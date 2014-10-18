@@ -1,8 +1,7 @@
 <?php
-
-$command = '-a';
-$path = '/var/www/html/';
+ 
+$command = $_POST['ls-option'];
+$path = $_POST['path'];
 
 $result = shell_exec(' perl /var/www/html/UnixLinuxProject/UnixPerlProject/ls.pl ' . $command . ' ' . $path);
-var_dump(json_decode($result));
-
+echo ($result);
