@@ -1,7 +1,5 @@
 <?php include_once('parts/top.php'); ?>
 
-	<body>
-
 		<div id="wrapper">
 
 			<?php include_once ('parts/nav.php'); ?>
@@ -35,7 +33,7 @@
 					</form>
 					
 					<div id="ls_respond">
-			
+						
 					</div>
 				</div>
 				<!-- /.container-fluid -->
