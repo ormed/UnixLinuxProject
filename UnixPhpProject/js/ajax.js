@@ -11,7 +11,7 @@ $(document).ready(function() {
 			success : function(data) {
 				$.each( data, function(key, value) {
 					console.log(value);
-					document.getElementById('ls_respond').innerHTML = document.getElementById('ls_respond').innerHTML + value + '&nbsp;&nbsp;&nbsp;&nbsp;';
+					document.getElementById('ls_respond').innerHTML = document.getElementById('ls_respond').innerHTML + value + '<br>';
 				});
 				
 				

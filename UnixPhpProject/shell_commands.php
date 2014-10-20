@@ -11,14 +11,17 @@
 						<div class="form-group">
 							<div class="col-lg-offset-1">
 								<label class="radio-inline">
+									<input type="radio" name="ls-option" id="inlineRadioAL" value="other">
+									ls </label>
+								<label class="radio-inline">
 									<input type="radio" name="ls-option" id="inlineRadioA" value="-a">
-									-a </label>
+									ls -a </label>
 								<label class="radio-inline">
 									<input type="radio" name="ls-option" id="inlineRadioL" value="-l">
-									-l </label>
+									ls -l </label>
 								<label class="radio-inline">
 									<input type="radio" name="ls-option" id="inlineRadioAL" value="-al">
-									-al </label>
+									ls -al </label>
 							</div>
 							<div class="col-lg-4">
 								<input type="text" class="form-control" name="path" placeholder="Path">
