@@ -20,6 +20,7 @@ switch ($command) {
 		@sorted_files = sort @files;
 		print encode_json( \@sorted_files );
 	}
+	
 	case "-l" { # fix print all files
 
 		#ls -l
