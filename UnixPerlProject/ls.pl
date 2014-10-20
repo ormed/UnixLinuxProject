@@ -4,6 +4,7 @@ use JSON;
 use File::stat;
 use Time::localtime;
 use Fcntl ':mode';
+use 5.010;
 
 use warnings;
 
@@ -107,26 +108,24 @@ sub getFileInformation {
 
 		$sb = stat($item);
 
-		print( ( stat($item) )[2] );
-
-		my $mode = ( stat($item) )[2] & 07777;
+		my $mode = $sb->mode & 07777;
 		my $usr  = ( $mode & 0700 ) >> 6;        #mode of user
 		my $grp  = ( $mode & 0070 ) >> 3;        #mode of group
 		my $oth  = $mode & 0007;                 #mode of others
 
 		$permissions .= getPermissions( $usr, $grp, $oth );
 
-		my $nlink = ( stat($item) )[3];
+		my $nlink = $sb->nlink;
 
-		my $uid  = ( stat $item )[4];            #number of user
+		my $uid  = $sb->uid;            #number of user
 		my $user = ( getpwuid $uid )[0];         #name of user
 
-		my $gid   = ( stat $item )[4];           #number of group
+		my $gid   = $sb->gid;           #number of group
 		my $group = ( getpwuid $gid )[0];        #name of group
 
-		my $size = ( stat $item )[7];            #size of file
+		my $size = $sb->size;            #size of file
 
-		my $date = ctime( ( stat($item) )[8] );
+		my $date = ctime( $sb->atime );
 
 		$str .= "$permissions $nlink $user $group $size $date $item \n";
 	}
