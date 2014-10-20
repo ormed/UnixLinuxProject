@@ -3,18 +3,17 @@ use Switch;
 use JSON;
 use File::stat;
 use Time::localtime;
-use Fcntl ':mode';
-use 5.010;
 
+use strict;
 use warnings;
 
-$command = $ARGV[0];    #command
-$dirname = $ARGV[1];    #path for dir
+my $command = $ARGV[0];    #command
+my $dirname = $ARGV[1];    #path for dir
 
 opendir my ($dh), $dirname or die "Couldn't open dir '$dirname': $!";
 
-@all_files = readdir $dh;
-@unhidden_files = grep { !/^\./ } @all_files;
+my @all_files = readdir $dh;
+my @unhidden_files = grep { !/^\./ } @all_files;
 
 closedir $dh;
 
@@ -22,20 +21,20 @@ switch ($command) {
 	case "-a" {
 
 		#ls -a
-		@sorted_files = sort @all_files;
+		my @sorted_files = sort @all_files;
 		print encode_json( \@sorted_files );
 	}
 	case "-l" {    # fix print all files
 
 		#ls -l
 
-		@sorted_files = sort @unhidden_files;
+		my @sorted_files = sort @unhidden_files;
 
 		my $count = 0;
 		my $str   = "";
 		my $info  = "";
-		@arrOfStrFiles = ();
-		foreach $item (@sorted_files) {
+		my @arrOfStrFiles = ();
+		foreach my $item (@sorted_files) {
 			$str .= getFileInformation($item);
 			$count++;
 		}
@@ -48,29 +47,29 @@ switch ($command) {
 
 		#ls -al
 
-		@sorted_files = sort @all_files;
+		my @sorted_files = sort @all_files;
 
 		my $count = 0;
 		my $str   = "";
-		foreach $item (@sorted_files) {
+		foreach my $item (@sorted_files) {
 			$str .= getFileInformation($item);
 			$count++;
 		}
 		$str = "total $count\n" . $str;
-		@arrOfStrFiles = split( '\n', $str );
+		my @arrOfStrFiles = split( '\n', $str );
 		print encode_json( \@arrOfStrFiles );
 	}
 	else {
 
 		#ls
-		@sorted_files = sort @unhidden_files;
+		my @sorted_files = sort @unhidden_files;
 		print encode_json( \@sorted_files );
 	}
 }
 
 sub getPermissions {
-	$permissions = "";
-	foreach $item (@_) {
+	my $permissions = "";
+	foreach my $item (@_) {
 		if ( $item == 0 ) {
 			$permissions = $permissions . "---";
 		}
@@ -104,14 +103,14 @@ sub getFileInformation {
 	my $str         = "";
 	my $permissions = "-";
 	my $sb;
-	foreach $item (@_) {
+	foreach my $item (@_) {
 
-		$sb = stat($item);
+		$sb = stat($dirname.$item);
 
-		my $mode = $sb->mode & 07777;
+		my $mode = ($sb->mode) & 07777;
 		my $usr  = ( $mode & 0700 ) >> 6;        #mode of user
 		my $grp  = ( $mode & 0070 ) >> 3;        #mode of group
-		my $oth  = $mode & 0007;                 #mode of others
+		my $oth  = ($mode) & 0007;                 #mode of others
 
 		$permissions .= getPermissions( $usr, $grp, $oth );
 
