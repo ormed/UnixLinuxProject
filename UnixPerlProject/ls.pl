@@ -45,6 +45,7 @@ switch ($command) {
 	}
 	case "-al" {
 
+
 		#ls -al
 		@files = readdir $dh;
 		closedir $dh;
