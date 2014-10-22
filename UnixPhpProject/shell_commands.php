@@ -22,6 +22,9 @@
 								<label class="radio-inline">
 									<input type="radio" name="ls-option" id="inlineRadioAL" value="-al">
 									ls -al </label>
+								<label class="radio-inline">
+									<input type="radio" name="ls-option" id="inlineRadioAL" value="-i">
+									ls -i </label>
 							</div>
 							<div class="col-lg-4">
 								<input type="text" class="form-control" name="path" placeholder="Path">
