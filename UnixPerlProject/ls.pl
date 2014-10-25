@@ -71,6 +71,28 @@ switch ($command) {
 		my @unhidden_files = split( '\n', $str );
 		print encode_json( \@unhidden_files );
 	}
+	case "-F" {
+
+		#ls -F
+		my $str          = "";
+		my @sorted_files = sort @unhidden_files;
+		foreach my $item (@sorted_files) {
+			$str .= "$item";
+			if ( -d $item)  {
+				$str .= "/ \n";
+			}
+			if ( -x $item ) {
+				$str .= "* \n";
+			}
+			if (!-d $item && !-x $item) {
+				$str .= " \n";
+			}
+			
+		}
+		my @unhidden_files = split( '\n', $str );
+		print encode_json( \@unhidden_files );
+	}
+
 	else {
 
 		#ls  { cl($a) cmp cl($b) }
