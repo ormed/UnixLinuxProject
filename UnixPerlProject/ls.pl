@@ -78,19 +78,19 @@ switch ($command) {
 		my @sorted_files = sort @unhidden_files;
 		foreach my $item (@sorted_files) {
 			$str .= "$item";
-			if ( -d $item)  {
-				$str .= "/ \n";
+			if ( -d $dirname . $item)  {
+				$str .= "/,";
 			}
-			if ( -x $item ) {
-				$str .= "* \n";
+			if ( -x $dirname . $item ) {
+				$str .= "*,";
 			}
-			if (!-d $item && !-x $item) {
-				$str .= " \n";
+			if (!-d $dirname . $item && !-x $dirname . $item) {
+				$str .= ",";
 			}
 			
 		}
-		my @unhidden_files = split( '\n', $str );
-		print encode_json( \@unhidden_files );
+		my @arr = split( ',', $str );
+		print encode_json( \@arr );
 	}
 
 	else {

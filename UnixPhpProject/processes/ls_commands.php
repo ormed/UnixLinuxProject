@@ -1,5 +1,5 @@
 <?php
- 
+
 $command = $_POST['ls-option'];
 $path = $_POST['path'];
 
