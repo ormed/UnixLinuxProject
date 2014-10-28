@@ -3,6 +3,7 @@ use Switch;
 use JSON;
 use File::stat;
 use Time::localtime;
+use Fcntl ':mode';
 
 use strict;
 use warnings;
@@ -24,7 +25,7 @@ switch ($command) {
 		my @sorted_files = sort @all_files;
 		print encode_json( \@sorted_files );
 	}
-	case "-l" {    # fix print all files
+	case "-l" {
 
 		#ls -l
 
@@ -71,6 +72,17 @@ switch ($command) {
 		my @unhidden_files = split( '\n', $str );
 		print encode_json( \@unhidden_files );
 	}
+	case "-s" {
+
+		#ls -s
+		my $str          = "";
+		my @sorted_files = sort @unhidden_files;
+		foreach my $item (@sorted_files) {
+			
+		}
+		my @unhidden_files = split( '\n', $str );
+		print encode_json( \@unhidden_files );
+	}
 	case "-F" {
 
 		#ls -F
@@ -78,16 +90,16 @@ switch ($command) {
 		my @sorted_files = sort @unhidden_files;
 		foreach my $item (@sorted_files) {
 			$str .= "$item";
-			if ( -d $dirname . $item)  {
+			if ( -d $dirname . $item ) {
 				$str .= "/,";
 			}
-			if ( -x $dirname . $item ) {
+			elsif ( -x $dirname . $item ) {
 				$str .= "*,";
 			}
-			if (!-d $dirname . $item && !-x $dirname . $item) {
+			else {
 				$str .= ",";
 			}
-			
+
 		}
 		my @arr = split( ',', $str );
 		print encode_json( \@arr );
@@ -136,6 +148,7 @@ sub getPermissions {
 sub getFileInformation {
 	my $str         = "";
 	my $permissions = "-";
+	my $type        = "";
 	my $sb;
 	foreach my $item (@_) {
 
@@ -158,7 +171,7 @@ sub getFileInformation {
 
 		my $size = $sb->size;                #size of file
 
-		my $date = ctime( $sb->atime );
+		my $date = ctime( $sb->mtime );
 
 		$str .= "$permissions $nlink $user $group $size $date $item \n";
 	}
