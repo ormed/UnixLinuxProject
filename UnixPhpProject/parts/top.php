@@ -10,7 +10,9 @@
 		<meta name="author" content="">
 
 		<title>Linux Remote - Control Linux From Remote</title>
-
+		
+		<link href="css/style.css" rel="stylesheet">
+		
 		<!-- Bootstrap Core CSS -->
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 

@@ -1,0 +1,14 @@
+.result-div {
+	margin-top: 100px; 
+	padding-left: 25px;
+}
+
+.result-div .table {
+	width: 60%;
+}
+
+.result-div .table tbody tr td {
+	border-bottom: 1px solid #ddd;
+	border-top: none;
+	padding: 3px;
+}

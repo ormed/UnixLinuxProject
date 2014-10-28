@@ -31,15 +31,17 @@ switch ($command) {
 
 		my @sorted_files = sort @unhidden_files;
 
-		my $count         = 0;
+		my $total_blocks  = 0;
 		my $str           = "";
 		my $info          = "";
 		my @arrOfStrFiles = ();
 		foreach my $item (@sorted_files) {
 			$str .= getFileInformation($item);
-			$count++;
+			my $sb = stat( $dirname . $item );
+			my $blocks = $sb->blocks / 2;
+			$total_blocks += $blocks;
 		}
-		$str = "total $count\n" . $str;
+		$str = "total $total_blocks\n" . $str;
 		@arrOfStrFiles = split( '\n', $str );
 		print encode_json( \@arrOfStrFiles );
 
@@ -49,13 +51,15 @@ switch ($command) {
 		#ls -al
 
 		my @sorted_files = sort @all_files;
-		my $count        = 0;
+		my $total_blocks = 0;
 		my $str          = "";
 		foreach my $item (@sorted_files) {
 			$str .= getFileInformation($item);
-			$count++;
+			my $sb = stat( $dirname . $item );
+			my $blocks = $sb->blocks / 2;
+			$total_blocks += $blocks;
 		}
-		$str = "total $count\n" . $str;
+		$str = "total $total_blocks\n" . $str;
 		my @arrOfStrFiles = split( '\n', $str );
 		print encode_json( \@arrOfStrFiles );
 	}
@@ -67,7 +71,7 @@ switch ($command) {
 		foreach my $item (@sorted_files) {
 			my $sb  = stat( $dirname . $item );
 			my $ino = $sb->ino;
-			$str .= "$ino $item \n";
+			$str .= "$ino,$item \n";
 		}
 		my @unhidden_files = split( '\n', $str );
 		print encode_json( \@unhidden_files );
@@ -75,11 +79,16 @@ switch ($command) {
 	case "-s" {
 
 		#ls -s
+		my $total_blocks = 0;
 		my $str          = "";
 		my @sorted_files = sort @unhidden_files;
 		foreach my $item (@sorted_files) {
-			
+			my $sb = stat( $dirname . $item );
+			my $blocks = $sb->blocks / 2;
+			$total_blocks += $blocks;
+			$str .= $blocks . ',' . $item . "\n"; 
 		}
+		$str = "total $total_blocks\n" . $str;
 		my @unhidden_files = split( '\n', $str );
 		print encode_json( \@unhidden_files );
 	}
@@ -173,7 +182,7 @@ sub getFileInformation {
 
 		my $date = ctime( $sb->mtime );
 
-		$str .= "$permissions $nlink $user $group $size $date $item \n";
+		$str .= "$permissions,$nlink,$user,$group,$size,$date,$item\n";
 	}
 	return $str;
 }
