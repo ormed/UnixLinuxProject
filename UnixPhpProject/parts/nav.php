@@ -117,14 +117,17 @@
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
-                	<li class="active">
+                	<li>
                         <a href="index.php"><i class="fa fa-fw fa-file"></i> Home</a>
                     </li>
                     <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Shell Commands <i class="fa fa-fw fa-caret-down"></i></a>
+                        <a href="open_commands.php"><i class="fa fa-fw fa-file"></i> Free Command Line</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Perl Shell Commands <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo" class="collapse">
                             <li>
-                                <a href="shell_commands.php">LS</a>
+                                <a href="ls_command.php">LS</a>
                             </li>
                             <li>
                                 <a href="#">grep</a>
