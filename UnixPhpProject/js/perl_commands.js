@@ -1,7 +1,7 @@
 $(document).ready(function() {
 	$('.form-horizontal').submit(function(event) {
-		document.getElementById('ls_respond').innerHTML = '';
-		var url = 'processes/ls_commands.php';
+		document.getElementById('respond').innerHTML = '';
+		var url = 'processes/perl_commands_exec.php';
 		var $data = $('.form-horizontal').serialize();
 		$.ajax({//Process the form using $.ajax()
 			type : 'POST',
@@ -9,12 +9,33 @@ $(document).ready(function() {
 			data : $data,
 			dataType : 'json',
 			success : function(data) {
-				document.getElementById('ls_respond').innerHTML = getTableFromJson(data);
+				document.getElementById('respond').innerHTML = getResultFromJson(data);
 			}
 		});
 		event.preventDefault();//prevent the default submit
 	});
 });
+
+function getResultFromJson(data) {
+	var $page = $('#page').val();
+	var result;
+	
+	switch ($page) {
+	case 'ls':
+		result = getTableFromJson(data);
+		break;
+	case 'more':
+		result = '<pre>' + data + '</pre>';
+		break;
+	default:
+		break;
+	}
+	
+	return result;
+}
+
+
+
 
 function getTableFromJson(data) {
 	var table = '<table class="table">';

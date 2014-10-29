@@ -1,7 +1,7 @@
 $(document).ready(function() {
 	$('.form-horizontal').submit(function(event) {
 		document.getElementById('command-respond').innerHTML = '';
-		var url = 'processes/shell_commands.php';
+		var url = 'processes/shell_commands_exec.php';
 		var $data = $('.form-horizontal').serialize();
 		$.ajax({//Process the form using $.ajax()
 			type : 'POST',

@@ -121,7 +121,7 @@
                         <a href="index.php"><i class="fa fa-fw fa-file"></i> Home</a>
                     </li>
                     <li>
-                        <a href="open_commands.php"><i class="fa fa-fw fa-file"></i> Free Command Line</a>
+                        <a href="shell_commands.php"><i class="fa fa-fw fa-file"></i> Free Command Line</a>
                     </li>
                     <li>
                         <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Perl Shell Commands <i class="fa fa-fw fa-caret-down"></i></a>
@@ -130,7 +130,7 @@
                                 <a href="ls_command.php">LS</a>
                             </li>
                             <li>
-                                <a href="#">grep</a>
+                                <a href="more_command.php">more</a>
                             </li>
                         </ul>
                     </li>

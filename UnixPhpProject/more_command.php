@@ -8,24 +8,18 @@
 
 				<div class="container-fluid">
 					<form class="form-horizontal" role="form">
-							<input id="page" type="hidden" name="page" value="ls">
+							<input id="page" type="hidden" name="page" value="more">
 							<div class="form-group">
-								<label for="inputCommand" class="col-sm-1 control-label">ls </label>
+								<label for="inputCommand" class="col-sm-1 control-label">more </label>
 								<div class="col-sm-3">
 									<select name="option" class="form-control">
 										<option value="other">no option</option>
-										<option value="-a">-a</option>
-										<option value="-l">-l</option>
-										<option value="-al">-al</option>
-										<option value="-i">-i</option>
-										<option value="-s">-s</option>
-										<option value="-F">-F</option>
 									</select>
 								</div>
 							</div>
 							
 							<div class="form-group">
-								<label for="inputPath" class="col-sm-1 control-label">Path: </label>
+								<label for="inputPath" class="col-sm-1 control-label">File Path: </label>
 								<div class="col-sm-3">
 									<input type="text" class="form-control" name="path" placeholder="Path">
 								</div>

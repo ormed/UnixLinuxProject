@@ -32,6 +32,6 @@
 		</div>
 		<!-- /#wrapper -->
 		
-		<script src="js/open_commands.js"></script>
+		<script src="js/shell_commands.js"></script>
 		
 <?php include_once('parts/bottom.php'); ?>
