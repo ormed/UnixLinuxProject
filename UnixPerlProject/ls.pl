@@ -2,8 +2,8 @@
 use Switch;
 use JSON;
 use File::stat;
-use Time::localtime;
 use Fcntl ':mode';
+use POSIX;
 
 use strict;
 use warnings;
@@ -22,14 +22,14 @@ switch ($command) {
 	case "-a" {
 
 		#ls -a
-		my @sorted_files = sort @all_files;
+		my @sorted_files = sort { "\L$a" cmp "\L$b" } @all_files;
 		print encode_json( \@sorted_files );
 	}
 	case "-l" {
 
 		#ls -l
 
-		my @sorted_files = sort @unhidden_files;
+		my @sorted_files = sort { "\L$a" cmp "\L$b" } @unhidden_files;
 
 		my $total_blocks  = 0;
 		my $str           = "";
@@ -39,7 +39,7 @@ switch ($command) {
 			$str .= getFileInformation($item);
 			my $sb = stat( $dirname . $item );
 			my $blocks = $sb->blocks / 2;
-			$total_blocks += $blocks;
+			$total_blocks += ( !-l $dirname . $item ) ? $blocks : 0;
 		}
 		$str = "total $total_blocks\n" . $str;
 		@arrOfStrFiles = split( '\n', $str );
@@ -50,14 +50,14 @@ switch ($command) {
 
 		#ls -al
 
-		my @sorted_files = sort @all_files;
+		my @sorted_files = sort { "\L$a" cmp "\L$b" } @all_files;
 		my $total_blocks = 0;
 		my $str          = "";
 		foreach my $item (@sorted_files) {
 			$str .= getFileInformation($item);
 			my $sb = stat( $dirname . $item );
 			my $blocks = $sb->blocks / 2;
-			$total_blocks += $blocks;
+			$total_blocks += ( !-l $dirname . $item ) ? $blocks : 0;
 		}
 		$str = "total $total_blocks\n" . $str;
 		my @arrOfStrFiles = split( '\n', $str );
@@ -67,7 +67,7 @@ switch ($command) {
 
 		#ls -i
 		my $str          = "";
-		my @sorted_files = sort @unhidden_files;
+		my @sorted_files = sort { "\L$a" cmp "\L$b" } @unhidden_files;
 		foreach my $item (@sorted_files) {
 			my $sb  = stat( $dirname . $item );
 			my $ino = $sb->ino;
@@ -81,11 +81,11 @@ switch ($command) {
 		#ls -s
 		my $total_blocks = 0;
 		my $str          = "";
-		my @sorted_files = sort @unhidden_files;
+		my @sorted_files = sort { "\L$a" cmp "\L$b" } @unhidden_files;
 		foreach my $item (@sorted_files) {
 			my $sb = stat( $dirname . $item );
 			my $blocks = $sb->blocks / 2;
-			$total_blocks += $blocks;
+			$total_blocks += ( !-l $dirname . $item ) ? $blocks : 0;
 			$str .= $blocks . ',' . $item . "\n"; 
 		}
 		$str = "total $total_blocks\n" . $str;
@@ -96,7 +96,7 @@ switch ($command) {
 
 		#ls -F
 		my $str          = "";
-		my @sorted_files = sort @unhidden_files;
+		my @sorted_files = sort { "\L$a" cmp "\L$b" } @unhidden_files;
 		foreach my $item (@sorted_files) {
 			$str .= "$item";
 			if ( -d $dirname . $item ) {
@@ -117,7 +117,7 @@ switch ($command) {
 	else {
 
 		#ls  { cl($a) cmp cl($b) }
-		my @sorted_files = sort @unhidden_files;
+		my @sorted_files = sort { "\L$a" cmp "\L$b" } @unhidden_files;
 		print encode_json( \@sorted_files );
 	}
 }
@@ -154,9 +154,41 @@ sub getPermissions {
 	return $permissions;
 }
 
+sub getFileType {
+	my $type = "";
+	foreach my $file (@_) {
+		if ( -f $file ) {
+			$type = "-";
+		}
+		elsif ( -l $file ) {
+			$type = "l";
+		}
+		elsif ( -d $file ) {
+			$type = "d";
+		}
+		elsif ( -p $file ) {
+			$type = "p";
+		}
+		elsif ( -s $file ) {
+			$type = "s";
+		}
+		elsif ( -c $file ) {
+			$type = "c";
+		}
+		elsif ( -b $file ) {
+			$type = "b";
+		}
+		else {
+			$type = "D";
+		}
+	}
+
+	return $type;
+}
+
 sub getFileInformation {
 	my $str         = "";
-	my $permissions = "-";
+	my $permissions = "";
 	my $type        = "";
 	my $sb;
 	foreach my $item (@_) {
@@ -167,7 +199,8 @@ sub getFileInformation {
 		my $usr  = ( $mode & 0700 ) >> 6;    #mode of user
 		my $grp  = ( $mode & 0070 ) >> 3;    #mode of group
 		my $oth  = ($mode) & 0007;           #mode of others
-
+		
+		$permissions .= getFileType( $dirname . $item );
 		$permissions .= getPermissions( $usr, $grp, $oth );
 
 		my $nlink = $sb->nlink;
@@ -180,9 +213,10 @@ sub getFileInformation {
 
 		my $size = $sb->size;                #size of file
 
-		my $date = ctime( $sb->mtime );
+		my $date = $sb->ctime;
+		my $formatted_date = POSIX::strftime('%b %e %H:%M', localtime($date) );
 
-		$str .= "$permissions,$nlink,$user,$group,$size,$date,$item\n";
+		$str .= "$permissions,$nlink,$user,$group,$size,$formatted_date,$item\n";
 	}
 	return $str;
 }
