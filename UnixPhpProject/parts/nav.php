@@ -132,6 +132,9 @@
                             <li>
                                 <a href="more_command.php">more</a>
                             </li>
+                            <li>
+                                <a href="wc_command.php">wc</a>
+                            </li>
                         </ul>
                     </li>
                 </ul>

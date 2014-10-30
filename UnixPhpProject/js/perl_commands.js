@@ -27,14 +27,19 @@ function getResultFromJson(data) {
 	case 'more':
 		result = '<pre>' + data + '</pre>';
 		break;
+	case 'wc':
+		result = "";
+		$.each(data, function(key, line_value) {
+			result += line_value + "\n";
+		});
+		result = '<pre>' + result + '</pre>';
+		break;
 	default:
 		break;
 	}
 	
 	return result;
 }
-
-
 
 
 function getTableFromJson(data) {
