@@ -5,6 +5,8 @@ use warnings;
 use Switch;
 use JSON;
 
+use constant TAB_SIZE => 8;
+
 my $command = $ARGV[0];    #command
 my $dirname = $ARGV[1];    #path for dir
 
@@ -30,15 +32,18 @@ my $longest_line = 0;
 
 while(my $line = <$dh>) {
     #split line in a char array
-    my @words = split(" ", $line);
+    my @words = split(/\s+/, $line);
     my @chars = split("", $line);
     
     $num_of_chars += length($line);
-    $num_of_words += $#words;
+    $num_of_words += $#words + 1;
     $num_of_lines ++;
     
-    if (length($line) -1 > $longest_line) {
-    	$longest_line = length($line) -1 ;
+    #my $num_of_tabs = $line =~ tr/\t//;
+    #my $line_length = (length($line) -1) + ($num_of_tabs * TAB_SIZE)- $num_of_tabs;
+    my $line_length = do { use bytes; length($line) };
+    if ($line_length > $longest_line) {
+    	$longest_line = $line_length ;
     }
 }
 
