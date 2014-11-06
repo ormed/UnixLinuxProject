@@ -4,6 +4,7 @@ use warnings;
 
 use Switch;
 use JSON;
+use Data::Dumper;
 
 use constant TAB_SIZE => 8;
 
@@ -31,8 +32,15 @@ my $num_of_words = 0;
 my $longest_line = 0;
 
 while(my $line = <$dh>) {
+	#trim line before extract words
+    my $temp_line = $line;
+    $temp_line =~ s/^\s+//; #remove space in the beginning
+	$temp_line =~ s/\s+$//; #remove space in the end
+    $temp_line =~ s/^\t+//; #remove tabs in the beginning
+	$temp_line =~ s/\t+$//; #remove tabs in the end
+	
     #split line in a char array
-    my @words = split(/\s+/, $line);
+    my @words = split(/\s+/, $temp_line);
     my @chars = split("", $line);
     
     $num_of_chars += length($line);
