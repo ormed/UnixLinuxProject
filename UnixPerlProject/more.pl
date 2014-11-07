@@ -4,13 +4,12 @@ use warnings;
 
 use Switch;
 use JSON;
-use File::stat;
 
 my $command = $ARGV[0];    #command
 my $dirname = $ARGV[1];    #path for dir
 
 my @error_arr = ("$dirname: No such file or directory");
-open my ($dh), $dirname or die print encode_json( \@error_arr );
+open my ($dh), '<:utf8', $dirname or die print encode_json( \@error_arr );
 
 if ( -d $dh ) {
 	my @error_arr = ("*** $dirname: directory ***");
