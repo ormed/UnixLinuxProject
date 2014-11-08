@@ -12,12 +12,28 @@ my $command = $ARGV[0];    #command
 my $dirname = $ARGV[1];    #path for dir
 
 my @error_arr = ("ls: cannot access $dirname: No such file or directory");
-opendir my ($dh), $dirname or die print encode_json(\@error_arr);
 
-my @all_files      = readdir $dh;
+open my ($df), $dirname or die print encode_json( \@error_arr );
+
+my $dh;
+my @all_files;
+
+if ( -f $df ) {
+	my $regex = qr/([\x00-\x2E\x30-\x7F]+)$/; 		# regular expression for the end of path
+	my @result = split($regex, $dirname);			# use split to get the end of path
+	my $file_name = $result[1];						# save result to file name variable
+	$dirname =~ s/\/([\x00-\x2E\x30-\x7F]+)$/\//g;	# remove file name from path
+	
+	@all_files = ($file_name);
+	
+} else {
+	opendir $dh, $dirname or die print encode_json(\@error_arr);
+	@all_files = readdir $dh;
+	closedir $dh;
+}
+
 my @unhidden_files = grep { !/^\./ } @all_files;
 
-closedir $dh;
 
 switch ($command) {
 	case "-a" {
@@ -188,12 +204,13 @@ sub getFileType {
 }
 
 sub getFileInformation {
+	
 	my $str         = "";
 	my $permissions = "";
 	my $type        = "";
 	my $sb;
 	foreach my $item (@_) {
-
+		
 		$sb = stat( $dirname . $item );
 
 		my $mode = ( $sb->mode ) & 07777;

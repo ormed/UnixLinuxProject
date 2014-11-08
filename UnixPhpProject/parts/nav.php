@@ -18,7 +18,7 @@
 						<a href="ls_command.php">LS</a>
 					</li>
 					<li>
-						<a href="more_command.php>more</a>
+						<a href="more_command.php">more</a>
 					</li>
 					<li>
 						<a href="wc_command.php">wc</a>
