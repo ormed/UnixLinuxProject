@@ -6,10 +6,10 @@
 	<div class="collapse navbar-collapse navbar-ex1-collapse">
 		<ul class="nav navbar-nav side-nav">
 			<li>
-				<a href="index.php"><i class="fa fa-fw fa-file"></i> Home</a>
+				<a href="index.php"><i class="fa fa-fw fa-home"></i> Home</a>
 			</li>
 			<li>
-				<a href="shell_commands.php"><i class="fa fa-fw fa-file"></i> Free Command Line</a>
+				<a href="shell_commands.php"><i class="fa fa-fw fa-code"></i> Free Command Line</a>
 			</li>
 			<li>
 				<a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Perl Shell Commands <i class="fa fa-fw fa-caret-down"></i></a>
@@ -27,7 +27,10 @@
 				</ul>
 			</li>
 			<li>
-				<a href="admin.php"><i class="fa fa-fw fa-user"></i> admin</a>
+				<a href="file_browser.php"><i class="fa fa-fw fa-folder"></i> File Browser</a>
+			</li>
+			<li>
+				<a href="admin.php"><i class="fa fa-fw fa-user"></i> Administration</a>
 			</li>
 		</ul>
 	</div>

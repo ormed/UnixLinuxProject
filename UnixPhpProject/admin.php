@@ -23,11 +23,10 @@
 					Submit
 				</button>
 			</form>
-			
-			</div>
-			<!-- /#page-wrapper -->
-
 		</div>
-		<!-- /#wrapper -->
+	</div>
+	<!-- /#page-wrapper -->
+</div>
+<!-- /#wrapper -->
 		
 <?php include_once('parts/bottom.php'); ?>
