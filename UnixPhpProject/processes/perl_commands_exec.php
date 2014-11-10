@@ -16,6 +16,9 @@ switch ($page) {
     case 'wc':
     	$result = shell_exec('perl /var/www/html/UnixLinuxProject/UnixPerlProject/wc.pl ' . $option . ' ' . $path);
     	break;
+	case 'rm':
+    	$result = shell_exec('perl /var/www/html/UnixLinuxProject/UnixPerlProject/rm.pl ' . $option . ' ' . $path);
+    	break;
 } 
 
 

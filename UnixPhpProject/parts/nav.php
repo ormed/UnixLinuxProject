@@ -23,6 +23,9 @@
 					<li>
 						<a href="wc_command.php">wc</a>
 					</li>
+					<li>
+						<a href="rm_command.php">rm</a>
+					</li>
 
 				</ul>
 			</li>

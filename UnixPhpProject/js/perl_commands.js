@@ -34,6 +34,13 @@ function getResultFromJson(data) {
 		});
 		result = '<pre>' + result + '</pre>';
 		break;
+	case 'rm':
+		result = "";
+		$.each(data, function(key, line_value) {
+			result += line_value + "\n";
+		});
+		result = '<pre>' + result + '</pre>';
+		break;
 	default:
 		break;
 	}
