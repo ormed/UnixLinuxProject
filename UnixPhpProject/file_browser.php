@@ -11,22 +11,28 @@ include_once ('parts/top.php');
 	<div id="page-wrapper">
 		<div class="container-fluid">
 
-			<ul class='custom-menu'>
-				<li data-action="first">First thing</li>
-				<li data-action="second">Second thing</li>
-				<li data-action="third">Third thing</li>
+			<ul class="custom-menu" id="file-menu">
+				<li data-action="view">View</li>
+				<li data-action="edit">Edit</li>
+				<li data-action="copy">Copy</li>
+				<li data-action="move">Cut</li>
+				<li data-action="delete">Delete</li>
 			</ul>
+			
+			<ul class="custom-menu" id='folder-menu'>
+				<li data-action="open">Open</li>
+				<li data-action="copy">Copy</li>
+				<li data-action="move">Cut</li>
+				<li data-action="delete">Delete</li>
+			</ul>
+			
 
-			<input type="hidden" id="current-folder" name="current-folder" value="/home/">
+			<input type="hidden" id="current-folder" name="current-folder" value="/">
 			<input type="hidden" id="prev-folder" name="prev-folder" value="/">
 			<input type="hidden" id="folder-option" name="folder-option" value="-al">
+			<input type="hidden" id="copied-entity" name="copied-entity" value="">
 
 			<div id="file-browser" class="col-md-6">
-				
-					<div class="file col-md-1">
-						<input type="image" src="images/fileicons/default.png" class="btn-file">
-						<label class="text-center">Short text</label>
-					</div>
 			</div>
 
 		</div>

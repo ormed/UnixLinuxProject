@@ -5,4 +5,4 @@ $command = $_POST['password'];
 $command = $_POST['re-password'];
 
 
-$result = shell_exec($command);
+$result = shell_exec('sudo ' . $command);

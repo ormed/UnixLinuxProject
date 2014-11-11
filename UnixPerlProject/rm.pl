@@ -16,6 +16,8 @@ my $dh;
 
 if ( -f $df ) {
 	unlink $dirname or warn "Could not unlink $dirname: $!";
+	my @respond = ("File: $dirname deleted");
+	print encode_json(\@respond);
 	exit;
 } 
 
@@ -39,6 +41,8 @@ switch ($command) {
 			}	
 		}
 		rmdir $dirname;
+		my @respond = ("directory $dirname deleted");
+		print encode_json(\@respond); 
 	}
 
 	else {
@@ -55,8 +59,6 @@ sub removeFolderContent {
 	my @params = @_;
 	my $current_directory = $params[0];
 	my @temp_files;
-	
-	print $current_directory . "\n";
 	
 	#stop condition if we reach our 'root' directory
 	if ( $current_directory eq $dirname ) {

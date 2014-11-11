@@ -1,20 +1,25 @@
 $(document).ready(function() {
 	$('.form-horizontal').submit(function(event) {
+		event.preventDefault();//prevent the default submit
 		document.getElementById('respond').innerHTML = '';
 		var url = 'processes/perl_commands_exec.php';
 		var $data = $('.form-horizontal').serialize();
-		$.ajax({//Process the form using $.ajax()
-			type : 'POST',
-			url : url,//proccess - server
-			data : $data,
-			dataType : 'json',
-			success : function(data) {
-				document.getElementById('respond').innerHTML = getResultFromJson(data);
-			}
-		});
-		event.preventDefault();//prevent the default submit
+		performAjax(url, $data);
+		
 	});
 });
+
+function performAjax(url, data) {
+	$.ajax({//Process the form using $.ajax()
+		type : 'POST',
+		url : url,//proccess - server
+		data : data,
+		dataType : 'json',
+		success : function(data) {
+			document.getElementById('respond').innerHTML = getResultFromJson(data);
+		}
+	});
+}
 
 function getResultFromJson(data) {
 	var $page = $('#page').val();
