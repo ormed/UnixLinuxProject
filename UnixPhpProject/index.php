@@ -1,4 +1,4 @@
-<?php include_once('parts/top.php'); ?>
+<?php include_once('parts/top.php');?>
 
 		<div id="wrapper">
 
