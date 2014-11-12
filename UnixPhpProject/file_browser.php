@@ -33,14 +33,30 @@ include_once ('parts/top.php');
 			</ul>
 			
 
-			<input type="hidden" id="current-folder" name="current-folder" value="/">
 			<input type="hidden" id="prev-folder" name="prev-folder" value="/">
 			<input type="hidden" id="folder-option" name="folder-option" value="-al">
 			<input type="hidden" id="copied-entity" name="copied-entity" value="">
 
-			<div id="file-browser" class="col-md-6">
-			</div>
 
+			<div class="row">
+				<label class="col-sm-3"><input type="checkbox" id="show-hidden-files" checked="checked"> Include Hidden Files</label>
+        		
+        		<span class="col-sm-3">
+        		<label>Current Folder: </label>
+        		<label for="folderPath" id="current-folder" name="current-folder">/</label>
+        		</span>
+        		
+        		<span class="col-sm-4">
+        		<labe>Find: </label>
+        		<input type="text" placeholder="Enter file name..">
+        		<button type="button" class="btn btn-primary btn-sm">Search</button>
+        		</span>
+        		
+			</div>
+			
+			<div id="file-browser" class="col-md-10">
+			</div>
+			
 		</div>
 		<!-- /#container-fuiid -->
 
@@ -51,7 +67,7 @@ include_once ('parts/top.php');
 <!-- /#wrapper -->
 <script src="js/file_manager.js"></script>
 <script>
-	var path = $('#current-folder').val();
+	var path = $('#current-folder').text();
 	showFolders(path);
 </script>
 

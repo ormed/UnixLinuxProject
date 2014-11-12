@@ -9,7 +9,6 @@ $(document).ready(function() {
 			data : $data,
 			dataType : 'text',
 			success : function(data) {
-				console.log('hi');
 				document.getElementById('command-respond').innerHTML = data;
 			}
 		});

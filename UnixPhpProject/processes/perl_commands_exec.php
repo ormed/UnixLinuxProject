@@ -8,7 +8,7 @@ $path = $_POST['path'];
 
 $result = array();
 
-$path = str_replace(' ', '\ ', $path); // eascape path in case we have spaces in it 
+$path = escapeshellarg($path); // eascape path in case we have spaces in it 
 
 switch ($page) {
 	case 'ls':

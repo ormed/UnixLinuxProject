@@ -44,12 +44,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 				</div>
 
 				<div class="col-sm-offset-1 col-sm-3">
-					<button type="submit" class="btn btn-primary">
-						Submit
-					</button>
+					<button type="submit" class="btn btn-primary">Submit</button>
 				</div>
 			</form>
 		
+			<span class="col-sm-offset-4 col-sm-4">
+        		<labe>Find: </label>
+        		<input type="text"placeholder="Enter your search..">
+        		<button type="button" class="btn btn-primary btn-sm">Search</button>
+        	</span>
 		
 		<?php if (isset($option) && $option == 'view') { ?>
 		
@@ -60,11 +63,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 		<?php } elseif (isset($option) && $option == 'edit') { 
 					$lines_arr = preg_split('/\n|\r/',$text);
 					$num_newlines = count($lines_arr); 
-					debug($num_newlines,TRUE);
 		?>
 			<div id="respond" class="result-div">
-				<textarea class="form-control" rows="<?php echo($num_newlines); ?>"><?php echo(htmlEntities($text)); ?></textarea>
+			<form id="save-edit" role="form">
+				<input type="hidden" id="current-file" name="current-file"; value="<?php echo(isset($path) ? $path : ''); ?>">
+				<textarea class="form-control" id="text-editor" name="text-editor" rows="<?php echo($num_newlines); ?>"><?php echo(htmlEntities($text)); ?></textarea>
+				<button type="submit" class="btn btn-primary">Save</button>
 			</div>
+			
 		<?php } ?>
 			
 		</div>
@@ -75,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
 </div>
 <!-- /#wrapper -->
-
+<script src="js/file_editor.js"></script>
 
 <?php
 	include_once ('parts/bottom.php');
