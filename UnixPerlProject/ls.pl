@@ -174,11 +174,11 @@ sub getPermissions {
 sub getFileType {
 	my $type = "";
 	foreach my $file (@_) {
-		if ( -f $file ) {
-			$type = "-";
-		}
-		elsif ( -l $file ) {
+		if ( -l $file ) {
 			$type = "l";
+		}
+		elsif ( -f $file ) {
+			$type = "-";
 		}
 		elsif ( -d $file ) {
 			$type = "d";

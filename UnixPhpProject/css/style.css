@@ -58,7 +58,8 @@
 	height: 50px;
 }
 
-.file .btn-file {
+.file .btn-file,
+.file .btn-file-special {
 	height: 50px;
 }
 

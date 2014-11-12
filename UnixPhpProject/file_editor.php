@@ -1,19 +1,18 @@
 <?php
 
-if (!isset($_GET['option']) || !isset($_GET['path'])) {
-	header("Location: index.php");
-}
 
 include_once ('parts/top.php');
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+	if (isset($_GET['option']) && isset($_GET['path'])) {
+		$option = $_GET['option'];
+		$path = $_GET['path'];
+		$json_text = json_decode(shell_exec('sudo perl /var/www/html/UnixLinuxProject/UnixPerlProject/more.pl "" ' . $path));
+		$text = "";
 
-$option = $_GET['option'];
-$path = $_GET['path'];
-
-$json_text = json_decode(shell_exec('sudo perl /var/www/html/UnixLinuxProject/UnixPerlProject/more.pl "" ' . $path));
-$text = "";
-
-foreach ($json_text as $line) {
-	$text .= $line . "\n";
+		foreach ($json_text as $line) {
+			$text .= $line . "\n";
+		}
+	}
 }
 ?>
 
@@ -26,13 +25,46 @@ foreach ($json_text as $line) {
 	<div id="page-wrapper">
 		<div class="container-fluid">
 		
-		<?php if ($option == 'view') { ?>
+		<form class="form-horizontal" role="form" method="get">
+				<div class="form-group">
+					<label for="inputCommand" class="col-sm-1 control-label">Open File As </label>
+					<div class="col-sm-3">
+						<select name="option" class="form-control">
+							<option value="view">View Only</option>
+							<option value="edit">Edit</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="inputPath" class="col-sm-1 control-label">File Path: </label>
+					<div class="col-sm-3">
+						<input type="text" class="form-control" name="path" placeholder="Path" value="<?php echo(isset($path) ? $path : ''); ?>">
+					</div>
+				</div>
+
+				<div class="col-sm-offset-1 col-sm-3">
+					<button type="submit" class="btn btn-primary">
+						Submit
+					</button>
+				</div>
+			</form>
 		
-			<pre><?php echo(htmlEntities($text)); ?></pre>
+		
+		<?php if (isset($option) && $option == 'view') { ?>
+		
+			<div id="respond" class="result-div">
+				<pre><?php echo(htmlEntities($text)); ?></pre>
+			</div>
 					
-		<?php } elseif ($option == 'edit') { ?>
-		
-		
+		<?php } elseif (isset($option) && $option == 'edit') { 
+					$lines_arr = preg_split('/\n|\r/',$text);
+					$num_newlines = count($lines_arr); 
+					debug($num_newlines,TRUE);
+		?>
+			<div id="respond" class="result-div">
+				<textarea class="form-control" rows="<?php echo($num_newlines); ?>"><?php echo(htmlEntities($text)); ?></textarea>
+			</div>
 		<?php } ?>
 			
 		</div>

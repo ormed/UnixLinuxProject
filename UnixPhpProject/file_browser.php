@@ -17,6 +17,7 @@ include_once ('parts/top.php');
 				<li data-action="copy">Copy</li>
 				<li data-action="move">Cut</li>
 				<li data-action="delete">Delete</li>
+				<li data-action="properties">Properties</li>
 			</ul>
 			
 			<ul class="custom-menu" id='folder-menu'>
@@ -24,6 +25,11 @@ include_once ('parts/top.php');
 				<li data-action="copy">Copy</li>
 				<li data-action="move">Cut</li>
 				<li data-action="delete">Delete</li>
+				<li data-action="properties">Properties</li>
+			</ul>
+			
+			<ul class="custom-menu" id='special-file-menu'>
+				<li data-action="properties">Properties</li>
 			</ul>
 			
 

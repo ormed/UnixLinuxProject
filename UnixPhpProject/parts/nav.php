@@ -1,4 +1,3 @@
-<?php include_once('help_functions.php'); ?>
 
 <!-- Navigation -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -33,6 +32,9 @@
 			</li>
 			<li>
 				<a href="file_browser.php"><i class="fa fa-fw fa-folder"></i> File Browser</a>
+			</li>
+			<li>
+				<a href="file_editor.php"><i class="fa fa-fw fa-font"></i> File Editor</a>
 			</li>
 			<li>
 				<a href="admin.php"><i class="fa fa-fw fa-user"></i> Administration</a>
