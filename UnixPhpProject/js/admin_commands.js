@@ -9,7 +9,8 @@ $(document).ready(function() {
 			data : $data,
 			dataType : 'json',
 			success : function(data) {
-				document.getElementById('respond').innerHTML = getResultFromJson(data);
+				alert('success');
+				//document.getElementById('respond').innerHTML = getResultFromJson(data);
 			}
 		});
 		event.preventDefault();//prevent the default submit

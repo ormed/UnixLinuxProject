@@ -7,36 +7,37 @@
 			<div id="page-wrapper">
 
 				<div class="container-fluid">
-					<form class="form-horizontal" role="form">
+					<form id="admin-form" class="form-horizontal" role="form">
 							<input id="page" type="hidden" name="page" value="add_user">
+							
 							<div class="form-group">
 								<label for="inputCommand" class="col-sm-1 control-label">User Name: </label>
 								<div class="col-sm-3">
-									<input type="text" class="form-control" name="path" placeholder="User Name">
+									<input type="text" class="form-control" name="user-name" placeholder="User Name">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="inputCommand" class="col-sm-1 control-label">Full Name: </label>
 								<div class="col-sm-3">
-									<input type="text" class="form-control" name="path" placeholder="Full Name">
+									<input type="text" class="form-control" name="full-name" placeholder="Full Name">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="inputCommand" class="col-sm-1 control-label">Password: </label>
 								<div class="col-sm-3">
-									<input type="password" class="form-control" name="path" placeholder="Password">
+									<input type="password" class="form-control" name="pwd" placeholder="Password">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="inputCommand" class="col-sm-1 control-label">Confirm Password: </label>
 								<div class="col-sm-3">
-									<input type="password" class="form-control" name="path" placeholder="Password">
+									<input type="password" class="form-control" name="repwd" placeholder="Password">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="inputCommand" class="col-sm-1 control-label">Login Shell </label>
 								<div class="col-sm-3">
-									<select name="option" class="form-control">
+									<select name="login-shell" class="form-control">
 										<option value="other">no option</option>
 									</select>
 								</div>
@@ -57,6 +58,6 @@
 		</div>
 		<!-- /#wrapper -->
 		
-		<script src="js/perl_commands.js"></script>
+		<script src="js/admin_commands.js"></script>
 		
 <?php include_once('parts/bottom.php'); ?>
