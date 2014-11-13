@@ -49,7 +49,7 @@
 						<a href="add_user.php">Sys info</a>
 					</li>
 					<li>
-						<a href="add_user.php">Date</a>
+						<a href="system_date.php">Date</a>
 					</li>
 					<li>
 						<a href="add_user.php">Beckup/Restore</a>

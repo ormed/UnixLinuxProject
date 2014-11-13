@@ -21,6 +21,10 @@
 
 		<!-- Custom Fonts -->
 		<link href="font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+		
+		 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+
+		<link rel="stylesheet" href="/resources/demos/style.css">
 
 		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -31,6 +35,7 @@
 		
 				<!-- jQuery Version 1.11.0 -->
 		<script src="js/lib/jquery-1.11.0.js"></script>
+		<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 
 		<!-- Bootstrap Core JavaScript -->
 		<script src="js/lib/bootstrap.min.js"></script>

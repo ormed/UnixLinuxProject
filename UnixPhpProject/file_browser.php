@@ -47,7 +47,7 @@ include_once ('parts/top.php');
         		</span>
         		
         		<span class="col-sm-4">
-        		<labe>Find: </label>
+        		<label>Find: </label>
         		<input type="text" placeholder="Enter file name..">
         		<button type="button" class="btn btn-primary btn-sm">Search</button>
         		</span>

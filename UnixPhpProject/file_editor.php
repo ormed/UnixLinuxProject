@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 			</form>
 		
 			<span class="col-sm-offset-4 col-sm-4">
-        		<labe>Find: </label>
+        		<label>Find: </label>
         		<input type="text"placeholder="Enter your search..">
         		<button type="button" class="btn btn-primary btn-sm">Search</button>
         	</span>
@@ -69,6 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 				<input type="hidden" id="current-file" name="current-file"; value="<?php echo(isset($path) ? $path : ''); ?>">
 				<textarea class="form-control" id="text-editor" name="text-editor" rows="<?php echo($num_newlines); ?>"><?php echo(htmlEntities($text)); ?></textarea>
 				<button type="submit" class="btn btn-primary">Save</button>
+			</form>
 			</div>
 			
 		<?php } ?>
