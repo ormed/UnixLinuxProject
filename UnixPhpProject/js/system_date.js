@@ -1,5 +1,47 @@
  $(function() {
-$( "#datepicker" ).datepicker();
+	 $("#datepicker").datepicker({ dateFormat: "yy-mm-dd" });
 });
+
+ $(function() {
+setInterval(function(){
+	var url = 'processes/admin_commands_exec.php';
+	var data = {page : 'date'};
+	performAjaxPost(url, data, function(data) {
+		$('#current-time').text(data.success);
+	});
+},1000);
+ });
+ 
+ $(document).ready(function() {
+		$('.form-horizontal').submit(function(event) {
+			var url = 'processes/admin_commands_exec.php';
+			var $data = $('.form-horizontal').serialize();
+			$.ajax({//Process the form using $.ajax()
+				type : 'POST',
+				url : url,//proccess - server
+				data : $data,
+				dataType : 'json',
+				success : function(data) {
+					if (data.error) {
+						alert("There is something wrong try again");
+					} else {
+						alert('Date has been updated');
+					}
+				}
+			});
+			event.preventDefault();//prevent the default submit
+		});
+	});
+
+//Help function
+function performAjaxPost(url, data, callBackFunc) {
+	$.ajax({
+		type : 'POST',
+		url : url,//proccess - server
+		data : data,
+		dataType : 'json',
+		success : callBackFunc 
+	});
+}
  
  

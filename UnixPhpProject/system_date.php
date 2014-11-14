@@ -10,6 +10,11 @@
 
 				<div class="container-fluid">
 				
+				<div id="time">
+					<label>Current Time: </label>
+					<label id="current-time"></label>
+				</div>
+				
 				<form class="form-horizontal" role="form">
 				
 				<input id="page" type="hidden" name="page" value="date">

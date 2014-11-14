@@ -61,6 +61,7 @@
 .folder label,
 .file label {
 	overflow:hidden;
+	display: -moz-box;
 }
 
 .file .btn-file,
@@ -68,3 +69,12 @@
 	height: 50px;
 }
 
+/*************** END OF FILE MANAGER ********************/
+
+#time {
+	margin-bottom: 20px;
+}
+
+#time #current-time{
+	margin-left: 20px;
+}
