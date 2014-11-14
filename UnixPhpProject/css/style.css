@@ -47,7 +47,7 @@
 }
 
 .folder, .file {
-	margin-top: 20px;
+	margin-top: 25px;
     box-sizing: border-box;
     width: 10%;
     height: 20%;
@@ -56,6 +56,11 @@
 
 .folder .btn-folder {
 	height: 50px;
+}
+
+.folder label,
+.file label {
+	overflow:hidden;
 }
 
 .file .btn-file,

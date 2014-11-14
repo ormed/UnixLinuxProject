@@ -246,7 +246,7 @@ function getFolderString(path, folder_name, props) {
 	} else {
 		folder += '<input type="image" src="images/fileicons/_Documents.png" ondblclick="showFolders(\'' + path + folder_name + '/\');" class="btn-folder" data-path="' + path + folder_name + '/" data-props="' + props + '">';
 	}
-	folder += '<label class="text-center col-md-5">' + folder_name + '</label>';
+	folder += '<label class="text-center">' + folder_name + '</label>';
 	folder += '</div>';
 
 	return folder;
@@ -256,7 +256,7 @@ function getFolderString(path, folder_name, props) {
 function getFileString(path, file_name, props) {
 	var folder = '<div class="file col-md-1">';
 	folder += '<input type="image" src="images/fileicons/default.png" ondblclick="document.location.href = \'/UnixLinuxProject/UnixPhpProject/file_editor.php?option=view&path=' + path + file_name + '\';" class="btn-file" data-path="' + path + file_name + '" data-props="' + props + '">';
-	folder += '<label class="text-center col-md-5">' + file_name + '</label>';
+	folder += '<label class="text-center">' + file_name + '</label>';
 	folder += '</div>';
 
 	return folder;
@@ -265,7 +265,7 @@ function getFileString(path, file_name, props) {
 function getSpecialFileString(path, file_name, props) {
 	var folder = '<div class="file col-md-1">';
 	folder += '<input type="image" src="images/fileicons/dll.png" ondblclick="aler("This file can\'t be opened");" class="btn-file-special" data-path="' + path + file_name + '" data-props="' + props + '">';
-	folder += '<label class="text-center col-md-5">' + file_name + '</label>';
+	folder += '<label class="text-center">' + file_name + '</label>';
 	folder += '</div>';
 
 	return folder;
@@ -274,7 +274,7 @@ function getSpecialFileString(path, file_name, props) {
 function getSymbolicFileString(path, file_name, props) {
 	var folder = '<div class="file col-md-1">';
 	folder += '<input type="image" src="images/fileicons/symbolic.jpeg" ondblclick="aler("This file can\'t be opened");" class="btn-file-special" data-path="' + path + file_name + '" data-props="' + props + '">';
-	folder += '<label class="text-center col-md-5">' + file_name + '</label>';
+	folder += '<label class="text-center">' + file_name + '</label>';
 	folder += '</div>';
 
 	return folder;
