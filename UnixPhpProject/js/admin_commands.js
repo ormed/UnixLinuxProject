@@ -15,26 +15,8 @@ $(document).ready(function() {
 					alert(data.success);
 					location.reload();
 				}
-				
-				//document.getElementById('respond').innerHTML = getResultFromJson(data);
 			}
 		});
 		event.preventDefault();//prevent the default submit
 	});
 });
-
-function getResultFromJson(data) {
-	var $page = $('#page').val();
-	var result;
-	
-	switch ($page) {
-	case 'remove_user':
-		result = '<pre>' + data + '</pre>';
-		break;
-		
-	default:
-		break;
-	}
-	
-	return result;
-}
