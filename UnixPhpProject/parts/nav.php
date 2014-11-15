@@ -40,7 +40,7 @@
 						<a href="add_user.php">Edit User</a>
 					</li>
 					<li>
-						<a href="add_user.php">Change Permissions</a>
+						<a href="change_permissions.php">Change Permissions</a>
 					</li>
 					<li>
 						<a href="add_user.php">Monitoring Processes</a>

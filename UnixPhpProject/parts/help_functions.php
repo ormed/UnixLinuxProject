@@ -20,3 +20,12 @@ function cleanInput($data) {
    $data = htmlspecialchars($data);
    return $data;
 }
+
+function passwordValidateion($pw, $re_pw) {
+	$error = '';
+	if($pw != $re_pw) {
+			$error = 'Opps! It seems like the passwords does not match.';	
+	}
+	return $error;
+}
+
