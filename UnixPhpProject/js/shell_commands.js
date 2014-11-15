@@ -7,9 +7,9 @@ $(document).ready(function() {
 			type : 'POST',
 			url : url,//proccess - server
 			data : $data,
-			dataType : 'text',
+			dataType : 'json',
 			success : function(data) {
-				document.getElementById('command-respond').innerHTML = data;
+				document.getElementById('command-respond').innerHTML = '<pre>' + data + '<pre>';
 			}
 		});
 		event.preventDefault();//prevent the default submit
