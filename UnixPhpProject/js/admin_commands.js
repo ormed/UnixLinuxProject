@@ -1,6 +1,5 @@
 $(document).ready(function() {
 	$('#admin-form').submit(function(event) {
-		document.getElementById('respond').innerHTML = '';
 		var url = 'processes/admin_commands_exec.php';
 		var $data = $('#admin-form').serialize();
 		$.ajax({//Process the form using $.ajax()

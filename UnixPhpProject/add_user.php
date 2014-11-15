@@ -64,7 +64,6 @@ $result = split("\n", $result);
 								<button type="submit" class="btn btn-primary">Submit</button>
 							</div>
 					</form>
-					<div id="respond" class="result-div"></div>	
 				</div>
 				<!-- /.container-fluid -->
 

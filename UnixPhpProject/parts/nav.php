@@ -46,7 +46,7 @@
 						<a href="add_user.php">Monitoring Processes</a>
 					</li>
 					<li>
-						<a href="add_user.php">Sys info</a>
+						<a href="monitor.php">Sys info</a>
 					</li>
 					<li>
 						<a href="system_date.php">Date</a>

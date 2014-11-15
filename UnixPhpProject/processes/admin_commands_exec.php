@@ -49,6 +49,35 @@ switch ($page) {
 			//http://superuser.com/questions/510691/linux-date-s-command-not-working-to-change-date-on-a-server
 			$success = shell_exec('sudo date --set="' . $date . ' ' . $hour . ':' . $minute . ':' . $second . '"');
 		}
+		
+		break;
+		
+	case 'ch_permission':
+		$path = $_POST['path'];
+		$owner = $_POST['owner'];
+		$owner_access = $_POST['owner-access'];
+		$group = $_POST['group'];
+		$group_access = $_POST['group-access'];
+		$others_access = $_POST['others-access'];
+
+		// check if file or directory
+		if (!isset($allow_execute)) {
+			$allow_execute = $_POST['allow-execute'];
+			
+			$error = shell_exec('sudo chown ' . $owner . ' ' . $path);
+			$error .= shell_exec('sudo chgrp ' . $group . ' ' . $path);
+			//build chmod number 
+			$chmod_num = (intval($owner_access) * 100) + (intval($group_access) * 10) + intval($others_access);
+			$chmod_num = ($allow_execute) ? ($chmod_num + 111) : $chmod_num;
+			$error .= shell_exec('sudo chmod ' . $chmod_num . ' ' . $path);
+			
+		} else {
+			$error = shell_exec('sudo chown ' . $owner . ' ' . $path);
+			$error .= shell_exec('sudo chgrp ' . $group . ' ' . $path);
+			$error .= shell_exec('sudo chmod ' . $chmod_num . ' ' . $path);
+		}
+		
+		$success = 'Permissions updated';
 		break;
 }
 

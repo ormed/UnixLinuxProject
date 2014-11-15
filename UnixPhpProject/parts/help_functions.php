@@ -28,4 +28,3 @@ function passwordValidateion($pw, $re_pw) {
 	}
 	return $error;
 }
-
