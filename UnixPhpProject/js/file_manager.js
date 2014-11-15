@@ -145,6 +145,9 @@ $('#file-menu li').click(function(){
         case "delete": 
         	deleteEntity(clicked_entity_path);
         	break;
+        case "change_permissions": 
+        	document.location.href = "/UnixLinuxProject/UnixPhpProject/change_permissions.php?path=" + clicked_entity_path;
+        	break;
         case "properties":
         	alert(getPrintedProperties(clicked_entity_props, clicked_entity_path));
     		break;
@@ -174,6 +177,9 @@ $('#folder-menu li').click(function(){
     	case "delete":
         	deleteEntity(clicked_entity_path);
     		break;
+    	case "change_permissions": 
+    		document.location.href = "/UnixLinuxProject/UnixPhpProject/change_permissions.php?path=" + clicked_entity_path;
+         	break;
     	case "properties":
     		alert(getPrintedProperties(clicked_entity_props, clicked_entity_path));
     		break;

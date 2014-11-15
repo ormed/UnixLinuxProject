@@ -17,6 +17,7 @@ include_once ('parts/top.php');
 				<li data-action="copy">Copy</li>
 				<li data-action="move">Cut</li>
 				<li data-action="delete">Delete</li>
+				<li data-action="change_permissions">Change Permissions</li>
 				<li data-action="properties">Properties</li>
 			</ul>
 			
@@ -25,6 +26,7 @@ include_once ('parts/top.php');
 				<li data-action="copy">Copy</li>
 				<li data-action="move">Cut</li>
 				<li data-action="delete">Delete</li>
+				<li data-action="change_permissions">Change Permissions</li>
 				<li data-action="properties">Properties</li>
 			</ul>
 			
