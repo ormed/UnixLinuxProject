@@ -4,7 +4,6 @@ include_once('../parts/help_functions.php');
 
 $page = $_POST['page'];
 
-
 $error = '';
 $success = '';
 
@@ -21,7 +20,10 @@ switch ($page) {
 		$success .= shell_exec('echo ' . $password . ' | sudo passwd ' . $user . ' --stdin');
     	break;
 	case 'remove_user':
-    	$success = shell_exec('cut -d : -f 1 /etc/passwd');
+		$rm_user = $_POST['option'];
+
+    	$error = shell_exec('sudo userdel ' . $rm_user);
+		$success = $rm_user . ' has been deleted.';
     	break;
 	case 'date':
 		$hour = isset($_POST['hour']) ? $_POST['hour'] : '';

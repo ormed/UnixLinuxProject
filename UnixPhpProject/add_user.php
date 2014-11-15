@@ -1,4 +1,10 @@
-<?php include_once('parts/top.php'); ?>
+<?php include_once ('parts/top.php');
+include_once('../parts/help_functions.php');
+
+$result = shell_exec('cat /etc/group |cut -d: -f3');
+$result = split("\n", $result);
+
+?>
 
 		<div id="wrapper">
 
@@ -35,10 +41,16 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="inputCommand" class="col-sm-1 control-label">Login Shell </label>
+								<label for="inputCommand" class="col-sm-1 control-label">Groups </label>
 								<div class="col-sm-3">
-									<select name="login-shell" class="form-control">
-										<option value="other">no option</option>
+									<select name="groups" class="form-control">
+									<?php foreach($result as $value) { 
+									if ($value == '') {
+										continue;
+									}
+								?>
+									<option value="<?php echo($value); ?>"><?php echo($value); ?></option>
+								<?php } ?>
 									</select>
 								</div>
 							</div>							

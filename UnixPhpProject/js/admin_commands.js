@@ -9,7 +9,13 @@ $(document).ready(function() {
 			data : $data,
 			dataType : 'json',
 			success : function(data) {
-				alert('success');
+				if (data.error) {
+					alert(data.error);
+				} else {
+					alert(data.success);
+					location.reload();
+				}
+				
 				//document.getElementById('respond').innerHTML = getResultFromJson(data);
 			}
 		});
