@@ -17,7 +17,7 @@ function performAjaxPost(url, data, callBackFunc) {
 		type : 'POST',
 		url : url,//proccess - server
 		data : data,
-		dataType : 'text',
+		dataType : 'json',
 		success : callBackFunc 
 	});
 }

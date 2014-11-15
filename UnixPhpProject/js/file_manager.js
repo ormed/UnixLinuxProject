@@ -1,6 +1,44 @@
 var clicked_entity_path = "";
 var clicked_entity_props = "";
 
+
+// bind the search event to search button
+$('#search-btn').bind('click', function() {
+	var $current_folder = $('#current-folder').text();
+	var $option = $('#search-option').val();
+	var $search = $('#search-folder').val();
+	var command = 'find ' + $current_folder + ' ' + $option + ' ' + $search;
+	var data = { command : command };
+	var url = 'processes/shell_commands_exec.php';
+	performAjaxPost(url, data, function(data) {
+		$('#result-path').children().remove().end().append('<option value="other" selected="selected"></option>');
+		if (data === null) {
+			alert('File was not found');
+		}
+		var select_values = data.split("\n");
+		$.each(select_values, function(key, value) {   
+			if (value == '') {
+				return;
+			}
+		     $('#result-path')
+		         .append($("<option></option>")
+		         .attr("value",value)
+		         .text(value)); 
+		});
+	});
+});
+
+//bind event to open directory of the search result
+$('#result-path').change(function() {
+	var selected_path = $('#result-path').val();
+	if (selected_path == 'other') {
+		return;
+	}
+	var folder_url = selected_path.substring(0,selected_path.lastIndexOf("/")) + '/';
+	showFolders(folder_url);
+});
+
+
 // include hidden files event
 $('#show-hidden-files').click(function() {
     var $this = $(this);
@@ -167,7 +205,8 @@ function showFolders(path) {
 	var $option = $('#folder-option').val();
 	var url = 'processes/perl_commands_exec.php';
 	
-	performAjaxPost(url, 'ls', $option, path, function(data) {
+	var data = { page : 'ls', option : $option, path : path };
+	performAjaxPost(url, data, function(data) {
 		
 		//update prev folder
 		var temp_path = path.substring(0, path.length - 1);
@@ -227,7 +266,8 @@ function showFolders(path) {
 // Delete an entity
 function deleteEntity(path) {
 	var url = 'processes/perl_commands_exec.php';
-	performAjaxPost(url, 'rm', '-r', path, function (data) {
+	var data = { page : 'rm', option : '-r', path : path };
+	performAjaxPost(url, data, function (data) {
 		alert(data);
 		showFolders($('#current-folder').text());
 		
@@ -346,8 +386,7 @@ function getFullTypeName(file_type) {
 
 
 // Help function
-function performAjaxPost(url, command, option, path, callBackFunc) {
-	var data = { page : command, option : option, path : path };
+function performAjaxPost(url, data, callBackFunc) {
 	$.ajax({
 		type : 'POST',
 		url : url,//proccess - server

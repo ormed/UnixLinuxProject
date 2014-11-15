@@ -46,15 +46,35 @@ include_once ('parts/top.php');
         		<label for="folderPath" id="current-folder" name="current-folder">/</label>
         		</span>
         		
-        		<span class="col-sm-4">
-        		<label>Find: </label>
-        		<input type="text" placeholder="Enter file name..">
-        		<button type="button" class="btn btn-primary btn-sm">Search</button>
-        		</span>
-        		
 			</div>
 			
+			<div class="row">
+				<span class="col-sm-3">
+        		<label class="col-sm-5">Search this folder: </label>
+        		<input id="search-folder" class="col-sm-7" type="text" placeholder="Enter file name..">
+        		</span>
+        		
+        		<div class="col-sm-2">
+					<select id="search-option" class="form-control">
+						<option value="-name">By name</option>
+					</select>
+				</div>
+        		
+        		<button id="search-btn" type="button" class="btn btn-primary btn-sm col-sm-1">Search</button>
+        		
+        		<span class="col-sm-6">
+        			<label class="col-sm-1">Result: </label>
+        			<div class="col-sm-7">
+						<select id="result-path" class="form-control">
+							<option value="other" selected="selected"></option>
+						</select>
+					</div>
+        		</span>
+
+			</div>
+
 			<div id="file-browser" class="col-md-10">
+
 			</div>
 			
 		</div>
