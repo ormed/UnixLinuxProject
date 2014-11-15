@@ -14,9 +14,20 @@ switch ($page) {
 		$full_name = $_POST['full-name'];
 		$password = $_POST['pwd'];
 		$repassword = $_POST['repwd'];
-		$shell = $_POST['login-shell'];
-
-    	$success = shell_exec('sudo useradd ' . $user);
+		$home_dir = $_POST['home-dir'];
+		
+		//$error = password_validateion
+		if($password != $repassword) {
+			$error = 'Opps! It seems like the passwords does not match.';
+			
+			break;	
+		}
+		
+		if(empty($home_dir)) {
+			$home_dir = '/home/' . $user;	
+		}
+		
+    	$success = shell_exec('sudo useradd -d' . $home_dir .' ' . $user . ' -c ' . $full_name);
 		$success .= shell_exec('echo ' . $password . ' | sudo passwd ' . $user . ' --stdin');
     	break;
 	case 'remove_user':

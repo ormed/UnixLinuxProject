@@ -41,6 +41,12 @@ $result = split("\n", $result);
 								</div>
 							</div>
 							<div class="form-group">
+								<label for="inputCommand" class="col-sm-1 control-label">Home Directory: </label>
+								<div class="col-sm-3">
+									<input type="text" class="form-control" name="home-dir">
+								</div>
+							</div>
+							<div class="form-group">
 								<label for="inputCommand" class="col-sm-1 control-label">Groups </label>
 								<div class="col-sm-3">
 									<select name="groups" class="form-control">
@@ -58,9 +64,7 @@ $result = split("\n", $result);
 								<button type="submit" class="btn btn-primary">Submit</button>
 							</div>
 					</form>
-					
-					<div id="respond" class="result-div"></div>
-					
+					<div id="respond" class="result-div"></div>	
 				</div>
 				<!-- /.container-fluid -->
 
