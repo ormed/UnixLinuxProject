@@ -10,7 +10,11 @@ include_once ('parts/top.php');
 
 	<div id="page-wrapper">
 		<div class="container-fluid">
-
+		
+			<input type="hidden" id="prev-folder" name="prev-folder" value="/">
+			<input type="hidden" id="folder-option" name="folder-option" value="-al">
+			<input type="hidden" id="copied-entity" name="copied-entity" value="">
+			
 			<ul class="custom-menu" id="file-menu">
 				<li data-action="view">View</li>
 				<li data-action="edit">Edit</li>
@@ -33,17 +37,11 @@ include_once ('parts/top.php');
 			<ul class="custom-menu" id='special-file-menu'>
 				<li data-action="properties">Properties</li>
 			</ul>
-			
-
-			<input type="hidden" id="prev-folder" name="prev-folder" value="/">
-			<input type="hidden" id="folder-option" name="folder-option" value="-al">
-			<input type="hidden" id="copied-entity" name="copied-entity" value="">
-
 
 			<div class="row">
 				<label class="col-sm-3"><input type="checkbox" id="show-hidden-files" checked="checked"> Include Hidden Files</label>
         		
-        		<span class="col-sm-3">
+        		<span class="col-sm-6">
         		<label>Current Folder: </label>
         		<label for="folderPath" id="current-folder" name="current-folder">/</label>
         		</span>
@@ -51,9 +49,9 @@ include_once ('parts/top.php');
 			</div>
 			
 			<div class="row">
-				<span class="col-sm-3">
-        		<label class="col-sm-5">Search this folder: </label>
-        		<input id="search-folder" class="col-sm-7" type="text" placeholder="Enter file name..">
+				<span class="col-sm-6">
+        		<label class="col-sm-4">Search this folder: </label>
+        		<input id="search-folder" class="col-sm-8" type="text" placeholder="Enter file name..">
         		</span>
         		
         		<div class="col-sm-2">
@@ -64,8 +62,8 @@ include_once ('parts/top.php');
         		
         		<button id="search-btn" type="button" class="btn btn-primary btn-sm col-sm-1">Search</button>
         		
-        		<span class="col-sm-6">
-        			<label class="col-sm-1">Result: </label>
+        		<span id="search-result" class="col-sm-6">
+        			<label class="col-sm-2">Result: </label>
         			<div class="col-sm-7">
 						<select id="result-path" class="form-control">
 							<option value="other" selected="selected"></option>

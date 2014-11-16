@@ -1,9 +1,11 @@
 var clicked_entity_path = "";
 var clicked_entity_props = "";
 
+$(function() {$('#search-result').hide();});
 
 // bind the search event to search button
 $('#search-btn').bind('click', function() {
+	$('#search-result').hide();
 	var $current_folder = $('#current-folder').text();
 	var $option = $('#search-option').val();
 	var $search = $('#search-folder').val();
@@ -11,10 +13,12 @@ $('#search-btn').bind('click', function() {
 	var data = { command : command };
 	var url = 'processes/shell_commands_exec.php';
 	performAjaxPost(url, data, function(data) {
-		$('#result-path').children().remove().end().append('<option value="other" selected="selected"></option>');
 		if (data === null) {
 			alert('File was not found');
+			return;
 		}
+		$('#result-path').children().remove().end().append('<option value="other" selected="selected"></option>');
+		$('#search-result').show();
 		var select_values = data.split("\n");
 		$.each(select_values, function(key, value) {   
 			if (value == '') {
