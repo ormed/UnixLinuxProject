@@ -6,7 +6,7 @@ use strict;
 use warnings;
 
 my $command = $ARGV[0];    #command
-my $dirname = $ARGV[1];    #path for dir want copy
+my $dirname = $ARGV[1];    #path for dir we want copy
 my $target  = $ARGV[2];    #path to copy dir
 
 my @error_arr = ("cp: cannot stat $dirname : No such file or directory");
@@ -16,7 +16,7 @@ open my ($df), $dirname or die print encode_json( \@error_arr );
 my $dh;
 
 if ( -f $df ) {
-	copyFileText( $df, $target );
+	copyFileText( $dirname, $target );
 	exit;
 }
 
@@ -25,87 +25,16 @@ my @all_files = readdir $dh;
 my @un_dotted_files = grep { !/^\.\./ } @all_files;
 closedir $dh;
 
-switch ($command) {
-	case "-R" {
-		if ( $#un_dotted_files > 0 ) {
-			foreach my $item (@un_dotted_files) {
-				if ( $item eq '.' ) {
-					next;
-				}
-				elsif ( $item eq '..' ) {
-					next;
-				}
-				else {
-					copyFolderContent( $dirname . $item );
-				}
-			}
-		}
-		rmdir $dirname;
-	}
+copyFolderContent( $dirname , $target );
 
-	else {
+if ( $#un_dotted_files > 0 ) {
 
-	}
-}
+	my @path_array = split( '/', $dirname ); #split the copy_to path inorder to get only the file name
+	my $new_dir = $target . '/' . $path_array[$#path_array];
+	
+	mkdir $new_dir;
 
-sub copyFolderContent {
-	my @params    = @_;
-	my $copy_from = $params[0];
-	my $copy_to   = $params[1];
-	my @temp_files;
-
-	#stop condition if we reach our 'root' directory
-	if ( $copy_from eq $dirname ) {
-		return;
-	}
-
-	#stop condition if its a file
-	if ( -f $copy_from ) {
-		$copy_from =~
-		  s/\/([\x00-\x2E\x30-\x7F]+)$/\//g;    # remove file name from path
-		copyFileText( $copy_from, $copy_to );
-		copyFolderContent($copy_from);
-		return;
-	}
-
-	if ( -d $copy_from ) {
-		opendir $dh, $copy_from or die print( \@error_arr );
-		@temp_files = readdir $dh;
-		close $dh;
-
-		# safety - stopping condition if we reached an empty folder.
-		my $size = $#temp_files;
-		if ( $size == 0 ) {
-			rmdir $copy_from;
-			return;
-		}
-
-		foreach my $item (@temp_files) {
-			if ( $item eq '.' ) {
-				next;
-			}
-			elsif ( $item eq '..' ) {
-				next;
-			}
-			else {
-				copyFolderContent( $copy_from . '/' . $item );
-			}
-		}
-		rmdir $copy_from;
-		return;
-	}
-}
-
-sub copyFileText {
-	my @params    = @_;
-	my $copy_from = $params[0];
-	my $copy_to   = $params[1];
-
-	my @error_arr  = ("error");
-	my @temp_files = readdir $dh;
-
-	#open my ($dh), $dirname or die print encode_json( \@error_arr );
-	foreach my $item (@temp_files) {
+	foreach my $item (@un_dotted_files) {
 		if ( $item eq '.' ) {
 			next;
 		}
@@ -113,12 +42,82 @@ sub copyFileText {
 			next;
 		}
 		else {
-			open FILE, ">", "$copy_to.txt" or die $!;
-			my $text_file = do { local $/; <$dh> };
-			print FILE $text_file;
-			close FILE;
+			
 		}
 	}
+}
+else {
 
+}
+
+sub copyFolderContent {
+	my @params = @_;
+	my $current_directory = $params[0];    #folder/file we want to copy
+	my $target = $params[1];
+	
+	#stop condition if its a file
+	if ( -f $current_directory ) {
+		#my $up_directory =~ s/\/([\x00-\x2E\x30-\x7F]+)$/\//g;	# remove file name from path
+		copyFileText($current_directory , $target);
+		return;
+	}
+	
+	if ( -d $current_directory ) {
+		
+		my @path_array = split( '/', $current_directory ); #split the copy_to path inorder to get only the file name
+		my $new_dir = $target . '/' . $path_array[$#path_array];
+		mkdir $new_dir; #create dir for copying 
+		
+		opendir $dh, $current_directory or die print (\@error_arr);
+		my @temp_files = readdir $dh;
+		close $dh;
+		
+		# safety - stopping condition if we reached an empty folder.
+		my $size = $#temp_files;
+		if ($size == 0 ) {
+			return;
+		}
+		
+		foreach my $item (@temp_files) {
+			if ( $item eq '.') {
+				next;
+			} elsif ( $item eq '..') {
+				next;
+			} else {
+				copyFolderContent($current_directory . '/' . $item , $new_dir);	
+			}
+		}
+		
+		return;
+	}
+}
+
+sub copyFileText {
+	my @params    = @_;
+	my $copy_from = $params[0];    #file we want to copy
+	my $copy_to   = $params[1];    #the folder we want to copy file to
+
+	my @path_array = split( '/', $copy_from ); #split the copy_to path inorder to get only the file name
+
+	my $new_file = $copy_to . '/' . $path_array[$#path_array];
+
+	my @error_arr = ("cp: cannot stat $copy_from : No such file or directory");
+	open my $in, '<:raw', $copy_from or die print encode_json( \@error_arr );
+
+	@error_arr = ("cp: cannot stat $new_file : No such file or directory");
+	open my $out, '>:raw', $new_file or die print encode_json( \@error_arr );
+
+	my $len;
+	my $data;
+
+	while ( $len = sysread $in, $data, 4096 ) {
+		syswrite $out, $data, $len;
+	}
+
+	if ( !defined $len ) {
+		@error_arr = ("Cant read file");
+		print encode_json( \@error_arr );
+		exit;
+	}
 }
 
