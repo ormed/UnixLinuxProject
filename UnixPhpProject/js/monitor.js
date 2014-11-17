@@ -48,6 +48,37 @@ $(function() {
 	},3000);
 });
 
+// cpu charts
+google.load("visualization", "1", {packages:["gauge"]});
+google.setOnLoadCallback(drawCpuChart);
+function drawCpuChart() {
+
+  var data = google.visualization.arrayToDataTable([
+    ['Label', 'Value'],
+    ['Memory', 0],
+    ['CPU', 0],
+  ]);
+
+  var options = {
+    width: 400, height: 120,
+    redFrom: 90, redTo: 100,
+    yellowFrom:75, yellowTo: 90,
+    minorTicks: 5
+  };
+
+  var chart = new google.visualization.Gauge(document.getElementById('cpu_div'));
+
+  chart.draw(data, options);
+
+  setInterval(function() {
+    data.setValue(0, 1, Math.round(60 * Math.random()));
+    chart.draw(data, options);
+  }, 1000);
+  setInterval(function() {
+    data.setValue(1, 1, Math.round(60 * Math.random()));
+    chart.draw(data, options);
+  }, 5000);
+}
 
 //Help function
 function performAjaxPost(url, data, callBackFunc) {

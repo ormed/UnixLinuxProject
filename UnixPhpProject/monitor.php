@@ -30,8 +30,11 @@ $mem_free = shell_exec('free -m');
 
 				<div class="container-fluid ">
 					
-					<div id="chart_div" style="width: 500px; height: 200px;"></div>
-
+					<div class="row">
+						<div class="col-lg-7" id="chart_div" style="width: 500px; height: 200px;"></div>
+						<div class="col-lg-7" id="cpu_div" style="width: 500px; height: 200px;"></div>
+					</div>
+					
 					<pre id="process-table"></pre>
 					
 					<pre><?php echo($mem_free); ?></pre>
