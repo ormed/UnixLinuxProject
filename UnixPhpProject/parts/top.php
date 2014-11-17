@@ -38,10 +38,6 @@
 		<!-- Bootstrap Core JavaScript -->
 		<script src="js/lib/bootstrap.min.js"></script>
 		
-		<!-- Google Charts API -->
-		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-
-		
 	</head>
 
 	<body>
