@@ -37,7 +37,7 @@
 						<a href="remove_user.php">Remove User</a>
 					</li>
 					<li>
-						<a href="add_user.php">Edit User</a>
+						<a href="edit_user.php">Edit User</a>
 					</li>
 					<li>
 						<a href="change_permissions.php">Change Permissions</a>

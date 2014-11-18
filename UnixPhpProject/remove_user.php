@@ -1,7 +1,8 @@
 <?php include_once ('parts/top.php');
 include_once('../parts/help_functions.php');
 
-$result = shell_exec('cut -d : -f 1 /etc/passwd');
+//$result = shell_exec('cut -d : -f 1 /etc/passwd');
+$result = shell_exec('cat /etc/passwd | grep "/home" |cut -d: -f1');
 $result = split("\n", $result);
 ?>
 

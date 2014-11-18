@@ -36,6 +36,13 @@ switch ($page) {
     	$error = shell_exec('sudo userdel ' . $rm_user);
 		$success = $rm_user . ' has been deleted.';
     	break;
+	case 'edit_user':
+		$edit_user = $_POST['
+user'];
+
+    	//$error = shell_exec('sudo userdel ' . $rm_user);
+		//$success = $rm_user . ' has been deleted.';
+    	break;
 	case 'date':
 		$hour = isset($_POST['hour']) ? $_POST['hour'] : '';
 		$minute = isset($_POST['minute']) ? $_POST['minute'] : '';

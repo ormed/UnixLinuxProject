@@ -25,13 +25,15 @@ my @all_files = readdir $dh;
 my @un_dotted_files = grep { !/^\.\./ } @all_files;
 closedir $dh;
 
-copyFolderContent( $dirname , $target );
+copyFolderContent( $dirname, $target );
 
 if ( $#un_dotted_files > 0 ) {
 
-	my @path_array = split( '/', $dirname ); #split the copy_to path inorder to get only the file name
+	my @path_array =
+	  split( '/', $dirname )
+	  ;    #split the copy_to path inorder to get only the file name
 	my $new_dir = $target . '/' . $path_array[$#path_array];
-	
+
 	mkdir $new_dir;
 
 	foreach my $item (@un_dotted_files) {
@@ -42,7 +44,6 @@ if ( $#un_dotted_files > 0 ) {
 			next;
 		}
 		else {
-			
 		}
 	}
 }
@@ -51,43 +52,48 @@ else {
 }
 
 sub copyFolderContent {
-	my @params = @_;
+	my @params            = @_;
 	my $current_directory = $params[0];    #folder/file we want to copy
-	my $target = $params[1];
-	
+	my $target            = $params[1];
+
 	#stop condition if its a file
 	if ( -f $current_directory ) {
-		#my $up_directory =~ s/\/([\x00-\x2E\x30-\x7F]+)$/\//g;	# remove file name from path
-		copyFileText($current_directory , $target);
+
+#my $up_directory =~ s/\/([\x00-\x2E\x30-\x7F]+)$/\//g;	# remove file name from path
+		copyFileText( $current_directory, $target );
 		return;
 	}
-	
+
 	if ( -d $current_directory ) {
-		
-		my @path_array = split( '/', $current_directory ); #split the copy_to path inorder to get only the file name
+
+		my @path_array =
+		  split( '/', $current_directory )
+		  ;    #split the copy_to path inorder to get only the file name
 		my $new_dir = $target . '/' . $path_array[$#path_array];
-		mkdir $new_dir; #create dir for copying 
-		
-		opendir $dh, $current_directory or die print (\@error_arr);
+		mkdir $new_dir;    #create dir for copying
+
+		opendir $dh, $current_directory or die print( \@error_arr );
 		my @temp_files = readdir $dh;
 		close $dh;
-		
+
 		# safety - stopping condition if we reached an empty folder.
 		my $size = $#temp_files;
-		if ($size == 0 ) {
+		if ( $size == 0 ) {
 			return;
 		}
-		
+
 		foreach my $item (@temp_files) {
-			if ( $item eq '.') {
+			if ( $item eq '.' ) {
 				next;
-			} elsif ( $item eq '..') {
+			}
+			elsif ( $item eq '..' ) {
 				next;
-			} else {
-				copyFolderContent($current_directory . '/' . $item , $new_dir);	
+			}
+			else {
+				copyFolderContent( $current_directory . '/' . $item, $new_dir );
 			}
 		}
-		
+
 		return;
 	}
 }
@@ -97,7 +103,9 @@ sub copyFileText {
 	my $copy_from = $params[0];    #file we want to copy
 	my $copy_to   = $params[1];    #the folder we want to copy file to
 
-	my @path_array = split( '/', $copy_from ); #split the copy_to path inorder to get only the file name
+	my @path_array =
+	  split( '/', $copy_from )
+	  ;    #split the copy_to path inorder to get only the file name
 
 	my $new_file = $copy_to . '/' . $path_array[$#path_array];
 
