@@ -20,11 +20,11 @@ switch ($page) {
 		if($password != $repassword) {
 			$error = 'Opps! It seems like the passwords does not match.';
 			
-			break;	
+			break;
 		}
 		
 		if(empty($home_dir)) {
-			$home_dir = '/home/' . $user;	
+			$home_dir = '/home/' . $user;
 		}
 		
     	$success = shell_exec('sudo useradd -d' . $home_dir .' ' . $user . ' -c ' . $full_name);
@@ -37,11 +37,26 @@ switch ($page) {
 		$success = $rm_user . ' has been deleted.';
     	break;
 	case 'edit_user':
-		$edit_user = $_POST['
-user'];
-
-    	//$error = shell_exec('sudo userdel ' . $rm_user);
-		//$success = $rm_user . ' has been deleted.';
+		$user = $_POST['old-user'];
+		$new_user = $_POST['new-user-name'];
+		$full_name = $_POST['full-name'];
+		$password = $_POST['pwd'];
+		$repassword = $_POST['repwd'];
+		$home_dir = $_POST['home-dir'];
+		
+		$error .= passwordValidateion($password, $repassword);
+		
+		if (!empty($error)) {
+			break;
+		}
+		// first update all info
+		$error .= shell_exec('sudo usermod -md ' . $home_dir . ' ' . $user); //change home dir and move the old one there
+		$error .= shell_exec('sudo usermod -c "' . $full_name . '" ' . $user); // update full name
+		$error .= shell_exec('echo ' . $password . ' | sudo passwd ' . $user . ' --stdin'); // change the password
+		
+		$error .= shell_exec('sudo usermod -l ' . $new_user . ' ' . $user); // last we update the user name
+		
+		$success = 'User has been updated';
     	break;
 	case 'date':
 		$hour = isset($_POST['hour']) ? $_POST['hour'] : '';

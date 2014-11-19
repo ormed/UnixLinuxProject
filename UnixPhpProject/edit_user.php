@@ -1,5 +1,4 @@
 <?php include_once('parts/top.php'); 
-include_once('../parts/help_functions.php');
 
 $users = shell_exec('cat /etc/passwd | grep "/home" |cut -d: -f1');
 //$groups = shell_exec('cat /etc/passwd | grep "/home" |cut -d: -f 5 | grep dvir');
@@ -9,11 +8,11 @@ $users = split("\n", $users);
 sort($users);
 //sort($groups);
 
-if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-	if (isset($_GET['user'])) {
-		$user = $_GET['user'];
-		$full_name = shell_exec('cat /etc/passwd | grep "/home" |cut -d: -f 5 | grep ' . $user);
-		echo($full_name);
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+	if (isset($_POST['user'])) {
+		$selected_user = $_POST['user'];
+		$full_user_path = shell_exec('cat /etc/passwd | grep "^' . $selected_user . ':"');
+		$full_user = explode(':', $full_user_path);
 	}
 }
 ?>
@@ -24,8 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 		<div id="page-wrapper">	
 			<div class="container-fluid">
 			
-				<form id="admin-form" class="form-horizontal" role="form" method="get">
-				<input id="page" type="hidden" name="page" value="edit_user">
+				<form class="form-horizontal" role="form" method="post">
 					<div class="form-group">
 						<label for="inputCommand" class="col-sm-1 control-label">Users: </label>
 						<div class="col-sm-3">
@@ -35,31 +33,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 										continue;
 									}
 								?>
-								<option value="<?php echo($value); ?>"><?php echo($value); ?></option>
+								<option value="<?php echo($value); ?>" <?php echo((isset($selected_user) && ($value == $selected_user)) ? 'selected="selected"' : ''); ?>><?php echo($value); ?></option>
 								<?php } ?>
 							</select>
 						</div>
-						<button type="submit" class="btn btn-primary">Submit</button>
+						<button type="submit" class="btn btn-primary">Select</button>
 					</div>			
 				</form>
-				
+
+
+				<?php if ($_SERVER['REQUEST_METHOD'] === 'POST') { ?>
 				<form id="admin-form" class="form-horizontal" role="form">
 				
 				<input id="page" type="hidden" name="page" value="edit_user">
-				<input id="user" type="hidden" name="user" value="<?php echo(isset($user) ? $user : ''); ?>">
+				<input id="user" type="hidden" name="old-user" value="<?php echo(isset($selected_user) ? $selected_user : ''); ?>">
 				
 				<legend>Edit user</legend>		
 					<div class="form-group">
 						<label for="inputCommand" class="col-sm-1 control-label">User Name: </label>
 						<div class="col-sm-3">
-							<input type="text" class="form-control" name="user-name" placeholder="User Name">
+							<input type="text" class="form-control" name="new-user-name" placeholder="User Name" value="<?php echo(isset($selected_user) ? $selected_user : ''); ?>">
 						</div>
 					</div>
 					
 					<div class="form-group">
 						<label for="inputCommand" class="col-sm-1 control-label">Full Name: </label>
 						<div class="col-sm-3">
-							<input type="text" class="form-control" name="full-name" placeholder="Full Name">
+							<input type="text" class="form-control" name="full-name" placeholder="Full Name" value="<?php echo(isset($full_user) ? $full_user[4] : ''); ?>">
 						</div>
 					</div>
 					
@@ -80,33 +80,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 					<div class="form-group">
 						<label for="inputCommand" class="col-sm-1 control-label">Home Directory: </label>
 						<div class="col-sm-3">
-							<input type="text" class="form-control" name="home-dir">
+							<input type="text" class="form-control" name="home-dir" value="<?php echo(isset($full_user) ? $full_user[5] : '') ?>">
 						</div>
 					</div>
-					
-					<div class="form-group">
-						<label for="inputCommand" class="col-sm-1 control-label">Groups </label>
-						<div class="col-sm-3">
-							<select name="groups" class="form-control">
-								<?php foreach($result as $value) { 
-									if ($value == '') {
-										continue;
-									}
-								?>
-								<option value="<?php echo($value); ?>"><?php echo($value); ?></option>
-								<?php } ?>
-							</select>
-						</div>
-					</div>	
 											
 					<div class="col-sm-offset-1 col-sm-3">
 						<button type="submit" class="btn btn-primary">Update user</button>
 					</div>
 				</form>
-								
+				<?php } ?>				
 			</div>
 		</div>
 		
+	
 		<script src="js/admin_commands.js"></script>
 			
 <?php include_once('parts/bottom.php'); ?>
