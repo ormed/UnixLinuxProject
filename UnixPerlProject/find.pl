@@ -38,18 +38,19 @@ sub findFileOrFolder {
 	my @temp_files;
 
 	my $dh;
-
-	#print("$current_directory\n");
+	
+	my @path_array = split( '/', $current_directory );    #split the copy_to path inorder to get only the file name
+	my $new_dir = $path_array[$#path_array];
+	
 	#stop condition if its a file
 	if ( -f $current_directory ) {
-		if ( $target eq $current_directory ) {
-			print("$current_directory\n");
+		if ( $new_dir eq $target ) {
 			return;
 		}
 	}
 
 	if ( -d $current_directory ) {
-		if ( $target eq $current_directory ) {
+		if ( $new_dir eq $target ) {
 			print("$current_directory\n");
 		}
 		opendir $dh, $current_directory or die print( \@error_arr );
@@ -71,12 +72,19 @@ sub findFileOrFolder {
 				next;
 			}
 			else {
+				#my @path_array = split( '/', $current_directory );    #split the copy_to path inorder to get only the file name
+				#my $new_dir = $path_array[$#path_array];
+				
 				if ( $item eq $target ) {
-					if(-d $item) {
-						print($current_directory . $item . "\n");
+					#print("dir = $item\n");
+					#print("current_directory = $current_directory\n");
+					if(-d $current_directory.$item) {
+						print($current_directory . "/" . $target . "/\n");
+						#print("dir\n");
 					}
 					else {
-						print($current_directory . "/" . $item . "\n");
+						print($current_directory . "/" . $target . "\n");
+						#print("file\n");
 					}		
 				}
 				findFileOrFolder( $current_directory . $item, $target );
