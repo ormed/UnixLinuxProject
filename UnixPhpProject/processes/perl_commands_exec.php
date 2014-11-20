@@ -23,6 +23,9 @@ switch ($page) {
 	case 'rm':
     	$result = shell_exec('sudo perl /var/www/html/UnixLinuxProject/UnixPerlProject/rm.pl ' . $option . ' ' . $path);
     	break;
+	case 'find':
+    	$result = shell_exec('sudo perl /var/www/html/UnixLinuxProject/UnixPerlProject/findv2.pl ' . $option . ' ' . $path);
+    	break;
 } 
 
 

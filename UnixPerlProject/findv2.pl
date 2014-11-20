@@ -7,7 +7,7 @@ use warnings;
 
 my $dirname = $ARGV[0];    #path for dir we want search
 my $target  = $ARGV[1];    #name of file to find
-
+my $respond_str = '';
 my @error_arr = ("cp: cannot stat $dirname : No such file or directory");
 
 open my ($df), $dirname or die print encode_json( \@error_arr );
@@ -19,8 +19,10 @@ if ( -f $df ) {
 	my $file_name = $path_array[$#path_array];
 	
 	if ( $file_name eq $target ) {
-		print("$dirname\n");
+		$respond_str .= "$dirname\n";
 	}
+	my @arrOfStrFiles = split( '\n', $respond_str );
+	print encode_json( \@arrOfStrFiles );
 	exit;
 }
 
@@ -32,6 +34,8 @@ closedir $dh;
 
 findFolderContent( $dirname, $target );
 
+my @arrOfStrFiles = split( '\n', $respond_str );
+print encode_json( \@arrOfStrFiles );
 
 sub findFolderContent {
 	my @params            = @_;
@@ -49,7 +53,7 @@ sub findFolderContent {
 	if ( -d $current_directory ) {
 
 		if ( $file_name eq $target ) {
-			print("$current_directory\n");
+			$respond_str .= "$current_directory\n";
 		}
 		my @error_arr = ("Cannot open $dirname : No such file or directory");
 		
@@ -81,7 +85,7 @@ sub findFolderContent {
 	#stop condition if its not a dir
 	else  {
 		if ( $file_name eq $target ) {
-			print("$current_directory\n");
+			$respond_str .= "$current_directory\n";
 		}
 		return;
 	}
