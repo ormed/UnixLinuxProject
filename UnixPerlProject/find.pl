@@ -24,9 +24,7 @@ foreach my $item (@all_files) {
 		next;
 	}
 	else {
-
-		$item = "/" . $item . "/";
-		findFileOrFolder( $item, $find );
+		findFileOrFolder( $dirname . $item, $find );
 	}
 }
 
@@ -40,20 +38,27 @@ sub findFileOrFolder {
 	my $dh;
 	
 	my @path_array = split( '/', $current_directory );    #split the copy_to path inorder to get only the file name
-	my $new_dir = $path_array[$#path_array];
-	
+		
 	#stop condition if its a file
 	if ( -f $current_directory ) {
+		my $new_dir = $path_array[$#path_array];
+	
 		if ( $new_dir eq $target ) {
+			print("$current_directory\n");
 			return;
 		}
 	}
 
 	if ( -d $current_directory ) {
+		my $new_dir = $path_array[$#path_array - 1];
+	
 		if ( $new_dir eq $target ) {
 			print("$current_directory\n");
 		}
-		opendir $dh, $current_directory or die print( \@error_arr );
+		
+		my $dir_to_open = $current_directory . ($current_directory ne '/') ? '/' : '';
+		print $dir_to_open ."\n";
+		opendir $dh, $dir_to_open or die print( \@error_arr );
 		@temp_files = readdir $dh;
 		close $dh;
 		
@@ -87,9 +92,10 @@ sub findFileOrFolder {
 						#print("file\n");
 					}		
 				}
-				findFileOrFolder( $current_directory . $item, $target );
+				findFileOrFolder( $dir_to_open . $item, $target );
 			}
 		}
+		#return;
 	}
 }
 
