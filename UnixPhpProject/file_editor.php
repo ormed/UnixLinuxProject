@@ -1,7 +1,7 @@
 <?php
 
-
 include_once ('parts/top.php');
+
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 	if (isset($_GET['option']) && isset($_GET['path'])) {
 		$option = $_GET['option'];

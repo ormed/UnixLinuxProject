@@ -27,8 +27,8 @@ switch ($page) {
 			$home_dir = '/home/' . $user;
 		}
 		
-    	$success = shell_exec('sudo useradd -d' . $home_dir .' ' . $user . ' -c ' . $full_name);
-		$success .= shell_exec('echo ' . $password . ' | sudo passwd ' . $user . ' --stdin');
+    	$success = shell_exec('sudo useradd -d' . $home_dir .' ' . $user . ' -c ' . escapeshellarg($full_name));
+		$success .= shell_exec('echo ' . escapeshellarg($password) . ' | sudo passwd ' . $user . ' --stdin');
     	break;
 	case 'remove_user':
 		$rm_user = $_POST['option'];
