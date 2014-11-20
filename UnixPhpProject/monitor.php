@@ -14,6 +14,8 @@ foreach(explode("\n", $disk_usage) as $line) {
 }
 array_shift($disks); //remove the headers at the start of array
 
+$cpu = shell_exec('mpstat | grep "all"');
+
 $mem_free = shell_exec('free -m');
 
 
@@ -32,12 +34,17 @@ $mem_free = shell_exec('free -m');
 					
 					<div class="row">
 						<div class="col-lg-7" id="chart_div" style="width: 500px; height: 200px;"></div>
-						<div class="col-lg-7" id="cpu_div" style="width: 500px; height: 200px;"></div>
+						<div class="col-lg-6">
+							<label>Monitor</label>
+							<div class="col-lg-7" id="cpu_div" style="width: 500px; height: 200px;"></div>
+						</div>
 					</div>
 					
-					<pre id="process-table"></pre>
-					
+					<label>Memory usage</label>
 					<pre><?php echo($mem_free); ?></pre>
+					
+					<label>Processes table</label>
+					<pre id="process-table"></pre>
 					
 				</div>
 				<!-- /.container-fluid -->

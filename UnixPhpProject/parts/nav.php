@@ -24,6 +24,9 @@
 					<li>
 						<a href="rm_command.php">rm</a>
 					</li>
+					<li>
+						<a href="find_command.php">find</a>
+					</li>
 
 				</ul>
 			</li>
@@ -43,10 +46,7 @@
 						<a href="change_permissions.php">Change Permissions</a>
 					</li>
 					<li>
-						<a href="add_user.php">Monitoring Processes</a>
-					</li>
-					<li>
-						<a href="monitor.php">Sys info</a>
+						<a href="monitor.php">System Monitor</a>
 					</li>
 					<li>
 						<a href="system_date.php">Date</a>
