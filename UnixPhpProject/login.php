@@ -7,7 +7,7 @@ if (isset($_SESSION['user'])) {
 
 require_once ("parts/top.php");
 
-if (($_SERVER["REQUEST_METHOD"] == "POST") && empty($err)) {
+if (($_SERVER["REQUEST_METHOD"] == "POST")) {
 //insert user to session
 $user = cleanInput($_POST['username']);
 $_SESSION['user'] = $user;

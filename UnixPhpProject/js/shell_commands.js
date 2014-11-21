@@ -9,7 +9,7 @@ $(document).ready(function() {
 			data : $data,
 			dataType : 'json',
 			success : function(data) {
-				document.getElementById('command-respond').innerHTML = '<pre>' + data + '<pre>';
+				document.getElementById('command-respond').innerHTML = data;
 			}
 		});
 		event.preventDefault();//prevent the default submit
