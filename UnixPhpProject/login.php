@@ -35,14 +35,14 @@ if (($_SERVER["REQUEST_METHOD"] == "POST")) {
 	<div id="page-wrapper">
 
 		<div class="container-fluid">
-			
+			<?php if (!empty($error)) { ?>
 			<div class="col-lg-10">
 				<div class="alert alert-danger col-lg-4">
         			<a href="#" class="close" data-dismiss="alert">&times;</a>
-        			<strong>Error!</strong> <?php echo($error); ?>
+        			<span id="error"><?php echo($error); ?></span>
     			</div>
 			</div>
-
+			<?php } ?>
 			<div class="col-lg-10">
 				<form class="form-horizontal col-lg-4" action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?> role="form" method="post">
 					<div class="form-group">

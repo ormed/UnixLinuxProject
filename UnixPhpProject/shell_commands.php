@@ -14,8 +14,13 @@ include_once('parts/top.php');
 			<?php include_once ('parts/nav.php'); ?>
 
 			<div id="page-wrapper">
-
 				<div class="container-fluid">
+					<div class="col-sm-12">
+						<div id="error" class="alert alert-danger col-sm-4 hide">
+        					<a href="#" class="close" data-dismiss="alert">&times;</a>
+        					<strong>Error!</strong><span></span>
+    					</div>
+    				</div>
 					<form class="form-horizontal" role="form" style="margin-bottom: 70px;">
 							
 							<div class="form-group">

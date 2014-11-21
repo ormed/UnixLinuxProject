@@ -9,7 +9,8 @@ $(document).ready(function() {
 			dataType : 'json',
 			success : function(data) {
 				if (data.error) {
-					alert(data.error);
+					$('#error span').text(data.error);
+					$('#error').removeClass('hide').addClass('show');
 				} else {
 					alert(data.success);
 					location.reload();

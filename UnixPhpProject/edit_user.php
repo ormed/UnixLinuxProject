@@ -29,7 +29,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		<?php include_once ('parts/nav.php');?>
 		<div id="page-wrapper">	
 			<div class="container-fluid">
-			
+				
+				<div class="col-sm-12">
+						<div id="error" class="alert alert-danger col-sm-4 hide">
+        					<a href="#" class="close" data-dismiss="alert">&times;</a>
+        					<strong>Error!</strong><span></span>
+    					</div>
+    			</div>
+				
 				<form class="form-horizontal" action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?> role="form" method="post">
 					<div class="form-group">
 						<label for="inputCommand" class="col-sm-1 control-label">Users: </label>

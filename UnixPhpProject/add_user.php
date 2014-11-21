@@ -20,6 +20,12 @@ $result = split("\n", $result);
 			<div id="page-wrapper">
 
 				<div class="container-fluid">
+					<div class="col-sm-12">
+						<div id="error" class="alert alert-danger col-sm-4 hide">
+        					<a href="#" class="close" data-dismiss="alert">&times;</a>
+        					<strong>Error!</strong><span></span>
+    					</div>
+    				</div>
 					<form id="admin-form" class="form-horizontal" role="form">
 							<input id="page" type="hidden" name="page" value="add_user">
 							

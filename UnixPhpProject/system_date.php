@@ -19,6 +19,13 @@ include_once('parts/top.php');
 
 				<div class="container-fluid">
 				
+				<div class="col-sm-12">
+					<div id="error" class="alert alert-danger col-sm-4 hide">
+        				<a href="#" class="close" data-dismiss="alert">&times;</a>
+        				<strong>Error!</strong><span></span>
+    				</div>
+    			</div>
+    				
 				<div id="time">
 					<label>Current Time: </label>
 					<label id="current-time"></label>
