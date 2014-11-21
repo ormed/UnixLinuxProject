@@ -78,3 +78,8 @@
 #time #current-time{
 	margin-left: 20px;
 }
+
+#login-container {
+	background-image: url("../images/login2.jpg");
+	padding-bottom: 40%;
+}

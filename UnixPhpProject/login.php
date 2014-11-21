@@ -34,7 +34,9 @@ if (($_SERVER["REQUEST_METHOD"] == "POST")) {
 
 	<div id="page-wrapper">
 
-		<div class="container-fluid">
+		<div id="login-container" class="container-fluid">
+		
+		<div style="padding-top: 150px; padding-left: 100px">
 			<?php if (!empty($error)) { ?>
 			<div class="col-lg-10">
 				<div class="alert alert-danger col-lg-4">
@@ -56,10 +58,10 @@ if (($_SERVER["REQUEST_METHOD"] == "POST")) {
 					<button type="submit" class="btn btn-primary">Submit </button>
 				</form>
 			</div>
+		</div>
 		
 		</div>
 		<!-- /.container-fluid -->
-
 	</div>
 	<!-- /#page-wrapper -->
 
