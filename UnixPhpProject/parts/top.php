@@ -38,6 +38,7 @@
 		<!-- Bootstrap Core JavaScript -->
 		<script src="js/lib/bootstrap.min.js"></script>
 		
+		<script src="js/nav.js"></script>
 	</head>
 
 	<body>

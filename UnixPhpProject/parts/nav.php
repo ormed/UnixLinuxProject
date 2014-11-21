@@ -4,7 +4,6 @@ $performing_user = $_SESSION['user'];
 
 ?>
 
-
 <!-- Navigation -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 	 <!-- Brand and toggle get grouped for better mobile display -->
@@ -19,6 +18,9 @@ $performing_user = $_SESSION['user'];
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
+            	<li>
+            		<a href="system_date.php">Current time: <span id="system-time"></span></a>
+                </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?php echo($performing_user); ?> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
