@@ -1,4 +1,11 @@
-<?php include_once('parts/top.php'); 
+<?php 
+@session_start();
+
+if (!isset($_SESSION['user'])) {
+    header("Location: login.php");
+}
+
+include_once('parts/top.php'); 
 
 $users = shell_exec('cat /etc/passwd | grep "/home" |cut -d: -f1');
 //$groups = shell_exec('cat /etc/passwd | grep "/home" |cut -d: -f 5 | grep dvir');
@@ -23,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		<div id="page-wrapper">	
 			<div class="container-fluid">
 			
-				<form class="form-horizontal" role="form" method="post">
+				<form class="form-horizontal" action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?> role="form" method="post">
 					<div class="form-group">
 						<label for="inputCommand" class="col-sm-1 control-label">Users: </label>
 						<div class="col-sm-3">

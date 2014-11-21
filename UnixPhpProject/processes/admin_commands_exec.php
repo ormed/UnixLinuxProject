@@ -1,8 +1,20 @@
 <?php
+@session_start();
+
 header('Content-type: application/json');
 include_once('../parts/help_functions.php');
 
-$performing_user = 'root'; // This is the user which performs the commands
+if (!isset($_SESSION['user'])) {
+	$result = array(
+		'error'		=> 'You are not logged in!',
+		'success'	=> $success
+	);
+	echo (json_encode($result));
+	exit;
+}
+
+
+$performing_user = $_SESSION['user']; // This is the user which performs the commands
 
 $page = $_POST['page'];
 

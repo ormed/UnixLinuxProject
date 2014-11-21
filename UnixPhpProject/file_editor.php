@@ -1,8 +1,13 @@
 <?php
+@session_start();
+
+if (!isset($_SESSION['user'])) {
+    header("Location: login.php");
+}
 
 include_once ('parts/top.php');
 
-$performing_user = 'root';
+$performing_user = $_SESSION['user'];
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 	if (isset($_GET['option']) && isset($_GET['path'])) {
@@ -27,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 	<div id="page-wrapper">
 		<div class="container-fluid">
 		
-		<form class="form-horizontal" role="form" method="get">
+		<form class="form-horizontal" action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?> role="form" method="get">
 				<div class="form-group">
 					<label for="inputCommand" class="col-sm-1 control-label">Open File As </label>
 					<div class="col-sm-3">

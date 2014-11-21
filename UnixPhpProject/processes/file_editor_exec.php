@@ -1,7 +1,20 @@
 <?php 
-include_once('../parts/help_functions.php');
+@session_start();
 
-$performing_user = 'root';
+include_once('../parts/help_functions.php');
+header('Content-type: application/json');
+
+if (!isset($_SESSION['user'])) {
+	$result = array(
+		'error'		=> 'You are not logged in!',
+		'success'	=> $success
+	);
+	echo (json_encode($result));
+	exit;
+}
+
+
+$performing_user = $_SESSION['user'];
 
 $text = $_POST['text-editor'];
 $file = $_POST['current-file'];

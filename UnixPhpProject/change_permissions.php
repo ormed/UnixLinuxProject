@@ -1,7 +1,14 @@
-<?php include_once('parts/top.php'); 
+<?php 
+@session_start();
+
+if (!isset($_SESSION['user'])) {
+    header("Location: login.php");
+}
+
+include_once('parts/top.php'); 
 include_once('../parts/help_functions.php');
 
-$performing_user = 'avishay';
+$performing_user = $_SESSION['user'];
 
 $users = shell_exec('cut -d : -f 1 /etc/passwd');
 $groups = shell_exec('cut -d : -f 1 /etc/group');
@@ -54,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 				<div class="container-fluid">
 					
 					
-					<form class="form-horizontal" role="form" method="get">
+					<form class="form-horizontal" action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?> role="form" method="get">
 						<div class="form-group">
 							<label for="inputPath" class="col-sm-1 control-label">Path: </label>
 							<div class="col-sm-3">

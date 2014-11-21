@@ -1,4 +1,12 @@
-<?php include_once ('parts/top.php');
+<?php 
+
+@session_start();
+
+if (!isset($_SESSION['user'])) {
+    header("Location: login.php");
+}
+
+include_once ('parts/top.php');
 include_once('../parts/help_functions.php');
 
 //$result = shell_exec('cut -d : -f 1 /etc/passwd');

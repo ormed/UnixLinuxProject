@@ -1,6 +1,13 @@
 <?php
+@session_start();
 
-$performing_user = 'root';
+if (!isset($_SESSION['user'])) {
+	$result = 'You are not logged in!';
+	echo (json_encode($result));
+	exit;
+}
+
+$performing_user = $_SESSION['user'];
 
 $command = $_POST['command'];
 

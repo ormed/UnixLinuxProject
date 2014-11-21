@@ -1,8 +1,17 @@
 <?php
+@session_start();
+
 include_once('../parts/help_functions.php');
 header('Content-type: application/json');
 
-$performing_user = 'root';
+if (!isset($_SESSION['user'])) {
+	$result = 'You are not logged in!';
+	echo (json_encode($result));
+	exit;
+}
+
+$performing_user = $_SESSION['user'];
+
 
 $page = $_POST['page'];
 $option = $_POST['option'];
