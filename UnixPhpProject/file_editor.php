@@ -2,11 +2,13 @@
 
 include_once ('parts/top.php');
 
+$performing_user = 'root';
+
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 	if (isset($_GET['option']) && isset($_GET['path'])) {
 		$option = $_GET['option'];
 		$path = $_GET['path'];
-		$json_text = json_decode(shell_exec('sudo perl /var/www/html/UnixLinuxProject/UnixPerlProject/more.pl "" ' . $path));
+		$json_text = json_decode(shell_exec('sudo su -c "perl /var/www/html/UnixLinuxProject/UnixPerlProject/more.pl \"\" ' . $path . '" -s /bin/sh ' .  $performing_user));
 		$text = "";
 
 		foreach ($json_text as $line) {

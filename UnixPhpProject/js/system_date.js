@@ -23,9 +23,9 @@ setInterval(function(){
 				dataType : 'json',
 				success : function(data) {
 					if (data.error) {
-						alert("There is something wrong try again");
+						alert(data.error);
 					} else {
-						alert('Date has been updated');
+						alert(data.success);
 					}
 				}
 			});

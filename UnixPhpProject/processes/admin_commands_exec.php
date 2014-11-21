@@ -2,6 +2,8 @@
 header('Content-type: application/json');
 include_once('../parts/help_functions.php');
 
+$performing_user = 'root'; // This is the user which performs the commands
+
 $page = $_POST['page'];
 
 $error = '';
@@ -17,9 +19,9 @@ switch ($page) {
 		$home_dir = $_POST['home-dir'];
 		
 		//$error = password_validateion
-		if($password != $repassword) {
-			$error = 'Opps! It seems like the passwords does not match.';
-			
+		$error .= passwordValidateion($password, $repassword);
+		
+		if (!empty($error)) {
 			break;
 		}
 		
@@ -27,15 +29,19 @@ switch ($page) {
 			$home_dir = '/home/' . $user;
 		}
 		
-    	$success = shell_exec('sudo useradd -d' . $home_dir .' ' . $user . ' -c ' . escapeshellarg($full_name));
-		$success .= shell_exec('echo ' . escapeshellarg($password) . ' | sudo passwd ' . $user . ' --stdin');
+    	$error .= shell_exec('sudo su -c "useradd -d ' . $home_dir .' ' . $user . ' -c ' . escapeshellarg($full_name) . '" -s /bin/sh ' .  $performing_user . ' 2>&1');
+		$error .= shell_exec('echo ' . escapeshellarg($password) . ' | sudo  su -c "passwd ' . $user . ' --stdin" ' . '" -s /bin/sh ' .  $performing_user  . ' 2>&1');
+		
+		$success .= 'User ' . $user . ' has been added.';
     	break;
+
 	case 'remove_user':
 		$rm_user = $_POST['option'];
 
-    	$error = shell_exec('sudo userdel ' . $rm_user);
+    	$error = shell_exec('sudo su -c "userdel ' . $rm_user . '" -s /bin/sh ' .  $performing_user . ' 2>&1');
 		$success = $rm_user . ' has been deleted.';
     	break;
+		
 	case 'edit_user':
 		$user = $_POST['old-user'];
 		$new_user = $_POST['new-user-name'];
@@ -50,14 +56,29 @@ switch ($page) {
 			break;
 		}
 		// first update all info
-		$error .= shell_exec('sudo usermod -md ' . $home_dir . ' ' . $user); //change home dir and move the old one there
-		$error .= shell_exec('sudo usermod -c "' . $full_name . '" ' . $user); // update full name
-		$error .= shell_exec('echo ' . $password . ' | sudo passwd ' . $user . ' --stdin'); // change the password
+		$error .= shell_exec('sudo su -c "usermod -md ' . $home_dir . ' ' . $user . '" -s /bin/sh ' .  $performing_user . ' 2>&1'); //change home dir and move the old one there
 		
-		$error .= shell_exec('sudo usermod -l ' . $new_user . ' ' . $user); // last we update the user name
+		if (!empty($error)) {
+			break;
+		}
+		
+		$error .= shell_exec('sudo su -c "usermod -c "' . $full_name . '" ' . $user . '" -s /bin/sh ' .  $performing_user . ' 2>&1'); // update full name
+		
+		if (!empty($error)) {
+			break;
+		}
+		
+		$error .= shell_exec('echo ' . $password . ' | sudo su -c "passwd ' . $user . ' --stdin' . '" -s /bin/sh ' .  $performing_user . ' 2>&1'); // change the password
+		
+		if (!empty($error)) {
+			break;
+		}
+		
+		$error .= shell_exec('sudo su -c "usermod -l ' . $new_user . ' ' . $user . '" -s /bin/sh ' .  $performing_user . ' 2>&1'); // last we update the user name
 		
 		$success = 'User has been updated';
     	break;
+		
 	case 'date':
 		$hour = isset($_POST['hour']) ? $_POST['hour'] : '';
 		$minute = isset($_POST['minute']) ? $_POST['minute'] : '';
@@ -69,8 +90,15 @@ switch ($page) {
 		} else {
 			// Inorder to make it work need to follow this tutorial:
 			//http://superuser.com/questions/510691/linux-date-s-command-not-working-to-change-date-on-a-server
-			$success = shell_exec('sudo date --set="' . $date . ' ' . $hour . ':' . $minute . ':' . $second . '"');
+			$test = shell_exec('sudo su -c "date --set=\"' . $date . ' ' . $hour . ':' . $minute . ':' . $second . '\"' . '" -s /bin/sh ' .  $performing_user . ' 2>&1');
+			
+			if (preg_match("/date: cannot set date: Operation not permitted/", $test)) {
+				$error = 'date: cannot set date: Operation not permitted';
+			}
+			
+			$success .= 'Date has been updated';
 		}
+
 		
 		break;
 		
@@ -83,20 +111,40 @@ switch ($page) {
 		$others_access = $_POST['others-access'];
 
 		// check if file or directory
-		if (!isset($allow_execute)) {
+		if (!isset($_POST['allow-execute'])) {
 			$allow_execute = $_POST['allow-execute'];
 			
-			$error = shell_exec('sudo chown ' . $owner . ' ' . $path);
-			$error .= shell_exec('sudo chgrp ' . $group . ' ' . $path);
+			$error = shell_exec('sudo su -c "chown ' . $owner . ' ' . $path . '" -s /bin/sh ' .  $performing_user . ' 2>&1');
+			
+			if (!empty($error)) {
+				break;
+			}
+			
+			$error .= shell_exec('sudo su -c "chgrp ' . $group . ' ' . $path . '" -s /bin/sh ' .  $performing_user . ' 2>&1');
+			
+			if (!empty($error)) {
+				break;
+			}
+			
 			//build chmod number 
 			$chmod_num = (intval($owner_access) * 100) + (intval($group_access) * 10) + intval($others_access);
 			$chmod_num = ($allow_execute) ? ($chmod_num + 111) : $chmod_num;
-			$error .= shell_exec('sudo chmod ' . $chmod_num . ' ' . $path);
+			$error .= shell_exec('sudo su -c "chmod ' . $chmod_num . ' ' . $path . '" -s /bin/sh ' .  $performing_user . ' 2>&1');
 			
 		} else {
-			$error = shell_exec('sudo chown ' . $owner . ' ' . $path);
-			$error .= shell_exec('sudo chgrp ' . $group . ' ' . $path);
-			$error .= shell_exec('sudo chmod ' . $chmod_num . ' ' . $path);
+			$error = shell_exec('sudo su -c "chown ' . $owner . ' ' . $path . '" -s /bin/sh ' .  $performing_user . ' 2>&1');
+			
+			if (!empty($error)) {
+				break;
+			}
+			
+			$error .= shell_exec('sudo su -c "chgrp ' . $group . ' ' . $path . '" -s /bin/sh ' .  $performing_user . ' 2>&1');
+			
+			if (!empty($error)) {
+				break;
+			}
+			
+			$error .= shell_exec('sudo su -c "chmod ' . $chmod_num . ' ' . $path . '" -s /bin/sh ' .  $performing_user . ' 2>&1');
 		}
 		
 		$success = 'Permissions updated';

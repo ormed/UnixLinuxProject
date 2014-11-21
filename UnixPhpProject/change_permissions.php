@@ -1,6 +1,8 @@
 <?php include_once('parts/top.php'); 
 include_once('../parts/help_functions.php');
 
+$performing_user = 'avishay';
+
 $users = shell_exec('cut -d : -f 1 /etc/passwd');
 $groups = shell_exec('cut -d : -f 1 /etc/group');
 $users = split("\n", $users);
@@ -12,25 +14,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 	if (isset($_GET['path'])) {
 		$path = $_GET['path'];
 		
-		$file_type = shell_exec('sudo stat -c="%F" ' . $path);
-		$file_type = str_replace('=', '', $file_type);
-		$file_type = str_replace("\n", '', $file_type);
-		
-		$file_group = shell_exec('sudo stat -c="%G" ' . $path);
-		$file_group = str_replace('=', '', $file_group);
-		$file_group = str_replace("\n", '', $file_group);
-		
-		$file_owner = shell_exec('sudo stat -c="%U" ' . $path);
-		$file_owner = str_replace('=', '', $file_owner);
-		$file_owner = str_replace("\n", '', $file_owner);
-		
-		$permission = shell_exec('sudo stat -c="%a" ' . $path);
-		$permission = str_replace('=', '', $permission);
-		$permission = str_replace("\n", '', $permission);
-		
-		$first = intval($permission[0]);
-		$second = intval($permission[1]);
-		$third = intval($permission[2]);
+		$file_type = shell_exec('sudo su -c "stat -c=\"%F\" ' . $path . '" -s /bin/sh ' .  $performing_user . ' 2>&1');
+	
+		// Check if user have permissions to edit this file
+		if (!preg_match("/Permission denied/", $file_type)) {
+			
+			$file_type = str_replace('=', '', $file_type);
+			$file_type = str_replace("\n", '', $file_type);
+			$file_type = preg_replace("/(\sempty)+/", "", $file_type);
+			
+			$file_group = shell_exec('sudo su -c "stat -c=\"%G\" ' . $path . '" -s /bin/sh ' .  $performing_user . ' 2>&1');
+			$file_group = str_replace('=', '', $file_group);
+			$file_group = str_replace("\n", '', $file_group);
+			
+			$file_owner = shell_exec('sudo su -c "stat -c=\"%U\" ' . $path . '" -s /bin/sh ' .  $performing_user . ' 2>&1');
+			$file_owner = str_replace('=', '', $file_owner);
+			$file_owner = str_replace("\n", '', $file_owner);
+			
+			$permission = shell_exec('sudo su -c "stat -c=\"%a\" ' . $path . '" -s /bin/sh ' .  $performing_user . ' 2>&1');
+			if (empty($permission)) {
+				$permission = str_replace('=', '', $permission);
+				$permission = str_replace("\n", '', $permission);
+			
+				$first = intval($permission[0]);
+				$second = intval($permission[1]);
+				$third = intval($permission[2]);
+			}
+		}
 	}
 }
 ?>
@@ -54,8 +64,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 						</div>
 					</form>	
 					
+					<?php if (preg_match("/Permission denied/", $file_type)) { ?>
 					
-					<?php if (strcmp($file_type, 'regular file') == 0) { 
+					<pre>Permission denied</pre>
+					
+					
+					<?php } elseif (strcmp($file_type, 'regular file') == 0) { 
 						$checked = FALSE;
 						//check if execute 
 						if ($first == 5 || $first == 7) {

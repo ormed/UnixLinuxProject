@@ -218,6 +218,12 @@ function showFolders(path) {
 	var data = { page : 'ls', option : $option, path : path };
 	performAjaxPost(url, data, function(data) {
 		
+		var test_result = data[0].split(/\s/);
+		if (test_result[0] != 'total') {
+			alert('Cannot access directory. Please check your permissions');
+			return;
+		}
+		
 		//update prev folder
 		var temp_path = path.substring(0, path.length - 1);
 		temp_path = temp_path.substring(0, temp_path.lastIndexOf("/")) + '/';
