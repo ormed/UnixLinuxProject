@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 	<div id="page-wrapper">
 		<div class="container-fluid">
 		
-		<form class="form-horizontal" action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?> role="form" method="get">
+		<form class="form-horizontal row" action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?> role="form" method="get">
 				<div class="form-group">
 					<label for="inputCommand" class="col-sm-1 control-label">Open File As </label>
 					<div class="col-sm-3">
@@ -55,14 +55,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 				</div>
 			</form>
 		
-			<span class="col-sm-offset-4 col-sm-4">
+		
+		<?php if (isset($option) && $option == 'view') { ?>
+			
+			<legend class="row col-sm-12">Find in file(grep): </legend>
+			<span class="row col-sm-4">
         		<label>Find: </label>
         		<input type="text"placeholder="Enter your search..">
         		<button type="button" class="btn btn-primary btn-sm">Search</button>
         	</span>
-		
-		<?php if (isset($option) && $option == 'view') { ?>
-		
+        	
 			<div id="respond" class="result-div">
 				<pre><?php echo(htmlEntities($text)); ?></pre>
 			</div>

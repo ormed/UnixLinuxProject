@@ -175,15 +175,16 @@ switch ($page) {
 		break;
 		
 	case 'restore':
-		$path = $_PcreatedOST['path'];
+		$path = $_POST['path'];
 		$file_name = $_POST['name'];
-		$error = shell_exec('sudo su -c "cd ' . $path . ' &&  tar -xvf ' . $file_name . '.tar " -s /bin/sh ' .  $performing_user . ' 2>&1');
-/*		$arr = explode(" ", $error);
+		$error = shell_exec('sudo su -c "cd ' . $path . ' &&  tar -xvf ' . $file_name . '.tar" -s /bin/sh ' .  $performing_user . ' 2>&1');
+		
+		$arr = explode(" ", $error);
 		
 		if(is_array($arr) && $arr[0] != 'tar:') {
 			$error = "";
-			$success = 'Files has been restored.';	
-		}*/
+			$success = 'Files has been restored.';
+		}
 		break;
 }
 
