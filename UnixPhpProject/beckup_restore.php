@@ -90,16 +90,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 				
 				<legend>Restore</legend>		
 					<div class="form-group">
-						<label for="inputCommand" class="col-sm-1 control-label">file to restore: </label>
+						<label for="inputCommand" class="col-sm-1 control-label">Path: </label>
 						<div class="col-sm-3">
-							<input type="text" class="form-control" name="files-to-restore" placeholder="files to restore">
+							<input type="text" class="form-control" name="path" placeholder="Path of file">
 						</div>
 					</div>
 					
 					<div class="form-group">
-						<label for="inputCommand" class="col-sm-1 control-label">Restore to: </label>
+						<label for="inputCommand" class="col-sm-1 control-label">File name: </label>
 						<div class="col-sm-3">
-							<input type="text" class="form-control" name="restore-to" placeholder="Restore to">
+							<input type="text" class="form-control" name="name" placeholder="File name">
 						</div>
 					</div>	
 											

@@ -175,14 +175,15 @@ switch ($page) {
 		break;
 		
 	case 'restore':
-		$path = $_POST['path'];
-		$files = $_POST['files-to-backup'];
-		$backup_to = $_POST['backup-to'];
-		$file_name = $_POST['file-name'];
-		$error = shell_exec('sudo su -c "cd ' . $backup_to . ' &&  tar -cf ' . $file_name . '.tar ' . $files . '" -s /bin/sh ' .  $performing_user . ' 2>&1');
+		$path = $_PcreatedOST['path'];
+		$file_name = $_POST['name'];
+		$error = shell_exec('sudo su -c "cd ' . $path . ' &&  tar -xvf ' . $file_name . '.tar " -s /bin/sh ' .  $performing_user . ' 2>&1');
+/*		$arr = explode(" ", $error);
 		
-		debug('cd ' . $backup_to . ' &&  tar -cf ' . $file_name . '.tar ' . $files, TRUE);
-		//$error .= shell_exec('sudo su -c "mv ' . $backup_to . ' &&  tar -cf ' . $file_name . '.tar ' . $files . '" -s /bin/sh ' .  $performing_user . ' 2>&1');
+		if(is_array($arr) && $arr[0] != 'tar:') {
+			$error = "";
+			$success = 'Files has been restored.';	
+		}*/
 		break;
 }
 
