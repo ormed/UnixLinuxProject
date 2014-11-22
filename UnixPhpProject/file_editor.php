@@ -39,6 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 						<select name="option" class="form-control">
 							<option value="view">View Only</option>
 							<option value="edit">Edit</option>
+							<option value="sed">Sed</option>
 						</select>
 					</div>
 				</div>
@@ -58,14 +59,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 		
 		<?php if (isset($option) && $option == 'view') { ?>
 			
-			<legend class="row col-sm-12">Find in file(grep): </legend>
-			<span class="row col-sm-4">
-        		<label>Find: </label>
-        		<input type="text"placeholder="Enter your search..">
-        		<button type="button" class="btn btn-primary btn-sm">Search</button>
-        	</span>
-        	
+			<legend class="row col-sm-12" style="margin-top: 25px;">Find in file(grep): </legend>
+			<form id="search-form" role="form">
+				<input type="hidden" name="page" value="grep">
+				<input type="hidden" id="current-file" name="current-file" value="<?php echo(isset($path) ? $path : ''); ?>">
+				<span class="row col-sm-4">
+        			<label>Find: </label>
+        			<input type="text"  name="search" placeholder="Enter your search..">
+        			<button type="submit" class="btn btn-primary btn-sm">Search</button>
+        		</span>
+        	</form>
+
+			<div id="grep-result" class="result-div hide">
+				<label>Grep Result: </label>
+				<pre></pre>
+			</div>     
+			   	
 			<div id="respond" class="result-div">
+				<label>Full File:</label>
 				<pre><?php echo(htmlEntities($text)); ?></pre>
 			</div>
 					
@@ -73,15 +84,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 					$lines_arr = preg_split('/\n|\r/',$text);
 					$num_newlines = count($lines_arr); 
 		?>
-			<div id="respond" class="result-div">
+			<div id="respond" class="col-sm-12" style="margin-top: 25px;">
 			<form id="save-edit" role="form">
-				<input type="hidden" id="current-file" name="current-file"; value="<?php echo(isset($path) ? $path : ''); ?>">
+				<input type="hidden" name="page" value="edit">
+				<input type="hidden" id="current-file" name="current-file" value="<?php echo(isset($path) ? $path : ''); ?>">
 				<textarea class="form-control" id="text-editor" name="text-editor" rows="<?php echo($num_newlines); ?>"><?php echo(htmlEntities($text)); ?></textarea>
 				<button type="submit" class="btn btn-primary">Save</button>
 			</form>
 			</div>
-			
+		<?php } elseif (isset($option) && $option == 'sed') { ?>
+			 
+			 	
+			 	
+			 	
 		<?php } ?>
+		
 			
 		</div>
 		<!-- /#container-fuiid -->
