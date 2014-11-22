@@ -6,10 +6,7 @@ $(function() {$('#search-result').hide();});
 // bind the search event to search button
 $('#search-btn').bind('click', function() {
 	$('#search-result').hide();
-	var $current_folder = $('#current-folder').text();
-	var $option = $('#search-option').val();
-	var $search = $('#search-folder').val();
-	var command = 'find ' + $current_folder + ' ' + $option + ' ' + $search;
+	var command = buildFindCommand();
 	var data = { command : command };
 	var url = 'processes/shell_commands_exec.php';
 	performAjaxPost(url, data, function(data) {
@@ -411,4 +408,60 @@ function performAjaxPost(url, data, callBackFunc) {
 		success : callBackFunc 
 	});
 }
+
+// Build find command
+function buildFindCommand() {
+	var $current_folder = $('#current-folder').text();
+	var command = 'find ' + $current_folder; // build the basic find command
+	
+	// search by file name
+	var search = $('#search-folder').val();
+	if (search) {
+		command += ' -name ' + search;
+	}
+	
+	// add modified since
+	var days = $('#search-days').val();
+	if (days) {
+		command += ' -mtime -' + days;
+	}
+
+	// search by file type
+	var file_type = $('#search-type').val();
+	if (file_type) {
+		command += ' -iname "*.' + file_type + '"';
+	}
+
+	// search for files only or dirs only or both
+	var $file_only = $('#files-only');
+	var $dir_only = $('#dir-only');
+	if ($file_only.is(':checked') && !$dir_only.is(':checked')) {
+		command += ' -type f';
+	} else if (!$file_only.is(':checked') && $dir_only.is(':checked')) {
+		command += ' -type d';
+	}
+	
+	return command;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

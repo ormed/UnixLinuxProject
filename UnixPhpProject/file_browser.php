@@ -54,19 +54,32 @@ include_once ('parts/top.php');
         		
 			</div>
 			
+			<legend>Search this folder: </legend>
+
 			<div class="row">
-				<span class="col-sm-6">
-        		<label class="col-sm-4">Search this folder: </label>
-        		<input id="search-folder" class="col-sm-8" type="text" placeholder="Enter file name..">
+			
+				<span class="col-sm-3">
+        		<label class="col-sm-4">File name: </label>
+        		<input id="search-folder" class="col-sm-8" type="text" placeholder="Enter File name..">
+        		</span>
+
+        		<span class="col-sm-2">
+        		<label class="col-sm-5">Modify: </label>
+        		<input id="search-days" class="col-sm-7" type="text" placeholder="Days..">
+        		</span>
+
+				<span class="col-sm-2">
+        		<label class="col-sm-4">File Type: </label>
+        		<input id="search-type" class="col-sm-8" type="text" placeholder="File type..">
         		</span>
         		
-        		<div class="col-sm-2">
-					<select id="search-option" class="form-control">
-						<option value="-name">By name</option>
-					</select>
-				</div>
+        		<label class="col-sm-1"><input type="checkbox" id="dir-only" checked="checked"> Dir only</label>
+        		<label class="col-sm-1"><input type="checkbox" id="files-only" checked="checked"> Files only</label>
         		
-        		<button id="search-btn" type="button" class="btn btn-primary btn-sm col-sm-1">Search</button>
+        		<button id="search-btn" type="button" class="btn btn-primary btn-sm col-sm-0">Search</button>
+        	</div>
+        	
+			<div class="row">
         		
         		<span id="search-result" class="col-sm-6">
         			<label class="col-sm-2">Result: </label>
@@ -76,7 +89,6 @@ include_once ('parts/top.php');
 						</select>
 					</div>
         		</span>
-
 			</div>
 
 			<div id="file-browser" class="col-md-10">

@@ -1,4 +1,6 @@
 #!/usr/bin/perl
+package CP;
+
 use Switch;
 use JSON;
 
