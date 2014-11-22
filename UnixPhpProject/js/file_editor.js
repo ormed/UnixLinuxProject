@@ -31,6 +31,21 @@ $(document).ready(function() {
 	});
 });
 
+$(document).ready(function() {
+	$('.sed').submit(function(event) {
+		event.preventDefault();//prevent the default submit
+		var url = 'processes/file_editor_exec.php';
+		var $data = $(this).serialize();
+		performAjaxPost(url, $data, function(data) {
+			if (data.error) {
+				alert(data.error);
+			} else {
+				slert(data.success);
+			}
+		});
+	});
+});
+
 
 //Help function
 function performAjaxPost(url, data, callBackFunc) {

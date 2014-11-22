@@ -85,18 +85,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 					$num_newlines = count($lines_arr); 
 		?>
 			<div id="respond" class="col-sm-12" style="margin-top: 25px;">
-			<form id="save-edit" role="form">
-				<input type="hidden" name="page" value="edit">
-				<input type="hidden" id="current-file" name="current-file" value="<?php echo(isset($path) ? $path : ''); ?>">
-				<textarea class="form-control" id="text-editor" name="text-editor" rows="<?php echo($num_newlines); ?>"><?php echo(htmlEntities($text)); ?></textarea>
-				<button type="submit" class="btn btn-primary">Save</button>
-			</form>
+				<form id="save-edit" role="form">
+					<input type="hidden" name="page" value="edit">
+					<input type="hidden" id="current-file" name="current-file" value="<?php echo(isset($path) ? $path : ''); ?>">
+					<textarea class="form-control" id="text-editor" name="text-editor" rows="<?php echo($num_newlines); ?>"><?php echo(htmlEntities($text)); ?></textarea>
+					<button type="submit" class="btn btn-primary">Save</button>
+				</form>
 			</div>
 		<?php } elseif (isset($option) && $option == 'sed') { ?>
-			 
-			 	
-			 	
-			 	
+		<form class="sed">
+			<div class="form-group">
+				<label for="inputPath" class="col-sm-2 control-label">Find And Replace: </label>
+				<div class="col-sm-3">
+					<input type="text" class="form-control" name="find" placeholder="Enter word to find">
+				</div>
+				
+				<div class="col-sm-3">
+					<input type="text" class="form-control" name="replace" placeholder="Enter word to replace">
+				</div>
+				<button type="submit" class="btn btn-primary">Submit</button>
+			</div>
+		</form>
+		
+		<form class="sed">
+			<div class="form-group">
+				<label for="inputPath" class="col-sm-2 control-label">Delete Rows: </label>
+				<div class="col-sm-3">
+					<input type="text" class="form-control" name="start-row" placeholder="Start row">
+				</div>
+				
+				<div class="col-sm-3">
+					<input type="text" class="form-control" name="end-row" placeholder="End row">
+				</div>
+				<button type="submit" class="btn btn-primary">Submit</button>
+			</div>
+		</form>
+					 
 		<?php } ?>
 		
 			

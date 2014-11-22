@@ -48,7 +48,10 @@ if ($page == 'edit') {
 	if (empty($success)) {
 		$error = 'Couldn\'t find "' . $search . '" in file';
 	}
+} elseif ($page == 'sed') {
+	
 }
+
 
 
 $result = array(
