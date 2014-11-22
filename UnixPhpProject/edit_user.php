@@ -8,12 +8,8 @@ if (!isset($_SESSION['user'])) {
 include_once('parts/top.php'); 
 
 $users = shell_exec('cat /etc/passwd | grep "/home" |cut -d: -f1');
-//$groups = shell_exec('cat /etc/passwd | grep "/home" |cut -d: -f 5 | grep dvir');
-//$groups = shell_exec('cut -d : -f 1 /etc/group');
 $users = split("\n", $users);
-//$groups = split("\n", $groups);
 sort($users);
-//sort($groups);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	if (isset($_POST['user'])) {
@@ -89,7 +85,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 						<div class="col-sm-3">
 							<input type="password" class="form-control" name="repwd" placeholder="Password">
 						</div>
-					</div>
+				
+								<option value="Beckup"</option>	</div>
 					
 					<div class="form-group">
 						<label for="inputCommand" class="col-sm-1 control-label">Home Directory: </label>

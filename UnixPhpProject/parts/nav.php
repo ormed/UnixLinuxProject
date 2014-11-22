@@ -79,7 +79,7 @@ $performing_user = $_SESSION['user'];
 						<a href="system_date.php">Date</a>
 					</li>
 					<li>
-						<a href="add_user.php">Beckup/Restore</a>
+						<a href="beckup_restore.php">Beckup/Restore</a>
 					</li>
 				</ul>
 			</li>

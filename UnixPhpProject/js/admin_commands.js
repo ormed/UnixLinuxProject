@@ -13,7 +13,7 @@ $(document).ready(function() {
 					$('#error').removeClass('hide').addClass('show');
 				} else {
 					alert(data.success);
-					location.reload();
+					//location.reload();
 				}
 			}
 		});
