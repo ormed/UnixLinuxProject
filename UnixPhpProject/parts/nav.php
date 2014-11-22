@@ -40,19 +40,19 @@ $performing_user = $_SESSION['user'];
 				<a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Perl Shell Commands <i class="fa fa-fw fa-caret-down"></i></a>
 				<ul id="demo" class="collapse">
 					<li>
-						<a href="ls_command.php">LS</a>
+						<a href="ls_command.php">List directory</a>
 					</li>
 					<li>
-						<a href="more_command.php">more</a>
+						<a href="more_command.php">View file</a>
 					</li>
 					<li>
-						<a href="wc_command.php">wc</a>
+						<a href="wc_command.php">Print info about counts forfile</a>
 					</li>
 					<li>
-						<a href="rm_command.php">rm</a>
+						<a href="rm_command.php">Remove file/directory</a>
 					</li>
 					<li>
-						<a href="find_command.php">find</a>
+						<a href="find_command.php">Search files directory</a>
 					</li>
 
 				</ul>

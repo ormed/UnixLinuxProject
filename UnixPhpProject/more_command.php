@@ -15,18 +15,10 @@ include_once('parts/top.php'); ?>
 
 				<div class="container-fluid">
 					<form class="form-horizontal" role="form">
-							<input id="page" type="hidden" name="page" value="more">
-							<div class="form-group">
-								<label for="inputCommand" class="col-sm-1 control-label">more </label>
-								<div class="col-sm-3">
-									<select name="option" class="form-control">
-										<option value="other">no option</option>
-									</select>
-								</div>
-							</div>
-							
-							<div class="form-group">
-								<label for="inputPath" class="col-sm-1 control-label">File Path: </label>
+						<input id="page" type="hidden" name="page" value="more">
+						<input id="page" type="hidden" name="option" value="other">
+						<div class="form-group">
+							<label for="inputPath" class="col-sm-1 control-label">File Path: </label>
 								<div class="col-sm-3">
 									<input type="text" class="form-control" name="path" placeholder="Path">
 								</div>

@@ -31,7 +31,7 @@ switch ($page) {
 		$home_dir = $_POST['home-dir'];
 		
 		//$error = password_validateion
-		$error .= passwordValidateion($password, $repassword);
+		$error .= passwordValidateion($user, $password, $repassword);
 		
 		if (!empty($error)) {
 			break;
@@ -62,7 +62,7 @@ switch ($page) {
 		$repassword = $_POST['repwd'];
 		$home_dir = $_POST['home-dir'];
 		
-		$error .= passwordValidateion($password, $repassword);
+		$error .= passwordValidateion($user, $password, $repassword);
 		
 		if (!empty($error)) {
 			break;

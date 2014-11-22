@@ -21,10 +21,25 @@ function cleanInput($data) {
    return $data;
 }
 
-function passwordValidateion($pw, $re_pw) {
-	$error = '';
+function passwordValidateion($user, $pw, $re_pw) {
+	$error = "";
 	if($pw != $re_pw) {
-			$error = 'Opps! It seems like the passwords does not match.';	
+			$error .= "It seems like the passwords does not match.";	
+	}
+	if(strlen ( $pw ) < 6) {
+			$error .= "Password must contain 6 or more characters.";
+	}
+	if(strpos($pw, $user) !== FALSE) {
+		$error .= "Passwords can not contain the user name.";
+	}
+	if(!preg_match('/[A-Za-z]/', $pw)) {
+		$error .= "Password must contain letters.";
+	}
+	if(!preg_match('/[0-9]/', $pw)) {
+		$error .= "Password must contain numbers.";
+	}
+	if(strpos($pw,  '!', '$', '#', '%') !== TRUE) {
+		$error .= "Passwords can not contain Non-alphanumeric.";
 	}
 	return $error;
 }

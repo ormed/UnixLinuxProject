@@ -23,7 +23,7 @@ $result = split("\n", $result);
 					<div class="col-sm-12">
 						<div id="error" class="alert alert-danger col-sm-4 hide">
         					<a href="#" class="close" data-dismiss="alert">&times;</a>
-        					<strong>Error!</strong><span></span>
+        					<strong>Error! </strong><span></span>
     					</div>
     				</div>
 					<form id="admin-form" class="form-horizontal" role="form">

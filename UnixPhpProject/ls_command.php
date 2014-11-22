@@ -21,12 +21,12 @@ include_once('parts/top.php'); ?>
 								<div class="col-sm-3">
 									<select name="option" class="form-control">
 										<option value="other">no option</option>
-										<option value="-a">-a</option>
-										<option value="-l">-l</option>
-										<option value="-al">-al</option>
-										<option value="-i">-i</option>
-										<option value="-s">-s</option>
-										<option value="-F">-F</option>
+										<option value="-a">Show hidden file</option>
+										<option value="-l">Show long format</option>
+										<option value="-al">Show hidden and long format</option>
+										<option value="-i">Show index number</option>
+										<option value="-s">Show size</option>
+										<option value="-F">List files and directories</option>
 									</select>
 								</div>
 							</div>
