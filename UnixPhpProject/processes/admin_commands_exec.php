@@ -162,21 +162,27 @@ switch ($page) {
 		$success = 'Permissions updated';
 		break;
 		
-	case 'backup_restore':
-		$option = $_POST['option'];
-		if($option == 'backup') {
-			$path = $_POST['path'];
-			$files = $_POST['files-to-backup'];
-			$backup_to = $_POST['backup-to'];
-			$file_name = $_POST['file-name'];
-			$error = shell_exec('sudo su -c "cd ' . $backup_to . ' &&  tar -cf ' . $file_name . '.tar ' . $files . '" -s /bin/sh ' .  $performing_user . ' 2>&1');
-			//$error .= shell_exec('sudo su -c "mv ' . $backup_to . ' &&  tar -cf ' . $file_name . '.tar ' . $files . '" -s /bin/sh ' .  $performing_user . ' 2>&1');
-		}
-		if($option == 'restore') {
-			$file = $_POST['files-to-restore'];
-			$restore = $_POST['restore-to'];
-				
-		}
+	case 'backup':
+		$path = $_POST['path'];
+		$files = $_POST['files-to-backup'];
+		$backup_to = $_POST['backup-to'];
+		$file_name = $_POST['file-name'];
+		
+		$error = shell_exec('sudo su -c "cd ' . $backup_to . ' &&  tar -cf ' . $file_name . '.tar ' . $files . '" -s /bin/sh ' .  $performing_user . ' 2>&1');
+		shell_exec('sudo su -c "mv ' . $path . $file_name . '.tar ' . $backup_to . '" -s /bin/sh ' .  $performing_user . ' 2>&1');
+		
+		$success = 'Backup file was created at: ' . $backup_to;
+		break;
+		
+	case 'restore':
+		$path = $_POST['path'];
+		$files = $_POST['files-to-backup'];
+		$backup_to = $_POST['backup-to'];
+		$file_name = $_POST['file-name'];
+		$error = shell_exec('sudo su -c "cd ' . $backup_to . ' &&  tar -cf ' . $file_name . '.tar ' . $files . '" -s /bin/sh ' .  $performing_user . ' 2>&1');
+		
+		debug('cd ' . $backup_to . ' &&  tar -cf ' . $file_name . '.tar ' . $files, TRUE);
+		//$error .= shell_exec('sudo su -c "mv ' . $backup_to . ' &&  tar -cf ' . $file_name . '.tar ' . $files . '" -s /bin/sh ' .  $performing_user . ' 2>&1');
 		break;
 }
 

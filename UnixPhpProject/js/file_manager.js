@@ -443,25 +443,3 @@ function buildFindCommand() {
 	
 	return command;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

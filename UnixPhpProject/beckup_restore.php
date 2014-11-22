@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 				
 				<form id="admin-form" class="form-horizontal" role="form">
 				
-				<input type="hidden" name="page" value="backup_restore">
+				<input type="hidden" name="page" value="backup">
 				
 				<legend>Backup</legend>	
 					<div class="form-group">
@@ -86,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 				
 				<form id="admin-form" class="form-horizontal" role="form">
 				
-				<input type="hidden" name="page" value="backup_restore">
+				<input type="hidden" name="page" value="restore">
 				
 				<legend>Restore</legend>		
 					<div class="form-group">
