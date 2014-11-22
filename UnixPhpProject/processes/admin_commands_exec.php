@@ -4,6 +4,9 @@
 header('Content-type: application/json');
 include_once('../parts/help_functions.php');
 
+$error = '';
+$success = '';
+
 if (!isset($_SESSION['user'])) {
 	$result = array(
 		'error'		=> 'You are not logged in!',
@@ -17,9 +20,6 @@ if (!isset($_SESSION['user'])) {
 $performing_user = $_SESSION['user']; // This is the user which performs the commands
 
 $page = $_POST['page'];
-
-$error = '';
-$success = '';
 
 
 switch ($page) {

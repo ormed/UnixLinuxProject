@@ -4,6 +4,9 @@
 include_once('../parts/help_functions.php');
 header('Content-type: application/json');
 
+$error = '';
+$success = '';
+
 if (!isset($_SESSION['user'])) {
 	$result = array(
 		'error'		=> 'You are not logged in!',
@@ -18,8 +21,6 @@ $performing_user = $_SESSION['user'];
 
 $page = $_POST['page'];
 $file = $_POST['current-file'];
-
-$error = '';
 
 if ($page == 'edit') {
 	$text = $_POST['text-editor'];
@@ -51,8 +52,6 @@ if ($page == 'edit') {
 } elseif ($page == 'sed') {
 	
 }
-
-
 
 $result = array(
 	'error'		=> $error,
