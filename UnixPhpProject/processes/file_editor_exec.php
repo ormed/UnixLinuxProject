@@ -16,25 +16,37 @@ if (!isset($_SESSION['user'])) {
 
 $performing_user = $_SESSION['user'];
 
-$text = $_POST['text-editor'];
+$page = $_POST['page'];
 $file = $_POST['current-file'];
 
-$lines = explode("\r\n", $text);
-
 $error = '';
-$success = 'File has been updated!';
 
-for($i=0; $i<count($lines); $i++) {
+if ($page == 'edit') {
+	$text = $_POST['text-editor'];
+
+	$lines = explode("\r\n", $text);
+	$success = 'File has been updated!';
+
+	for($i=0; $i<count($lines); $i++) {
 	
-	if ($i == 0) {
-		// first save the first line
-		$error .= shell_exec('sudo su -c "echo \"' . addslashes($lines[$i]) . '\" > ' . $file . '" -s /bin/sh ' .  $performing_user . ' 2>&1');
-	} else {
-		$error .= shell_exec('sudo su -c "echo \"' . addslashes($lines[$i]) . '\" >> ' . $file . '" -s /bin/sh ' .  $performing_user . ' 2>&1');
+		if ($i == 0) {
+			// first save the first line
+			$error .= shell_exec('sudo su -c "echo \"' . addslashes($lines[$i]) . '\" > ' . $file . '" -s /bin/sh ' .  $performing_user . ' 2>&1');
+		} else {
+			$error .= shell_exec('sudo su -c "echo \"' . addslashes($lines[$i]) . '\" >> ' . $file . '" -s /bin/sh ' .  $performing_user . ' 2>&1');
+		}
+		
+		if (!empty($error)) {
+			break;
+		}
 	}
+} elseif ($page == 'grep') {
+	$search = $_POST['search'];
 	
-	if (!empty($error)) {
-		break;
+	$success = shell_exec('sudo su -c "grep ' . $search . ' ' . $file . '" -s /bin/sh ' .  $performing_user . ' 2>&1');
+	
+	if (empty($success)) {
+		$error = 'Couldn\'t find "' . $search . '" in file';
 	}
 }
 
