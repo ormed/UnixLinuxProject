@@ -15,18 +15,19 @@ include_once('parts/top.php'); ?>
 
 				<div class="container-fluid">
 					<form class="form-horizontal" role="form">
+					<legend>Find command</legend>
 							<input id="page" type="hidden" name="page" value="find">
 							<div class="form-group">
-								<label for="inputCommand" class="col-sm-1 control-label">Dir to search: </label>
+								<label for="inputCommand" class="col-sm-1 control-label">Search in dir: </label>
 								<div class="col-sm-3">
-									<input type="text" class="form-control" name="option" placeholder="Dir Path">
+									<input type="text" class="form-control" name="option" placeholder="Dir Path for search">
 								</div>
 							</div>
 							
 							<div class="form-group">
-								<label for="inputPath" class="col-sm-1 control-label">File to find: </label>
+								<label for="inputPath" class="col-sm-1 control-label">File name: </label>
 								<div class="col-sm-3">
-									<input type="text" class="form-control" name="path" placeholder="Search Value">
+									<input type="text" class="form-control" name="path" placeholder="File name">
 								</div>
 							</div>
 							

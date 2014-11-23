@@ -2,8 +2,8 @@ QA:
 
 Perl Commands:
 
-1) add copy to manu.
-2) check rm and cp on hidden files.
+1) add copy to manu. added
+2) check rm and cp on hidden files. cheaked and work
 3) add rm command
 
 

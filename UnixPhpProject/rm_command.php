@@ -16,13 +16,14 @@ include_once('parts/top.php'); ?>
 
 				<div class="container-fluid">
 					<form class="form-horizontal" role="form">
+					<legend>Rm command</legend>
 							<input id="page" type="hidden" name="page" value="rm">
 							<div class="form-group">
-								<label for="inputCommand" class="col-sm-1 control-label">rm </label>
+								<label for="inputCommand" class="col-sm-1 control-label">Option: </label>
 								<div class="col-sm-3">
 									<select name="option" class="form-control">
-										<option value="other">no option</option>
-										<option value="-a">-r</option>
+										<option value="other">remove file</option>
+										<option value="-r">remove files and directory</option>
 									</select>
 								</div>
 							</div>

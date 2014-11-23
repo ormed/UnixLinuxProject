@@ -15,13 +15,19 @@ include_once('parts/top.php'); ?>
 
 				<div class="container-fluid">
 					<form class="form-horizontal" role="form">
-					<legend>More command</legend>
-						<input id="page" type="hidden" name="page" value="more">
-						<input id="page" type="hidden" name="option" value="other">
-						<div class="form-group">
-							<label for="inputPath" class="col-sm-1 control-label">File path: </label>
+					<legend>Cp command</legend>
+							<input id="page" type="hidden" name="page" value="cp">
+							<div class="form-group">
+								<label for="inputCommand" class="col-sm-1 control-label">Directory/file to copy: </label>
 								<div class="col-sm-3">
-									<input type="text" class="form-control" name="path" placeholder="File path">
+									<input type="text" class="form-control" name="option" placeholder="Path">
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<label for="inputPath" class="col-sm-1 control-label">Copy to: </label>
+								<div class="col-sm-3">
+									<input type="text" class="form-control" name="path" placeholder="Copy to">
 								</div>
 							</div>
 							

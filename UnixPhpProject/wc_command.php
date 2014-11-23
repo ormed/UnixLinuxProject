@@ -17,25 +17,26 @@ include_once('parts/top.php');
 
 				<div class="container-fluid">
 					<form class="form-horizontal" role="form">
+					<legend>Wc command</legend>
 							<input id="page" type="hidden" name="page" value="wc">
 							<div class="form-group">
-								<label for="inputCommand" class="col-sm-1 control-label">wc </label>
+								<label for="inputCommand" class="col-sm-1 control-label">Option: </label>
 								<div class="col-sm-3">
 									<select name="option" class="form-control">
 										<option value="other">no option</option>
-										<option value="-l">-l</option>
-										<option value="-c">-c</option>
-										<option value="-m">-m</option>
-										<option value="-L">-L</option>
-										<option value="-w">-w</option>
+										<option value="-l">print the newline counts</option>
+										<option value="-c">print the byte counts</option>
+										<option value="-m">print the character counts</option>
+										<option value="-L">print the length of the longest line</option>
+										<option value="-w">print the word counts</option>
 									</select>
 								</div>
 							</div>
 							
 							<div class="form-group">
-								<label for="inputPath" class="col-sm-1 control-label">File Path: </label>
+								<label for="inputPath" class="col-sm-1 control-label">File path: </label>
 								<div class="col-sm-3">
-									<input type="text" class="form-control" name="path" placeholder="Path">
+									<input type="text" class="form-control" name="path" placeholder="File path">
 								</div>
 							</div>
 							

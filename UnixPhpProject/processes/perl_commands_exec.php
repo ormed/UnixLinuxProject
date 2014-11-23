@@ -37,6 +37,9 @@ switch ($page) {
 	case 'find':
     	$result = shell_exec('sudo su -c "perl /var/www/html/UnixLinuxProject/UnixPerlProject/findv2.pl ' . $option . ' ' . $path . '" -s /bin/sh ' .  $performing_user);
     	break;
+	case 'cp':
+    	$result = shell_exec('sudo su -c "perl /var/www/html/UnixLinuxProject/UnixPerlProject/cp.pl -R ' . $option . ' ' . $path . '" -s /bin/sh ' .  $performing_user);
+    	break;
 } 
 
 

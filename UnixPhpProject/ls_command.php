@@ -15,9 +15,10 @@ include_once('parts/top.php'); ?>
 
 				<div class="container-fluid">
 					<form class="form-horizontal" role="form">
+					<legend>Ls command</legend>
 							<input id="page" type="hidden" name="page" value="ls">
 							<div class="form-group">
-								<label for="inputCommand" class="col-sm-1 control-label">ls </label>
+								<label for="inputCommand" class="col-sm-1 control-label">Option: </label>
 								<div class="col-sm-3">
 									<select name="option" class="form-control">
 										<option value="other">no option</option>
@@ -32,9 +33,9 @@ include_once('parts/top.php'); ?>
 							</div>
 							
 							<div class="form-group">
-								<label for="inputPath" class="col-sm-1 control-label">Path: </label>
+								<label for="inputPath" class="col-sm-1 control-label">File path: </label>
 								<div class="col-sm-3">
-									<input type="text" class="form-control" name="path" placeholder="Path">
+									<input type="text" class="form-control" name="path" placeholder="File path">
 								</div>
 							</div>
 							
