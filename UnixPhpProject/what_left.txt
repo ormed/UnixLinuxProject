@@ -17,6 +17,8 @@ Admin Commands:
 6) fix verify password. --------fixed-----------
 7) add group to edituser--------added------------
 8) fix bug with add full name that has spaces --------fixed-----------
+9) backup/restore - move to bash script
+10) password verify - move to bash script
 
 
 File Browser:
