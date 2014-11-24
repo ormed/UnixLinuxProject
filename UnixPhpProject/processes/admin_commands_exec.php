@@ -30,7 +30,9 @@ switch ($page) {
 		$repassword = $_POST['repwd'];
 		$home_dir = $_POST['home-dir'];
 		
-		//$error = password_validateion
+		$groups = $_POST['groups'];
+		$groups = implode(',', $groups);
+    		
 		$error .= passwordValidateion($user, $password, $repassword);
 		
 		if (!empty($error)) {
@@ -41,7 +43,7 @@ switch ($page) {
 			$home_dir = '/home/' . $user;
 		}
 		
-    	$error .= shell_exec('sudo su -c "useradd -d ' . $home_dir .' ' . $user . ' -c ' . escapeshellarg($full_name) . '" -s /bin/sh ' .  $performing_user . ' 2>&1');
+    	$error .= shell_exec('sudo su -c "useradd -G ' . $groups . ' -d ' . $home_dir .' ' . $user . ' -c ' . escapeshellarg($full_name) . '" -s /bin/sh ' .  $performing_user . ' 2>&1');
 		$error .= shell_exec('echo ' . escapeshellarg($password) . ' | sudo  su -c "passwd ' . $user . ' --stdin" ' . '" -s /bin/sh ' .  $performing_user  . ' 2>&1');
 		
 		$success .= 'User ' . $user . ' has been added.';

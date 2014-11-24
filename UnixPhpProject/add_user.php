@@ -8,8 +8,8 @@ if (!isset($_SESSION['user'])) {
 include_once ('parts/top.php');
 include_once('../parts/help_functions.php');
 
-$result = shell_exec('cat /etc/group |cut -d: -f3');
-$result = split("\n", $result);
+$groups = shell_exec('cut -d: -f1 /etc/group');
+$groups = split("\n", $groups);
 
 ?>
 
@@ -62,13 +62,13 @@ $result = split("\n", $result);
 							<div class="form-group">
 								<label for="inputCommand" class="col-sm-1 control-label">Groups </label>
 								<div class="col-sm-3">
-									<select name="groups" class="form-control">
-									<?php foreach($result as $value) { 
-									if ($value == '') {
+									<select name="groups[]" class="form-control" multiple="multiple">
+									<?php foreach($groups as $group) { 
+									if ($group == '') {
 										continue;
 									}
 								?>
-									<option value="<?php echo($value); ?>"><?php echo($value); ?></option>
+									<option value="<?php echo($group); ?>"><?php echo($group); ?></option>
 								<?php } ?>
 									</select>
 								</div>

@@ -22,5 +22,5 @@ File Browser:
 
 File editor:
 
-1) finish SED commands. ------------Done------------
+1) finish SED commands. ------------Done
 2) add word count ?
