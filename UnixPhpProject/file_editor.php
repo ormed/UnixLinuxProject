@@ -77,6 +77,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 			   	
 			<div id="respond" class="result-div">
 				<label>Full File:</label>
+				<label class="pull-right"><?php 
+				$word_count = explode(' ', shell_exec('sudo su -c "perl /var/www/html/UnixLinuxProject/UnixPerlProject/wc.pl \"\" ' . $path . '" -s /bin/sh ' .  $performing_user)); 
+				echo ('Lines: ' . str_replace('["', '', $word_count[0]) . ' Words: ' . $word_count[1] . ' Bytes: ' . $word_count[2]);
+				?></label>
 				<pre><?php echo(htmlEntities($text)); ?></pre>
 			</div>
 					
