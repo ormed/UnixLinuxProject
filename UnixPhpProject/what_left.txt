@@ -2,9 +2,9 @@ QA:
 
 Perl Commands:
 
-1) add copy to manu. added
-2) check rm and cp on hidden files. cheaked and work
-3) add rm command
+1) add copy to manu. --------added------------
+2) check rm and cp on hidden files. ------------checked and work------------
+3) add mv command
 
 
 Admin Commands:
@@ -22,5 +22,5 @@ File Browser:
 
 File editor:
 
-1) finish SED commands.
+1) finish SED commands. ------------Done------------
 2) add word count ?

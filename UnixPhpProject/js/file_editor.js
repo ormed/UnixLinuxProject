@@ -40,7 +40,8 @@ $(document).ready(function() {
 			if (data.error) {
 				alert(data.error);
 			} else {
-				slert(data.success);
+				$('#respond label').text('Result:');
+				$('#respond pre').text(data.success);
 			}
 		});
 	});

@@ -94,6 +94,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 			</div>
 		<?php } elseif (isset($option) && $option == 'sed') { ?>
 		<form class="sed">
+			<input type="hidden" name="page" value="sed-print">
+			<input type="hidden" id="current-file" name="current-file" value="<?php echo(isset($path) ? $path : ''); ?>">
+			<div class="form-group">
+				<label for="inputPath" class="col-sm-2 control-label">Print Rows: </label>
+				<div class="col-sm-3">
+					<input type="text" class="form-control" name="start-row" placeholder="Start row">
+				</div>
+				
+				<div class="col-sm-3">
+					<input type="text" class="form-control" name="end-row" placeholder="End row">
+				</div>
+				<button type="submit" class="btn btn-primary">Submit</button>
+			</div>
+		</form>
+		
+		<form class="sed">
+			<input type="hidden" name="page" value="sed-replace">
+			<input type="hidden" id="current-file" name="current-file" value="<?php echo(isset($path) ? $path : ''); ?>">
 			<div class="form-group">
 				<label for="inputPath" class="col-sm-2 control-label">Find And Replace: </label>
 				<div class="col-sm-3">
@@ -108,6 +126,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 		</form>
 		
 		<form class="sed">
+			<input type="hidden" name="page" value="sed-delete">
+			<input type="hidden" id="current-file" name="current-file" value="<?php echo(isset($path) ? $path : ''); ?>">
 			<div class="form-group">
 				<label for="inputPath" class="col-sm-2 control-label">Delete Rows: </label>
 				<div class="col-sm-3">
@@ -120,7 +140,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 				<button type="submit" class="btn btn-primary">Submit</button>
 			</div>
 		</form>
-					 
+		
+		<form class="sed">
+			<input type="hidden" name="page" value="sed-append">
+			<input type="hidden" id="current-file" name="current-file" value="<?php echo(isset($path) ? $path : ''); ?>">
+			<div class="form-group">
+				<label for="inputPath" class="col-sm-2 control-label">Append Text: </label>
+				<div class="col-sm-3">
+					<input type="text" class="form-control" name="row-num" placeholder="Row Number">
+				</div>
+				
+				<div class="col-sm-3">
+					<input type="text" class="form-control" name="append-text" placeholder="Text To Append">
+				</div>
+				<button type="submit" class="btn btn-primary">Submit</button>
+			</div>
+		</form>
+		
+		<div id="respond" class="result-div">
+			<label>Full File(using sed):</label>
+			<pre><?php echo(shell_exec('sudo su -c "sed \"\" ' . $path . '" -s /bin/sh ' .  $performing_user . ' 2>&1')); ?></pre>
+		</div>
+		 
 		<?php } ?>
 		
 			
