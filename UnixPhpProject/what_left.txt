@@ -9,18 +9,26 @@ Perl Commands:
 
 Admin Commands:
 
-1) adduser- fix the group.
-2) Check all the fields in adduser/edituser (for example- empty fields).
-3) Check what happens when changing user name or creating a new user with already exist username.
+1) adduser- fix the group.  --------added------------
+2) Check all the fields in adduser/edituser (for example- empty fields). --------added------------
+3) Check what happens when changing user name or creating a new user with already exist username. --------checked and work-----------
 4) userdel - show list of all users?
 5) backup/restore - add option to restore files in specific place.
+6) fix verify password. --------fixed-----------
+7) add group to edituser--------added------------
+8) fix bug with add full name that has spaces --------fixed-----------
 
 
 File Browser:
 
-1) connect copy and cut to interface.
+1) connect copy and cut to interface. 
 
 File editor:
 
-1) finish SED commands. ------------Done
+1) finish SED commands. ------------Done--------------
 2) add word count ?
+
+
+General:
+
+1) arrange all files in directories ------------Done--------------

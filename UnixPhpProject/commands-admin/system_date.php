@@ -2,17 +2,17 @@
 @session_start();
 
 if (!isset($_SESSION['user'])) {
-    header("Location: login.php");
+    header("Location: /UnixLinuxProject/UnixPhpProject/login.php");
 }
 
-include_once('parts/top.php');
+include_once('../parts/top.php');
 
 ?>
 
 		<div id="wrapper">
 
 			<?php
-			include_once ('parts/nav.php');
+			include_once ('../parts/nav.php');
 			?>
 
 			<div id="page-wrapper">
@@ -69,6 +69,6 @@ include_once('parts/top.php');
 		<!-- /#wrapper -->
 
 
-		<script src="js/system_date.js"></script>
+		<script src="../js/system_date.js"></script>
 		
-<?php include_once('parts/bottom.php'); ?>
+<?php include_once('../parts/bottom.php'); ?>

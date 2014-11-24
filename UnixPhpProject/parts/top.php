@@ -11,16 +11,16 @@
 
 		<title>Linux Remote - Control Linux From Remote</title>
 		
-		<link href="css/style.css" rel="stylesheet">
+		<link href="/UnixLinuxProject/UnixPhpProject/css/style.css" rel="stylesheet">
 		
 		<!-- Bootstrap Core CSS -->
-		<link href="css/lib/bootstrap.min.css" rel="stylesheet">
+		<link href="/UnixLinuxProject/UnixPhpProject/css/lib/bootstrap.min.css" rel="stylesheet">
 
 		<!-- Custom CSS -->
-		<link href="css/lib/sb-admin.css" rel="stylesheet">
+		<link href="/UnixLinuxProject/UnixPhpProject/css/lib/sb-admin.css" rel="stylesheet">
 
 		<!-- Custom Fonts -->
-		<link href="font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+		<link href="/UnixLinuxProject/UnixPhpProject/font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 		
 		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
 
@@ -32,13 +32,13 @@
 		<![endif]-->
 		
 				<!-- jQuery Version 1.11.0 -->
-		<script src="js/lib/jquery-1.11.0.js"></script>
+		<script src="/UnixLinuxProject/UnixPhpProject/js/lib/jquery-1.11.0.js"></script>
 		<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 
 		<!-- Bootstrap Core JavaScript -->
-		<script src="js/lib/bootstrap.min.js"></script>
+		<script src="/UnixLinuxProject/UnixPhpProject/js/lib/bootstrap.min.js"></script>
 		
-		<script src="js/nav.js"></script>
+		<script src="/UnixLinuxProject/UnixPhpProject/js/nav.js"></script>
 	</head>
 
 	<body>

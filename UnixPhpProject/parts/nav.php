@@ -14,18 +14,18 @@ $performing_user = $_SESSION['user'];
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.php">Linux Control System</a>
+                <a class="navbar-brand" href="/UnixLinuxProject/UnixPhpProject/index.php">Linux Control System</a>
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
             	<li>
-            		<a href="system_date.php">Current time: <span id="system-time"></span></a>
+            		<a href="/UnixLinuxProject/UnixPhpProject/commands-admin/system_date.php">Current time: <span id="system-time"></span></a>
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?php echo($performing_user); ?> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="logout.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            <a href="/UnixLinuxProject/UnixPhpProject/logout.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
                         </li>
                     </ul>
                 </li>
@@ -34,28 +34,28 @@ $performing_user = $_SESSION['user'];
 	<div class="collapse navbar-collapse navbar-ex1-collapse">
 		<ul class="nav navbar-nav side-nav">
 			<li>
-				<a href="index.php"><i class="fa fa-fw fa-home"></i> Home</a>
+				<a href="/UnixLinuxProject/UnixPhpProject/index.php"><i class="fa fa-fw fa-home"></i> Home</a>
 			</li>
 			<li>
 				<a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Perl Shell Commands <i class="fa fa-fw fa-caret-down"></i></a>
 				<ul id="demo" class="collapse">
 					<li>
-						<a href="ls_command.php">List directory (ls)</a>
+						<a href="/UnixLinuxProject/UnixPhpProject/commands-perl/ls_command.php">List directory (ls)</a>
 					</li>
 					<li>
-						<a href="more_command.php">View file (more)</a>
+						<a href="/UnixLinuxProject/UnixPhpProject/commands-perl/more_command.php">View file (more)</a>
 					</li>
 					<li>
-						<a href="wc_command.php">Print info about counts for file (wc)</a>
+						<a href="/UnixLinuxProject/UnixPhpProject/commands-perl/wc_command.php">Print info about counts for file (wc)</a>
 					</li>
 					<li>
-						<a href="rm_command.php">Remove file/directory (rm)</a>
+						<a href="/UnixLinuxProject/UnixPhpProject/commands-perl/rm_command.php">Remove file/directory (rm)</a>
 					</li>
 					<li>
-						<a href="find_command.php">Search files directory (find)</a>
+						<a href="/UnixLinuxProject/UnixPhpProject/commands-perl/find_command.php">Search files directory (find)</a>
 					</li>
 					<li>
-						<a href="cp_command.php">Copy files and directory (cp)</a>
+						<a href="/UnixLinuxProject/UnixPhpProject/commands-perl/cp_command.php">Copy files and directory (cp)</a>
 					</li>
 
 				</ul>
@@ -64,36 +64,36 @@ $performing_user = $_SESSION['user'];
 				<a href="javascript:;" data-toggle="collapse" data-target="#admin"><i class="fa fa-fw fa-user"></i> Administration <i class="fa fa-fw fa-caret-down"></i></a>
 				<ul id="admin" class="collapse">
 					<li>
-						<a href="add_user.php">Add User</a>
+						<a href="/UnixLinuxProject/UnixPhpProject/commands-admin/add_user.php">Add User</a>
 					</li>
 					<li>
-						<a href="remove_user.php">Remove User</a>
+						<a href="/UnixLinuxProject/UnixPhpProject/commands-admin/remove_user.php">Remove User</a>
 					</li>
 					<li>
-						<a href="edit_user.php">Edit User</a>
+						<a href="/UnixLinuxProject/UnixPhpProject/commands-admin/edit_user.php">Edit User</a>
 					</li>
 					<li>
-						<a href="change_permissions.php">Change Permissions</a>
+						<a href="/UnixLinuxProject/UnixPhpProject/commands-admin/change_permissions.php">Change Permissions</a>
 					</li>
 					<li>
-						<a href="monitor.php">System Monitor</a>
+						<a href="/UnixLinuxProject/UnixPhpProject/commands-admin/monitor.php">System Monitor</a>
 					</li>
 					<li>
-						<a href="system_date.php">Date</a>
+						<a href="/UnixLinuxProject/UnixPhpProject/commands-admin/system_date.php">Date</a>
 					</li>
 					<li>
-						<a href="beckup_restore.php">Beckup/Restore</a>
+						<a href="/UnixLinuxProject/UnixPhpProject/commands-admin/beckup_restore.php">Beckup/Restore</a>
 					</li>
 				</ul>
 			</li>
 			<li>
-				<a href="file_browser.php"><i class="fa fa-fw fa-folder"></i> File Browser</a>
+				<a href="/UnixLinuxProject/UnixPhpProject/file_browser.php"><i class="fa fa-fw fa-folder"></i> File Browser</a>
 			</li>
 			<li>
-				<a href="file_editor.php"><i class="fa fa-fw fa-font"></i> File Editor</a>
+				<a href="/UnixLinuxProject/UnixPhpProject/file_editor.php"><i class="fa fa-fw fa-font"></i> File Editor</a>
 			</li>
 			<li>
-				<a href="shell_commands.php"><i class="fa fa-fw fa-code"></i> Free Command Line</a>
+				<a href="/UnixLinuxProject/UnixPhpProject/shell_commands.php"><i class="fa fa-fw fa-code"></i> Free Command Line</a>
 			</li>
 		</ul>
 	</div>

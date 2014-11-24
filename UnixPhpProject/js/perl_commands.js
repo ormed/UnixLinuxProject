@@ -2,7 +2,7 @@ $(document).ready(function() {
 	$('.form-horizontal').submit(function(event) {
 		event.preventDefault();//prevent the default submit
 		document.getElementById('respond').innerHTML = '';
-		var url = 'processes/perl_commands_exec.php';
+		var url = '/UnixLinuxProject/UnixPhpProject/processes/perl_commands_exec.php';
 		var $data = $('.form-horizontal').serialize();
 		performAjax(url, $data);
 		

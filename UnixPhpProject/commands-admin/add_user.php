@@ -2,10 +2,10 @@
 @session_start();
 
 if (!isset($_SESSION['user'])) {
-    header("Location: login.php");
+    header("Location: /UnixLinuxProject/UnixPhpProject/login.php");
 }
 
-include_once ('parts/top.php');
+include_once ('../parts/top.php');
 include_once('../parts/help_functions.php');
 
 $groups = shell_exec('cut -d: -f1 /etc/group');
@@ -15,7 +15,7 @@ $groups = split("\n", $groups);
 
 		<div id="wrapper">
 
-			<?php include_once ('parts/nav.php'); ?>
+			<?php include_once ('../parts/nav.php'); ?>
 
 			<div id="page-wrapper">
 
@@ -23,7 +23,7 @@ $groups = split("\n", $groups);
 					<div class="col-sm-12">
 						<div id="error" class="alert alert-danger col-sm-4 hide">
         					<a href="#" class="close" data-dismiss="alert">&times;</a>
-        					<strong>Error! </strong><span></span>
+        					<strong>Error!&nbsp;</strong> <span></span>
     					</div>
     				</div>
 					<form id="admin-form" class="form-horizontal" role="form">
@@ -86,6 +86,6 @@ $groups = split("\n", $groups);
 		</div>
 		<!-- /#wrapper -->
 		
-		<script src="js/admin_commands.js"></script>
+		<script src="../js/admin_commands.js"></script>
 		
-<?php include_once('parts/bottom.php'); ?>
+<?php include_once('../parts/bottom.php'); ?>

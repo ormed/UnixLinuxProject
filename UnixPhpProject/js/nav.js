@@ -1,6 +1,6 @@
 $(function() {
 setInterval(function(){
-	var url = 'processes/admin_commands_exec.php';
+	var url = '/UnixLinuxProject/UnixPhpProject/processes/admin_commands_exec.php';
 	var data = {page : 'date'};
 	performAjaxPost(url, data, function(data) {
 		$('#system-time').text(data.success);

@@ -29,8 +29,13 @@ switch ($page) {
 		$password = $_POST['pwd'];
 		$repassword = $_POST['repwd'];
 		$home_dir = $_POST['home-dir'];
-		
 		$groups = $_POST['groups'];
+		
+		if (empty($user) || empty($password) || empty($repassword) || empty($groups)) {
+			$error = 'It seems like there are empty fields.';
+			break;
+		}
+		
 		$groups = implode(',', $groups);
     		
 		$error .= passwordValidateion($user, $password, $repassword);
@@ -51,7 +56,12 @@ switch ($page) {
 
 	case 'remove_user':
 		$rm_user = $_POST['option'];
-
+		
+		if (empty($rm_user)) {
+			$error = 'It seems like there are empty fields.';
+			break;
+		}
+		
     	$error = shell_exec('sudo su -c "userdel ' . $rm_user . '" -s /bin/sh ' .  $performing_user . ' 2>&1');
 		$success = $rm_user . ' has been deleted.';
     	break;
@@ -63,6 +73,14 @@ switch ($page) {
 		$password = $_POST['pwd'];
 		$repassword = $_POST['repwd'];
 		$home_dir = $_POST['home-dir'];
+		$groups = $_POST['groups'];
+		
+		if (empty($user) || empty($new_user) || empty($password) || empty($repassword) || empty($groups)) {
+			$error = 'It seems like there are empty fields.';
+			break;
+		}
+		
+		$groups = implode(',', $groups);
 		
 		$error .= passwordValidateion($user, $password, $repassword);
 		
@@ -73,22 +91,40 @@ switch ($page) {
 		$error .= shell_exec('sudo su -c "usermod -md ' . $home_dir . ' ' . $user . '" -s /bin/sh ' .  $performing_user . ' 2>&1'); //change home dir and move the old one there
 		
 		if (!empty($error)) {
-			break;
+			if (preg_match("/usermod: no changes/", $error)) {
+				$error = '';
+			} else {
+				break;
+			}
 		}
 		
-		$error .= shell_exec('sudo su -c "usermod -c "' . $full_name . '" ' . $user . '" -s /bin/sh ' .  $performing_user . ' 2>&1'); // update full name
-		
+		$error .= shell_exec('sudo su -c "usermod -c \"' . $full_name . '\" ' . $user . '" -s /bin/sh ' .  $performing_user . ' 2>&1'); // update full name
+
 		if (!empty($error)) {
-			break;
+			if (preg_match("/usermod: no changes/", $error)) {
+				$error = '';
+			} else {
+				break;
+			}
 		}
 		
-		$error .= shell_exec('echo ' . $password . ' | sudo su -c "passwd ' . $user . ' --stdin' . '" -s /bin/sh ' .  $performing_user . ' 2>&1'); // change the password
-		
+		$error .= shell_exec('sudo su -c "usermod -G ' . $groups . ' ' . $user . '" -s /bin/sh ' .  $performing_user . ' 2>&1'); // update groups
+
 		if (!empty($error)) {
-			break;
+			if (preg_match("/usermod: no changes/", $error)) {
+				$error = '';
+			} else {
+				break;
+			}
 		}
+		
+		shell_exec('echo ' . $password . ' | sudo su -c "passwd ' . $user . ' --stdin' . '" -s /bin/sh ' .  $performing_user . ' 2>&1'); // change the password
 		
 		$error .= shell_exec('sudo su -c "usermod -l ' . $new_user . ' ' . $user . '" -s /bin/sh ' .  $performing_user . ' 2>&1'); // last we update the user name
+		
+		if (preg_match("/usermod: no changes/", $error)) {
+			$error = '';
+		}
 		
 		$success = 'User has been updated';
     	break;
@@ -102,6 +138,12 @@ switch ($page) {
 		if (empty($hour) & empty($minute) & empty($second) & empty($date)) {
 			$success = shell_exec('date +"%a %b %d, %I:%M:%S %p"');
 		} else {
+			
+			if (empty($hour) || empty($minute) || empty($second) || empty($date)) {
+				$error = 'It seems like there are empty fields.';
+				break;
+			}
+			
 			// Inorder to make it work need to follow this tutorial:
 			//http://superuser.com/questions/510691/linux-date-s-command-not-working-to-change-date-on-a-server
 			$test = shell_exec('sudo su -c "date --set=\"' . $date . ' ' . $hour . ':' . $minute . ':' . $second . '\"' . '" -s /bin/sh ' .  $performing_user . ' 2>&1');
@@ -170,6 +212,11 @@ switch ($page) {
 		$backup_to = $_POST['backup-to'];
 		$file_name = $_POST['file-name'];
 		
+		if (empty($path) || empty($files) || empty($backup_to) || empty($file_name)) {
+			$error = 'It seems like there are empty fields.';
+			break;
+		}
+		
 		$error = shell_exec('sudo su -c "cd ' . $backup_to . ' &&  tar -cf ' . $file_name . '.tar ' . $files . '" -s /bin/sh ' .  $performing_user . ' 2>&1');
 		shell_exec('sudo su -c "mv ' . $path . $file_name . '.tar ' . $backup_to . '" -s /bin/sh ' .  $performing_user . ' 2>&1');
 		
@@ -179,6 +226,12 @@ switch ($page) {
 	case 'restore':
 		$path = $_POST['path'];
 		$file_name = $_POST['name'];
+		
+		if (empty($path) || empty($file_name)) {
+			$error = 'It seems like there are empty fields.';
+			break;
+		}
+		
 		$error = shell_exec('sudo su -c "cd ' . $path . ' &&  tar -xvf ' . $file_name . '.tar" -s /bin/sh ' .  $performing_user . ' 2>&1');
 		
 		$arr = explode(" ", $error);

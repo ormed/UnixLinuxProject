@@ -2,10 +2,10 @@
 @session_start();
 
 if (!isset($_SESSION['user'])) {
-    header("Location: login.php");
+    header("Location: /UnixLinuxProject/UnixPhpProject/login.php");
 }
 
-include_once('parts/top.php'); 
+include_once('../parts/top.php'); 
 include_once('../parts/help_functions.php');
 
 $performing_user = $_SESSION['user'];
@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 			$file_owner = str_replace("\n", '', $file_owner);
 			
 			$permission = shell_exec('sudo su -c "stat -c=\"%a\" ' . $path . '" -s /bin/sh ' .  $performing_user . ' 2>&1');
-			if (empty($permission)) {
+			if (!empty($permission)) {
 				$permission = str_replace('=', '', $permission);
 				$permission = str_replace("\n", '', $permission);
 			
@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
 		<div id="wrapper">
 
-			<?php include_once ('parts/nav.php'); ?>
+			<?php include_once ('../parts/nav.php'); ?>
 
 			<div id="page-wrapper">
 
@@ -278,8 +278,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 				</div>
 			</div>	
 			
-	<script src="js/admin_commands.js"></script>
+	<script src="../js/admin_commands.js"></script>
 	
-<?php include_once('parts/bottom.php'); ?>	
+<?php include_once('../parts/bottom.php'); ?>	
 
 					

@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	$('#admin-form').submit(function(event) {
-		var url = 'processes/admin_commands_exec.php';
+		var url = '/UnixLinuxProject/UnixPhpProject/processes/admin_commands_exec.php';
 		var $data = $('#admin-form').serialize();
 		$.ajax({//Process the form using $.ajax()
 			type : 'POST',

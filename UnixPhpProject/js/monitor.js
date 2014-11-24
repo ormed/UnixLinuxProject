@@ -11,7 +11,7 @@ google.setOnLoadCallback(drawCpuChart);
 //update process table every 3 second
 $(function() {
 	setInterval(function(){
-		var url = 'processes/shell_commands_exec.php';
+		var url = '/UnixLinuxProject/UnixPhpProject/processes/shell_commands_exec.php';
 		var data = {command : 'top -n 1 -b'};
 		performAjaxPost(url, data, function(data) {
 			$('#process-table').text(data);
@@ -76,7 +76,7 @@ function drawCpuChart() {
   chart.draw(cpu_data, options);
   // intervals for the memory chart
   setInterval(function() {
-	  var url = 'processes/shell_commands_exec.php';
+	  var url = '/UnixLinuxProject/UnixPhpProject/processes/shell_commands_exec.php';
 	  var data = {command : 'free -m | grep "Mem:"'};
 	  performAjaxPost(url, data, function(returnedData) {
 		  var resultArr = returnedData.split(/\s([0-9]+)/);
@@ -89,7 +89,7 @@ function drawCpuChart() {
   
   // intervals update cpu chart from mpstat shell command
   setInterval(function() {
-	  var url = 'processes/shell_commands_exec.php';
+	  var url = '/UnixLinuxProject/UnixPhpProject/processes/shell_commands_exec.php';
 	  var data = {command : 'mpstat | grep "all"'};
 	  performAjaxPost(url, data, function(returnedData) {
 		  var resultArr = returnedData.split(/\s([0-9]+\.[0-9]+)/);

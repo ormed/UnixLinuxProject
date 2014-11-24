@@ -2,11 +2,11 @@
 @session_start();
 
 if (!isset($_SESSION['user'])) {
-    header("Location: login.php");
+    header("Location: /UnixLinuxProject/UnixPhpProject/login.php");
 }
 
-include_once('parts/top.php');
-include_once('parts/help_functions.php');
+include_once('../parts/top.php');
+include_once('../parts/help_functions.php');
 
 $disk_usage = shell_exec('df -BM');
 
@@ -32,7 +32,7 @@ $mem_free = shell_exec('free -m');
 		<div id="wrapper">
 
 			<?php
-			include_once ('parts/nav.php');
+			include_once ('../parts/nav.php');
 			?>
 
 			<div id="page-wrapper">
@@ -64,6 +64,6 @@ $mem_free = shell_exec('free -m');
 
 	<script type="text/javascript" src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1','packages':['corechart']}]}"></script>
 	<script>var disks = <?php echo(json_encode($disks)); ?>;</script>
-	<script type="text/javascript" src="js/monitor.js"></script>
+	<script type="text/javascript" src="../js/monitor.js"></script>
 		
-<?php include_once('parts/bottom.php'); ?>
+<?php include_once('../parts/bottom.php'); ?>

@@ -38,7 +38,9 @@ function passwordValidateion($user, $pw, $re_pw) {
 	if(!preg_match('/[0-9]/', $pw)) {
 		$error .= "Password must contain numbers.";
 	}
-	if(strpos($pw,  '!', '$', '#', '%') !== TRUE) {
+	if(strpos($pw, '!') !== FALSE || strpos($pw, '$') !== FALSE 
+	|| strpos($pw, '#') !== FALSE || strpos($pw, '%') !== FALSE
+	|| strpos($pw, '"') !== FALSE || strpos($pw, '\'') !== FALSE) {
 		$error .= "Passwords can not contain Non-alphanumeric.";
 	}
 	return $error;

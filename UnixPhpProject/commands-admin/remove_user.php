@@ -3,10 +3,10 @@
 @session_start();
 
 if (!isset($_SESSION['user'])) {
-    header("Location: login.php");
+    header("Location: /UnixLinuxProject/UnixPhpProject/login.php");
 }
 
-include_once ('parts/top.php');
+include_once ('../parts/top.php');
 include_once('../parts/help_functions.php');
 
 //$result = shell_exec('cut -d : -f 1 /etc/passwd');
@@ -16,7 +16,7 @@ $result = split("\n", $result);
 
 	<div id="wrapper">
 
-		<?php include_once ('parts/nav.php');?>
+		<?php include_once ('../parts/nav.php');?>
 		<div id="page-wrapper">	
 			<div class="container-fluid">
 				
@@ -50,6 +50,6 @@ $result = split("\n", $result);
 			</div>
 		</div>
 		
-		<script src="js/admin_commands.js"></script>
+		<script src="../js/admin_commands.js"></script>
 			
-<?php include_once('parts/bottom.php'); ?>
+<?php include_once('../parts/bottom.php'); ?>
