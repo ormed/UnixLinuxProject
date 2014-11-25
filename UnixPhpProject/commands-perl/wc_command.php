@@ -24,11 +24,11 @@ include_once('../parts/top.php');
 								<div class="col-sm-3">
 									<select name="option" class="form-control">
 										<option value="other">no option</option>
-										<option value="-l">print the newline counts</option>
-										<option value="-c">print the byte counts</option>
-										<option value="-m">print the character counts</option>
-										<option value="-L">print the length of the longest line</option>
-										<option value="-w">print the word counts</option>
+										<option value="-l">print the newline counts (-l)</option>
+										<option value="-c">print the byte counts (-c)</option>
+										<option value="-m">print the character counts (-m)</option>
+										<option value="-L">print the length of the longest line (-L)</option>
+										<option value="-w">print the word counts (-w)</option>
 									</select>
 								</div>
 							</div>

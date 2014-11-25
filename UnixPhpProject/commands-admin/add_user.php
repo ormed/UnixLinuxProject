@@ -28,6 +28,7 @@ $groups = split("\n", $groups);
     				</div>
 					<form id="admin-form" class="form-horizontal" role="form">
 							<input id="page" type="hidden" name="page" value="add_user">
+							<legend>Add user</legend>
 							
 							<div class="form-group">
 								<label for="inputCommand" class="col-sm-1 control-label">User Name: </label>

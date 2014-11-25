@@ -29,6 +29,7 @@ $result = split("\n", $result);
 				
 				<form id="admin-form" class="form-horizontal" role="form">
 						<input id="page" type="hidden" name="page" value="remove_user">
+						<legend>Remove user</legend>
 						<div class="form-group">
 							<label for="inputCommand" class="col-sm-1 control-label">Users: </label>
 							<div class="col-sm-3">

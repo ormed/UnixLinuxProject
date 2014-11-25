@@ -31,15 +31,15 @@ switch ($page) {
 		$home_dir = $_POST['home-dir'];
 		$groups = $_POST['groups'];
 		
-		if (empty($user) || empty($password) || empty($repassword) || empty($groups)) {
+		if (empty($user) || empty($password) || empty($repassword)) {
 			$error = 'It seems like there are empty fields.';
 			break;
 		}
 		
 		$groups = implode(',', $groups);
     		
-		$error .= passwordValidateion($user, $password, $repassword);
-		//$error .= shell_exec("./var/www/html/UnixLinuxProject/UnixPerlProject/passwordValidateion");
+		//$error .= passwordValidateion($user, $password, $repassword);
+		$error .= shell_exec("./var/www/html/UnixLinuxProject/UnixPerlProject/passwordValidateion  " . $user . " " . $password . " " . $repassword);
 		
 		if (!empty($error)) {
 			break;
