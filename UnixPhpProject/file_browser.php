@@ -20,6 +20,7 @@ include_once ('parts/top.php');
 			<input type="hidden" id="prev-folder" name="prev-folder" value="/">
 			<input type="hidden" id="folder-option" name="folder-option" value="-al">
 			<input type="hidden" id="copied-entity" name="copied-entity" value="">
+			<input type="hidden" id="cut-entity" name="cut-entity" value="">
 			
 			<ul class="custom-menu" id="file-menu">
 				<li data-action="view">View</li>
@@ -45,15 +46,14 @@ include_once ('parts/top.php');
 			</ul>
 
 			<div class="row">
-				<label class="col-sm-3"><input type="checkbox" id="show-hidden-files" checked="checked"> Include Hidden Files</label>
-        		
-        		<span class="col-sm-6">
+
+        		<span class="col-sm-12">
         		<label>Current Folder: </label>
         		<label for="folderPath" id="current-folder" name="current-folder">/</label>
         		</span>
         		
 			</div>
-			
+
 			<legend>Search this folder: </legend>
 
 			<div class="row">
@@ -91,10 +91,11 @@ include_once ('parts/top.php');
         		</span>
 			</div>
 
-			<div id="file-browser" class="col-md-10">
-
-			</div>
+			<div id="file-browser" class="col-md-10"></div>
 			
+			<label class="col-sm-2"><input type="checkbox" id="show-hidden-files" checked="checked"> Include Hidden Files</label>
+			<button id="paste-btn" type="button" class="btn btn-primary btn-sm col-sm-1 col-sm-offset-1">Paste</button>
+
 		</div>
 		<!-- /#container-fuiid -->
 

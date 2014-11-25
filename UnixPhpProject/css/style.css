@@ -72,6 +72,11 @@
 	height: 50px;
 }
 
+#paste-btn {
+	margin-left: 25px;
+	margin-top: 5px;
+}
+
 /*************** END OF FILE MANAGER ********************/
 
 #time {

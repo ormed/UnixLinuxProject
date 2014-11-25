@@ -18,12 +18,12 @@ Admin Commands:
 7) add group to edituser--------added------------
 8) fix bug with add full name that has spaces --------fixed-----------
 9) backup/restore - move to bash script
-10) password verify - move to bash script
+10) password verify - move to bash script --------added------------
 
 
 File Browser:
 
-1) connect copy and cut to interface. 
+1) connect copy and cut to interface.  ------------Done--------------
 
 File editor:
 

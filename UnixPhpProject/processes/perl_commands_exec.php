@@ -19,7 +19,7 @@ $path = $_POST['path'];
 
 $result = array();
 
-//$path = escapeshellarg($path); // eascape path in case we have spaces in it 
+$path = str_replace(' ', '\\ ', $path); // eascape path in case we have spaces in it 
 
 switch ($page) {
 	case 'ls':
@@ -39,6 +39,10 @@ switch ($page) {
     	break;
 	case 'cp':
     	$result = shell_exec('sudo su -c "perl /var/www/html/UnixLinuxProject/UnixPerlProject/cp.pl -R ' . $option . ' ' . $path . '" -s /bin/sh ' .  $performing_user);
+    	break;
+	case 'mv':
+    	$result = shell_exec('sudo su -c "perl /var/www/html/UnixLinuxProject/UnixPerlProject/cp.pl -R ' . $option . ' ' . $path . '" -s /bin/sh ' .  $performing_user);
+    	shell_exec('sudo su -c "perl /var/www/html/UnixLinuxProject/UnixPerlProject/rm.pl -r ' . $option . '" -s /bin/sh ' .  $performing_user);
     	break;
 } 
 

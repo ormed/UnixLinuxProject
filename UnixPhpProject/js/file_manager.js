@@ -29,6 +29,23 @@ $('#search-btn').bind('click', function() {
 	});
 });
 
+// bind the paste event to button
+$('#paste-btn').bind('click', function() {
+	var copy = $('#copied-entity').val();
+	var cut = $('#cut-entity').val();
+	var current_folder = $('#current-folder').text();
+	
+	// First check if its copy then if its cut
+	if (copy) {
+		copyEntity(copy, current_folder);
+		$('#copied-entity').val('');
+		$('#cut-entity').val('');
+	} else if (cut) {
+		moveEntity(cut, current_folder);
+		$('#cut-entity').val('');
+	}
+});
+
 //bind event to open directory of the search result
 $('#result-path').change(function() {
 	var selected_path = $('#result-path').val();
@@ -141,7 +158,7 @@ $('#file-menu li').click(function(){
         	$('#copied-entity').val(clicked_entity_path);
         	break;
         case "move":
-        	$('#copied-entity').val(clicked_entity_path);
+        	$('#cut-entity').val(clicked_entity_path);
         	break;
         case "delete": 
         	deleteEntity(clicked_entity_path);
@@ -173,7 +190,7 @@ $('#folder-menu li').click(function(){
     		$('#copied-entity').val(clicked_entity_path);
     		break;
     	case "move":
-    		$('#copied-entity').val(clicked_entity_path);
+    		$('#cut-entity').val(clicked_entity_path);
     		break;
     	case "delete":
         	deleteEntity(clicked_entity_path);
@@ -283,6 +300,26 @@ function deleteEntity(path) {
 	performAjaxPost(url, data, function (data) {
 		alert(data);
 		showFolders($('#current-folder').text());
+		
+	});
+}
+
+function copyEntity(path_from, path_to) {
+	var url = 'processes/perl_commands_exec.php';
+	var data = { page : 'cp', option : path_from, path : path_to };
+	performAjaxPost(url, data, function (data) {
+		alert(data);
+		showFolders(path_to);
+		
+	});
+}
+
+function moveEntity(path_from, path_to) {
+	var url = 'processes/perl_commands_exec.php';
+	var data = { page : 'mv', option : path_from, path : path_to };
+	performAjaxPost(url, data, function (data) {
+		alert('file ' + path_from + ' moved');
+		showFolders(path_to);
 		
 	});
 }

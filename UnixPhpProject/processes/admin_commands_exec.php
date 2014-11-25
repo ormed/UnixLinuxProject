@@ -29,27 +29,29 @@ switch ($page) {
 		$password = $_POST['pwd'];
 		$repassword = $_POST['repwd'];
 		$home_dir = $_POST['home-dir'];
-		$groups = $_POST['groups'];
+		$groups = isset($_POST['groups']) ? $_POST['groups'] : '';
 		
 		if (empty($user) || empty($password) || empty($repassword)) {
 			$error = 'It seems like there are empty fields.';
 			break;
 		}
-		
-		$groups = implode(',', $groups);
-    		
-		//$error .= passwordValidateion($user, $password, $repassword);
-		$error .= shell_exec("./var/www/html/UnixLinuxProject/UnixPerlProject/passwordValidateion  " . $user . " " . $password . " " . $repassword);
+		if (!empty($groups)) {
+			$groups = implode(',', $groups);
+		}	
+
+		$error .= shell_exec("/var/www/html/UnixLinuxProject/UnixPerlProject/passwordValidateion  " . $user . " " . $password . " " . $repassword);
 		
 		if (!empty($error)) {
 			break;
 		}
 		
-		if(empty($home_dir)) {
-			$home_dir = '/home/' . $user;
-		}
-		
-    	$error .= shell_exec('sudo su -c "useradd -G ' . $groups . ' -d ' . $home_dir .' ' . $user . ' -c ' . escapeshellarg($full_name) . '" -s /bin/sh ' .  $performing_user . ' 2>&1');
+		$command  = 'useradd';
+    	$command .= (!empty($groups)) ? (' -G ' . $groups) : '';
+		$command .= (!empty($full_name)) ? (' -c ' . escapeshellarg($full_name)) : '';
+		$command .= (!empty($home_dir)) ? (' -d ' . $home_dir) : '';
+		$command .= ' ' . $user; 
+    	
+		$error .= shell_exec('sudo su -c "' . $command . '" -s /bin/sh ' .  $performing_user . ' 2>&1');
 		$error .= shell_exec('echo ' . escapeshellarg($password) . ' | sudo  su -c "passwd ' . $user . ' --stdin" ' . '" -s /bin/sh ' .  $performing_user  . ' 2>&1');
 		
 		$success .= 'User ' . $user . ' has been added.';
@@ -83,7 +85,8 @@ switch ($page) {
 		
 		$groups = implode(',', $groups);
 		
-		$error .= passwordValidateion($user, $password, $repassword);
+		//$error .= passwordValidateion($user, $password, $repassword);
+		$error .= shell_exec("/var/www/html/UnixLinuxProject/UnixPerlProject/passwordValidateion  " . $user . " " . $password . " " . $repassword);
 		
 		if (!empty($error)) {
 			break;

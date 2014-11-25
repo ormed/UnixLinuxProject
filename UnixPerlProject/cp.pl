@@ -19,6 +19,8 @@ my $dh;
 
 if ( -f $df ) {
 	copyFileText( $dirname, $target );
+	my @respond = ("file $dirname copied");
+	print encode_json(\@respond); 
 	exit;
 }
 
@@ -29,29 +31,8 @@ closedir $dh;
 
 copyFolderContent( $dirname, $target );
 
-if ( $#un_dotted_files > 0 ) {
-
-	my @path_array =
-	  split( '/', $dirname )
-	  ;    #split the copy_to path inorder to get only the file name
-	my $new_dir = $target . '/' . $path_array[$#path_array];
-
-	mkdir $new_dir;
-
-	foreach my $item (@un_dotted_files) {
-		if ( $item eq '.' ) {
-			next;
-		}
-		elsif ( $item eq '..' ) {
-			next;
-		}
-		else {
-		}
-	}
-}
-else {
-
-}
+my @respond = ("directory $dirname copied");
+print encode_json(\@respond); 
 
 sub copyFolderContent {
 	my @params            = @_;
