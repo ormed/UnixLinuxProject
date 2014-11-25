@@ -39,6 +39,7 @@ switch ($page) {
 		$groups = implode(',', $groups);
     		
 		$error .= passwordValidateion($user, $password, $repassword);
+		//$error .= shell_exec("./var/www/html/UnixLinuxProject/UnixPerlProject/passwordValidateion");
 		
 		if (!empty($error)) {
 			break;
