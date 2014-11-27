@@ -78,7 +78,7 @@ switch ($page) {
 		$home_dir = $_POST['home-dir'];
 		$groups = $_POST['groups'];
 		
-		if (empty($user) || empty($new_user) || empty($password) || empty($repassword) || empty($groups)) {
+		if (empty($user) || empty($new_user) || empty($password) || empty($repassword)) {
 			$error = 'It seems like there are empty fields.';
 			break;
 		}
@@ -112,13 +112,15 @@ switch ($page) {
 			}
 		}
 		
-		$error .= shell_exec('sudo su -c "usermod -G ' . $groups . ' ' . $user . '" -s /bin/sh ' .  $performing_user . ' 2>&1'); // update groups
+		if (!empty($groups)) {
+			$error .= shell_exec('sudo su -c "usermod -G ' . $groups . ' ' . $user . '" -s /bin/sh ' .  $performing_user . ' 2>&1'); // update groups
 
-		if (!empty($error)) {
-			if (preg_match("/usermod: no changes/", $error)) {
-				$error = '';
-			} else {
-				break;
+			if (!empty($error)) {
+				if (preg_match("/usermod: no changes/", $error)) {
+					$error = '';
+				} else {
+					break;
+				}
 			}
 		}
 		

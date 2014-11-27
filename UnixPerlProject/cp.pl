@@ -41,17 +41,13 @@ sub copyFolderContent {
 
 	#stop condition if its a file
 	if ( -f $current_directory ) {
-
-#my $up_directory =~ s/\/([\x00-\x2E\x30-\x7F]+)$/\//g;	# remove file name from path
 		copyFileText( $current_directory, $target );
 		return;
 	}
 
 	if ( -d $current_directory ) {
 
-		my @path_array =
-		  split( '/', $current_directory )
-		  ;    #split the copy_to path inorder to get only the file name
+		my @path_array = split( '/', $current_directory );   #split the copy_to path inorder to get only the file name
 		my $new_dir = $target . '/' . $path_array[$#path_array];
 		mkdir $new_dir;    #create dir for copying
 
@@ -86,10 +82,7 @@ sub copyFileText {
 	my $copy_from = $params[0];    #file we want to copy
 	my $copy_to   = $params[1];    #the folder we want to copy file to
 
-	my @path_array =
-	  split( '/', $copy_from )
-	  ;    #split the copy_to path inorder to get only the file name
-
+	my @path_array = split( '/', $copy_from );    #split the copy_to path inorder to get only the file name
 	my $new_file = $copy_to . '/' . $path_array[$#path_array];
 
 	my @error_arr = ("cp: cannot stat $copy_from : No such file or directory");

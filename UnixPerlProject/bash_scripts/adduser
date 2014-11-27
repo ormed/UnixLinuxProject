@@ -1,2 +1,0 @@
-echo `useradd $1`
-echo `id $1` 

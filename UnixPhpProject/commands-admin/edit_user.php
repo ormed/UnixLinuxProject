@@ -7,7 +7,8 @@ if (!isset($_SESSION['user'])) {
 
 include_once('../parts/top.php'); 
 
-$users = shell_exec('cat /etc/passwd | grep "/home" |cut -d: -f1');
+$users = shell_exec('cut -d : -f 1 /etc/passwd');
+//$users = shell_exec('cat /etc/passwd | grep "/home" |cut -d: -f1');
 $users = split("\n", $users);
 sort($users);
 
