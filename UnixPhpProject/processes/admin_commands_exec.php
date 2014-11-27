@@ -229,6 +229,7 @@ switch ($page) {
 		
 	case 'restore':
 		$path = $_POST['path'];
+		$extract_path = $_POST['extract-path'];
 		$file_name = $_POST['name'];
 		
 		if (empty($path) || empty($file_name)) {
@@ -236,7 +237,10 @@ switch ($page) {
 			break;
 		}
 		
-		$error = shell_exec('sudo su -c "cd ' . $path . ' &&  tar -xvf ' . $file_name . '.tar" -s /bin/sh ' .  $performing_user . ' 2>&1');
+		$command = 'cd ' . $path . ' &&  tar -xvf ' . $file_name . '.tar';
+		$command .= (!empty($extract_path)) ? (' -C ' . $extract_path) : '';
+
+		$error = shell_exec('sudo su -c "' . $command . '" -s /bin/sh ' .  $performing_user . ' 2>&1');
 		
 		$arr = explode(" ", $error);
 		

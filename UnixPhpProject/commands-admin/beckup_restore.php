@@ -97,6 +97,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 					</div>
 					
 					<div class="form-group">
+						<label for="inputCommand" class="col-sm-1 control-label">Path To Extract: </label>
+						<div class="col-sm-3">
+							<input type="text" class="form-control" name="extract-path" placeholder="Path To extract">
+						</div>
+					</div>
+					
+					<div class="form-group">
 						<label for="inputCommand" class="col-sm-1 control-label">File name: </label>
 						<div class="col-sm-3">
 							<input type="text" class="form-control" name="name" placeholder="File name">
